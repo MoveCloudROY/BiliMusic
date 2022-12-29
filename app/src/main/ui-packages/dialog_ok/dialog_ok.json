@@ -1,0 +1,173 @@
+{
+  "name": "dialog_ok",
+  "version": 32,
+  "source-key": {
+    "type": "figma",
+    "file": "fmyi8bk5JepuCfQVb7LIDl",
+    "node": "37:1869",
+    "version": "2809093970",
+    "component-id": "dd9735e15d89030422c73a10ed67c66a4f02735f"
+  },
+  "default": "DialogOk",
+  "design": {
+    "atoms": [
+      {
+        "type": "group",
+        "id": "top_level",
+        "root": "true"
+      },
+      {
+        "type": "group",
+        "id": "Group"
+      },
+      {
+        "type": "vector",
+        "id": "Rectangle 11"
+      },
+      {
+        "type": "text",
+        "id": "text"
+      }
+    ],
+    "modes": {
+      "DialogOk": {
+        "rules": [
+          {
+            "id": "top_level",
+            "padding": {
+              "top": "12.0",
+              "bottom": "12.0"
+            },
+            "tap-handler": "$on Button tapped",
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "shrink"
+              },
+              "height-constraints": {
+                "sizing-mode": "shrink"
+              }
+            },
+            "children": [
+              "Group"
+            ],
+            "item-spacing": "10.0",
+            "clip-content": "false"
+          },
+          {
+            "id": "Group",
+            "border-radius": "10.0",
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "fixed",
+                "value": "168.0"
+              },
+              "height-constraints": {
+                "sizing-mode": "fixed",
+                "value": "45.0"
+              }
+            },
+            "is-structured": "false",
+            "children": [
+              "Rectangle 11",
+              "text"
+            ],
+            "clip-content": "false"
+          },
+          {
+            "id": "Rectangle 11",
+            "border-radius": "10.0",
+            "drop-shadow": {
+              "color": {
+                "alpha": "1.0",
+                "hue": "232.64150943396226",
+                "saturation": "0.424",
+                "value": "0.9803921568627451"
+              },
+              "blur": "4.0",
+              "offset-x": "1.0",
+              "offset-y": "2.0",
+              "spread": "0.0",
+              "blend-mode": "normal"
+            },
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "fixed",
+                "value": "168.0"
+              },
+              "height-constraints": {
+                "sizing-mode": "fixed",
+                "value": "45.0"
+              }
+            },
+            "vector-content": "rectangle_11.svg"
+          },
+          {
+            "id": "text",
+            "alignment": {
+              "horizontal": {
+                "attachment": "start",
+                "offset": "64.0"
+              },
+              "vertical": {
+                "attachment": "start",
+                "offset": "10.0"
+              }
+            },
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "fixed",
+                "value": "40.0"
+              },
+              "height-constraints": {
+                "sizing-mode": "shrink"
+              }
+            },
+            "font-weight": "700.0",
+            "color": {
+              "alpha": "1.0",
+              "hue": "0.0",
+              "saturation": "0.0",
+              "value": "1.0"
+            },
+            "text-content": "$text",
+            "overflow": "visible",
+            "max-lines": "-1",
+            "text-align": "left",
+            "text-align-vertical": "center",
+            "text-size": "20.0",
+            "letter-spacing": "-0.2800000011920929",
+            "line-height": "1.2189999580383302",
+            "typeface": "Montserrat"
+          }
+        ]
+      }
+    }
+  },
+  "parameters": {
+    "on Button tapped": {
+      "data-type": "void-callback",
+      "required": false,
+      "description": ""
+    },
+    "text": {
+      "data-type": "text",
+      "required": false,
+      "description": ""
+    }
+  },
+  "previews": [
+    {
+      "design": "DialogOk",
+      "size": {
+        "width": 168.0,
+        "height": 69.0
+      },
+      "parameters": {
+        "text": "确认"
+      }
+    }
+  ],
+  "adin-component-search-paths": [],
+  "image-search-paths": [],
+  "vector-search-paths": []
+}

@@ -19,6 +19,7 @@ data class Music(
     val cover_url: String = "",
     val name: String = "name",
     val artist: String = "artist",
+
     val minute: Int = 0,
     val second: Int = 0,
     val times5day: Int = 0,
