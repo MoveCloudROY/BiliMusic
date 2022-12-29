@@ -1,0 +1,126 @@
+{
+  "name": "music_horizon_bar_elem",
+  "version": 32,
+  "source-key": {
+    "type": "figma",
+    "file": "fmyi8bk5JepuCfQVb7LIDl",
+    "node": "26:248",
+    "version": "2784914876"
+  },
+  "default": "MusicHorizonBarElem",
+  "design": {
+    "atoms": [
+      {
+        "type": "group",
+        "id": "top_level",
+        "root": "true"
+      },
+      {
+        "type": "image",
+        "id": "cover"
+      },
+      {
+        "type": "text",
+        "id": "name"
+      }
+    ],
+    "modes": {
+      "MusicHorizonBarElem": {
+        "rules": [
+          {
+            "id": "top_level",
+            "tap-handler": "$on HorizonBarElem tapped",
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "shrink"
+              },
+              "height-constraints": {
+                "sizing-mode": "shrink"
+              }
+            },
+            "children": [
+              "cover",
+              "name"
+            ],
+            "item-spacing": "4.0",
+            "clip-content": "false"
+          },
+          {
+            "id": "cover",
+            "border-radius": "15.0",
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "fixed",
+                "value": "84.0"
+              },
+              "height-constraints": {
+                "sizing-mode": "fixed",
+                "value": "84.0"
+              }
+            },
+            "image-content": "$cover",
+            "scale": "cover"
+          },
+          {
+            "id": "name",
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "proportional",
+                "value": "1.0"
+              },
+              "height-constraints": {
+                "sizing-mode": "shrink"
+              }
+            },
+            "font-weight": "700.0",
+            "color": {
+              "alpha": "1.0",
+              "hue": "227.75510204081633",
+              "saturation": "0.49",
+              "value": "0.39215686274509803"
+            },
+            "text-content": "$name",
+            "overflow": "visible",
+            "max-lines": "-1",
+            "text-size": "11.0",
+            "line-height": "1.17138671875",
+            "typeface": "Droid Sans"
+          }
+        ]
+      }
+    }
+  },
+  "parameters": {
+    "on HorizonBarElem tapped": {
+      "data-type": "void-callback",
+      "required": false,
+      "description": ""
+    },
+    "cover": {
+      "data-type": "image",
+      "required": false,
+      "description": ""
+    },
+    "name": {
+      "data-type": "text",
+      "required": false,
+      "description": ""
+    }
+  },
+  "previews": [
+    {
+      "design": "MusicHorizonBarElem",
+      "size": {
+        "width": 84.0,
+        "height": 101.0
+      },
+      "parameters": {
+        "cover": "cover.png",
+        "name": "中文Chinese1"
+      }
+    }
+  ],
+  "adin-component-search-paths": [],
+  "image-search-paths": [],
+  "vector-search-paths": []
+}

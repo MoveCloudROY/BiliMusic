@@ -1,0 +1,441 @@
+{
+  "name": "play_bar",
+  "version": 32,
+  "source-key": {
+    "type": "figma",
+    "file": "fmyi8bk5JepuCfQVb7LIDl",
+    "node": "95:1428",
+    "version": "2789633576"
+  },
+  "default": "status=stop",
+  "documentation": "playBar at the bottom",
+  "design": {
+    "atoms": [
+      {
+        "type": "group",
+        "id": "top_level",
+        "root": "true"
+      },
+      {
+        "type": "image",
+        "id": "cover"
+      },
+      {
+        "type": "vector",
+        "id": "_Split"
+      },
+      {
+        "type": "group",
+        "id": "MusicInfoTextBlock"
+      },
+      {
+        "type": "group",
+        "id": "PlayButton"
+      },
+      {
+        "type": "text",
+        "id": "name"
+      },
+      {
+        "type": "text",
+        "id": "artist"
+      },
+      {
+        "type": "vector",
+        "id": "_PlayButton_icon"
+      }
+    ],
+    "modes": {
+      "status=stop": {
+        "rules": [
+          {
+            "id": "top_level",
+            "padding": {
+              "left": "24.0",
+              "top": "9.0",
+              "right": "24.0",
+              "bottom": "9.0"
+            },
+            "drop-shadow": {
+              "color": {
+                "alpha": "0.24705882352941178",
+                "hue": "0.0",
+                "saturation": "0.0",
+                "value": "0.0"
+              },
+              "blur": "20.0",
+              "offset-x": "0.0",
+              "offset-y": "-2.0",
+              "spread": "0.0",
+              "blend-mode": "normal"
+            },
+            "tap-handler": "$on PlayBar tapped",
+            "arrangement": "row",
+            "main-axis-align": "start",
+            "children": [
+              "cover",
+              "_Split",
+              "MusicInfoTextBlock",
+              "PlayButton"
+            ],
+            "item-spacing": "14.0",
+            "background-color": {
+              "alpha": "1.0",
+              "hue": "0.0",
+              "saturation": "0.0",
+              "value": "1.0"
+            }
+          },
+          {
+            "id": "cover",
+            "border-radius": "10.0",
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "fixed",
+                "value": "56.0"
+              },
+              "height-constraints": {
+                "sizing-mode": "fixed",
+                "value": "56.0"
+              }
+            },
+            "image-content": "$music cover",
+            "scale": "cover"
+          },
+          {
+            "id": "_Split",
+            "border-radius": "5.0",
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "fixed",
+                "value": "2.0"
+              },
+              "height-constraints": {
+                "sizing-mode": "fixed",
+                "value": "58.0"
+              }
+            },
+            "vector-content": "split.svg"
+          },
+          {
+            "id": "MusicInfoTextBlock",
+            "children": [
+              "name",
+              "artist"
+            ],
+            "clip-content": "false"
+          },
+          {
+            "id": "PlayButton",
+            "tap-handler": "$on PlayButton tapped",
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "fixed",
+                "value": "40.0"
+              },
+              "height-constraints": {
+                "sizing-mode": "fixed",
+                "value": "51.0"
+              }
+            },
+            "is-structured": "false",
+            "children": [
+              "_PlayButton_icon"
+            ],
+            "clip-content": "false"
+          },
+          {
+            "id": "name",
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "proportional",
+                "value": "1.0"
+              },
+              "height-constraints": {
+                "sizing-mode": "shrink"
+              }
+            },
+            "font-weight": "700.0",
+            "color": {
+              "alpha": "1.0",
+              "hue": "227.75510204081633",
+              "saturation": "0.49",
+              "value": "0.39215686274509803"
+            },
+            "text-content": "$music name",
+            "overflow": "visible",
+            "max-lines": "-1",
+            "text-align": "left",
+            "text-size": "16.0",
+            "line-height": "1.17138671875",
+            "typeface": "Droid Sans"
+          },
+          {
+            "id": "artist",
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "proportional",
+                "value": "1.0"
+              },
+              "height-constraints": {
+                "sizing-mode": "shrink"
+              }
+            },
+            "font-weight": "700.0",
+            "color": {
+              "alpha": "1.0",
+              "hue": "230.52631578947367",
+              "saturation": "0.17674418604651165",
+              "value": "0.8431372549019608"
+            },
+            "text-content": "$music artist",
+            "overflow": "visible",
+            "max-lines": "-1",
+            "text-align": "left",
+            "line-height": "1.17138671875",
+            "typeface": "Droid Sans"
+          },
+          {
+            "id": "_PlayButton_icon",
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "proportional",
+                "value": "1.0"
+              },
+              "height-constraints": {
+                "sizing-mode": "proportional",
+                "value": "1.0"
+              }
+            },
+            "vector-content": "play_button_icon.svg"
+          }
+        ]
+      },
+      "status=playing": {
+        "rules": [
+          {
+            "id": "top_level",
+            "padding": {
+              "left": "24.0",
+              "top": "9.0",
+              "right": "24.0",
+              "bottom": "9.0"
+            },
+            "drop-shadow": {
+              "color": {
+                "alpha": "0.24705882352941178",
+                "hue": "0.0",
+                "saturation": "0.0",
+                "value": "0.0"
+              },
+              "blur": "20.0",
+              "offset-x": "0.0",
+              "offset-y": "-2.0",
+              "spread": "0.0",
+              "blend-mode": "normal"
+            },
+            "tap-handler": "$on PlayBar tapped",
+            "arrangement": "row",
+            "main-axis-align": "start",
+            "children": [
+              "cover",
+              "_Split",
+              "MusicInfoTextBlock",
+              "PlayButton"
+            ],
+            "item-spacing": "14.0",
+            "background-color": {
+              "alpha": "1.0",
+              "hue": "0.0",
+              "saturation": "0.0",
+              "value": "1.0"
+            }
+          },
+          {
+            "id": "cover",
+            "border-radius": "10.0",
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "fixed",
+                "value": "56.0"
+              },
+              "height-constraints": {
+                "sizing-mode": "fixed",
+                "value": "56.0"
+              }
+            },
+            "image-content": "$music cover",
+            "scale": "cover"
+          },
+          {
+            "id": "_Split",
+            "border-radius": "5.0",
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "fixed",
+                "value": "2.0"
+              },
+              "height-constraints": {
+                "sizing-mode": "fixed",
+                "value": "58.0"
+              }
+            },
+            "vector-content": "split1.svg"
+          },
+          {
+            "id": "MusicInfoTextBlock",
+            "children": [
+              "name",
+              "artist"
+            ],
+            "clip-content": "false"
+          },
+          {
+            "id": "PlayButton",
+            "tap-handler": "$on PlayButton tapped",
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "fixed",
+                "value": "40.0"
+              },
+              "height-constraints": {
+                "sizing-mode": "fixed",
+                "value": "48.0"
+              }
+            },
+            "is-structured": "false",
+            "children": [
+              "_PlayButton_icon"
+            ]
+          },
+          {
+            "id": "name",
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "proportional",
+                "value": "1.0"
+              },
+              "height-constraints": {
+                "sizing-mode": "shrink"
+              }
+            },
+            "font-weight": "700.0",
+            "color": {
+              "alpha": "1.0",
+              "hue": "227.75510204081633",
+              "saturation": "0.49",
+              "value": "0.39215686274509803"
+            },
+            "text-content": "$music name",
+            "overflow": "visible",
+            "max-lines": "-1",
+            "text-align": "left",
+            "text-size": "16.0",
+            "line-height": "1.17138671875",
+            "typeface": "Droid Sans"
+          },
+          {
+            "id": "artist",
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "proportional",
+                "value": "1.0"
+              },
+              "height-constraints": {
+                "sizing-mode": "shrink"
+              }
+            },
+            "font-weight": "700.0",
+            "color": {
+              "alpha": "1.0",
+              "hue": "230.52631578947367",
+              "saturation": "0.17674418604651165",
+              "value": "0.8431372549019608"
+            },
+            "text-content": "$music artist",
+            "overflow": "visible",
+            "max-lines": "-1",
+            "text-align": "left",
+            "line-height": "1.17138671875",
+            "typeface": "Droid Sans"
+          },
+          {
+            "id": "_PlayButton_icon",
+            "margin": {
+              "top": "0.6666717529296875",
+              "bottom": "0.666656494140625"
+            },
+            "border-radius": "15.0",
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "proportional",
+                "value": "1.0"
+              },
+              "height-constraints": {
+                "sizing-mode": "proportional",
+                "value": "1.0"
+              }
+            },
+            "vector-content": "play_button_icon1.svg"
+          }
+        ]
+      }
+    }
+  },
+  "parameters": {
+    "on PlayBar tapped": {
+      "data-type": "void-callback",
+      "required": false,
+      "description": ""
+    },
+    "music cover": {
+      "data-type": "image",
+      "required": false,
+      "description": ""
+    },
+    "on PlayButton tapped": {
+      "data-type": "void-callback",
+      "required": false,
+      "description": ""
+    },
+    "music name": {
+      "data-type": "text",
+      "required": false,
+      "description": ""
+    },
+    "music artist": {
+      "data-type": "text",
+      "required": false,
+      "description": ""
+    }
+  },
+  "previews": [
+    {
+      "design": "status=stop",
+      "size": {
+        "width": 352.0,
+        "height": 76.0
+      },
+      "parameters": {
+        "music cover": "cover.png",
+        "music name": "中文测试Chinese123",
+        "music artist": "<unknown>"
+      }
+    },
+    {
+      "design": "status=playing",
+      "size": {
+        "width": 352.0,
+        "height": 76.0
+      },
+      "parameters": {
+        "music cover": "cover.png",
+        "music name": "中文测试Chinese123",
+        "music artist": "<unknown>"
+      }
+    }
+  ],
+  "adin-component-search-paths": [],
+  "image-search-paths": [],
+  "vector-search-paths": []
+}

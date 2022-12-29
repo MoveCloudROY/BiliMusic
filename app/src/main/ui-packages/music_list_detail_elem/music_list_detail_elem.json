@@ -1,0 +1,548 @@
+{
+  "name": "music_list_detail_elem",
+  "version": 32,
+  "source-key": {
+    "type": "figma",
+    "file": "fmyi8bk5JepuCfQVb7LIDl",
+    "node": "33:655",
+    "version": "2795301895"
+  },
+  "default": "switch=off",
+  "design": {
+    "atoms": [
+      {
+        "type": "group",
+        "id": "top_level",
+        "root": "true"
+      },
+      {
+        "type": "image",
+        "id": "cover"
+      },
+      {
+        "type": "group",
+        "id": "MusicInfoTextBlock"
+      },
+      {
+        "type": "group",
+        "id": "comment"
+      },
+      {
+        "type": "text",
+        "id": "name"
+      },
+      {
+        "type": "text",
+        "id": "artist"
+      },
+      {
+        "type": "text",
+        "id": "minute"
+      },
+      {
+        "type": "text",
+        "id": "_split"
+      },
+      {
+        "type": "text",
+        "id": "second"
+      },
+      {
+        "type": "group",
+        "id": "More horiz"
+      },
+      {
+        "type": "vector",
+        "id": "_occupy"
+      },
+      {
+        "type": "vector",
+        "id": "more"
+      }
+    ],
+    "modes": {
+      "switch=off": {
+        "rules": [
+          {
+            "id": "top_level",
+            "padding": "5.0",
+            "border-radius": "9.0",
+            "tap-handler": "$on switch tapped",
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "proportional",
+                "value": "1.0"
+              },
+              "height-constraints": {
+                "sizing-mode": "shrink"
+              }
+            },
+            "arrangement": "row",
+            "main-axis-align": "start",
+            "children": [
+              "cover",
+              "MusicInfoTextBlock",
+              "comment"
+            ],
+            "item-spacing": "10.0",
+            "background-color": {
+              "alpha": "1.0",
+              "hue": "0.0",
+              "saturation": "0.0",
+              "value": "1.0"
+            },
+            "clip-content": "false"
+          },
+          {
+            "id": "cover",
+            "border-radius": "10.0",
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "fixed",
+                "value": "56.0"
+              },
+              "height-constraints": {
+                "sizing-mode": "fixed",
+                "value": "56.0"
+              }
+            },
+            "image-content": "$cover",
+            "scale": "cover"
+          },
+          {
+            "id": "MusicInfoTextBlock",
+            "padding": {
+              "bottom": "11.0"
+            },
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "proportional",
+                "value": "1.0"
+              },
+              "height-constraints": {
+                "sizing-mode": "fixed",
+                "value": "40.0"
+              }
+            },
+            "main-axis-align": "start",
+            "children": [
+              "name",
+              "artist"
+            ],
+            "clip-content": "false"
+          },
+          {
+            "id": "comment",
+            "padding": {
+              "bottom": "2.0"
+            },
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "shrink"
+              },
+              "height-constraints": {
+                "sizing-mode": "shrink"
+              }
+            },
+            "arrangement": "row",
+            "cross-axis-align": "start",
+            "children": [
+              "minute",
+              "_split",
+              "second"
+            ],
+            "item-spacing": "1.0",
+            "clip-content": "false"
+          },
+          {
+            "id": "name",
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "proportional",
+                "value": "1.0"
+              },
+              "height-constraints": {
+                "sizing-mode": "shrink"
+              }
+            },
+            "font-weight": "700.0",
+            "color": {
+              "alpha": "1.0",
+              "hue": "227.75510204081633",
+              "saturation": "0.49",
+              "value": "0.39215686274509803"
+            },
+            "text-content": "$name",
+            "overflow": "visible",
+            "max-lines": "-1",
+            "text-align": "left",
+            "text-size": "16.0",
+            "line-height": "1.17138671875",
+            "typeface": "Droid Sans"
+          },
+          {
+            "id": "artist",
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "proportional",
+                "value": "1.0"
+              },
+              "height-constraints": {
+                "sizing-mode": "shrink"
+              }
+            },
+            "font-weight": "700.0",
+            "color": {
+              "alpha": "1.0",
+              "hue": "230.52631578947367",
+              "saturation": "0.17674418604651165",
+              "value": "0.8431372549019608"
+            },
+            "text-content": "$artist",
+            "overflow": "visible",
+            "max-lines": "-1",
+            "text-align": "left",
+            "line-height": "1.17138671875",
+            "typeface": "Droid Sans"
+          },
+          {
+            "id": "minute",
+            "color": {
+              "alpha": "1.0",
+              "hue": "230.52631578947367",
+              "saturation": "0.17674418604651165",
+              "value": "0.8431372549019608"
+            },
+            "text-content": "$minute_off",
+            "overflow": "visible",
+            "text-size": "16.0",
+            "line-height": "0.77880859375",
+            "typeface": "Concert One"
+          },
+          {
+            "id": "_split",
+            "color": {
+              "alpha": "1.0",
+              "hue": "230.52631578947367",
+              "saturation": "0.17674418604651165",
+              "value": "0.8431372549019608"
+            },
+            "text-content": ":",
+            "overflow": "visible",
+            "text-size": "16.0",
+            "line-height": "0.77880859375",
+            "typeface": "Concert One"
+          },
+          {
+            "id": "second",
+            "color": {
+              "alpha": "1.0",
+              "hue": "230.52631578947367",
+              "saturation": "0.17674418604651165",
+              "value": "0.8431372549019608"
+            },
+            "text-content": "$second_off",
+            "overflow": "visible",
+            "text-size": "16.0",
+            "line-height": "0.77880859375",
+            "typeface": "Concert One"
+          }
+        ]
+      },
+      "switch=on": {
+        "rules": [
+          {
+            "id": "top_level",
+            "padding": "5.0",
+            "border-radius": "9.0",
+            "drop-shadow": {
+              "color": {
+                "alpha": "1.0",
+                "hue": "232.64150943396226",
+                "saturation": "0.424",
+                "value": "0.9803921568627451"
+              },
+              "blur": "4.0",
+              "offset-x": "1.0",
+              "offset-y": "2.0",
+              "spread": "0.0",
+              "blend-mode": "normal"
+            },
+            "tap-handler": "$on switch tapped",
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "proportional",
+                "value": "1.0"
+              },
+              "height-constraints": {
+                "sizing-mode": "shrink"
+              }
+            },
+            "arrangement": "row",
+            "main-axis-align": "start",
+            "children": [
+              "cover",
+              "MusicInfoTextBlock",
+              "More horiz"
+            ],
+            "item-spacing": "10.0",
+            "fills": [
+              {
+                "color": {},
+                "opacity": "1.0",
+                "fill-type": "lineargradient",
+                "blend-mode": "normal",
+                "color-stops": [
+                  {
+                    "color": {
+                      "alpha": "1.0",
+                      "hue": "232.5",
+                      "saturation": "0.7529411764705882",
+                      "value": "1.0"
+                    },
+                    "color-stop-position": "0.0"
+                  },
+                  {
+                    "color": {
+                      "alpha": "0.7098039215686275",
+                      "hue": "259.1489361702128",
+                      "saturation": "0.5529411764705883",
+                      "value": "1.0"
+                    },
+                    "color-stop-position": "1.0"
+                  }
+                ],
+                "gradient-handle-positions": [
+                  {
+                    "x": "0.2",
+                    "y": "1.0"
+                  },
+                  {
+                    "x": "1.0",
+                    "y": "-0.95"
+                  },
+                  {
+                    "x": "1.17",
+                    "y": "1.94"
+                  }
+                ]
+              }
+            ],
+            "clip-content": "false"
+          },
+          {
+            "id": "cover",
+            "border-radius": "10.0",
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "fixed",
+                "value": "56.0"
+              },
+              "height-constraints": {
+                "sizing-mode": "fixed",
+                "value": "56.0"
+              }
+            },
+            "image-content": "$cover",
+            "scale": "cover"
+          },
+          {
+            "id": "MusicInfoTextBlock",
+            "padding": {
+              "bottom": "11.0"
+            },
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "proportional",
+                "value": "1.0"
+              },
+              "height-constraints": {
+                "sizing-mode": "fixed",
+                "value": "40.0"
+              }
+            },
+            "main-axis-align": "start",
+            "children": [
+              "name",
+              "artist"
+            ],
+            "clip-content": "false"
+          },
+          {
+            "id": "More horiz",
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "fixed",
+                "value": "30.0"
+              },
+              "height-constraints": {
+                "sizing-mode": "fixed",
+                "value": "30.0"
+              }
+            },
+            "is-structured": "false",
+            "children": [
+              "_occupy",
+              "more"
+            ]
+          },
+          {
+            "id": "name",
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "proportional",
+                "value": "1.0"
+              },
+              "height-constraints": {
+                "sizing-mode": "shrink"
+              }
+            },
+            "font-weight": "700.0",
+            "color": {
+              "alpha": "1.0",
+              "hue": "0.0",
+              "saturation": "0.0",
+              "value": "1.0"
+            },
+            "text-content": "$name",
+            "overflow": "visible",
+            "max-lines": "-1",
+            "text-align": "left",
+            "text-size": "16.0",
+            "line-height": "1.17138671875",
+            "typeface": "Droid Sans"
+          },
+          {
+            "id": "artist",
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "proportional",
+                "value": "1.0"
+              },
+              "height-constraints": {
+                "sizing-mode": "shrink"
+              }
+            },
+            "font-weight": "700.0",
+            "color": {
+              "alpha": "1.0",
+              "hue": "0.0",
+              "saturation": "0.0",
+              "value": "1.0"
+            },
+            "text-content": "$artist",
+            "overflow": "visible",
+            "max-lines": "-1",
+            "text-align": "left",
+            "line-height": "1.17138671875",
+            "typeface": "Droid Sans"
+          },
+          {
+            "id": "_occupy",
+            "tap-handler": "$on more tapped",
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "proportional",
+                "value": "1.0"
+              },
+              "height-constraints": {
+                "sizing-mode": "proportional",
+                "value": "1.0"
+              }
+            }
+          },
+          {
+            "id": "more",
+            "margin": {
+              "left": "5.0",
+              "top": "12.5",
+              "right": "5.0",
+              "bottom": "12.5"
+            },
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "proportional",
+                "value": "1.0"
+              },
+              "height-constraints": {
+                "sizing-mode": "proportional",
+                "value": "1.0"
+              }
+            },
+            "vector-content": "more.svg"
+          }
+        ]
+      }
+    }
+  },
+  "parameters": {
+    "on switch tapped": {
+      "data-type": "void-callback",
+      "required": false,
+      "description": ""
+    },
+    "cover": {
+      "data-type": "image",
+      "required": false,
+      "description": ""
+    },
+    "name": {
+      "data-type": "text",
+      "required": false,
+      "description": ""
+    },
+    "artist": {
+      "data-type": "text",
+      "required": false,
+      "description": ""
+    },
+    "minute_off": {
+      "data-type": "text",
+      "required": false,
+      "description": ""
+    },
+    "second_off": {
+      "data-type": "text",
+      "required": false,
+      "description": ""
+    },
+    "on more tapped": {
+      "data-type": "void-callback",
+      "required": false,
+      "description": ""
+    }
+  },
+  "previews": [
+    {
+      "design": "switch=off",
+      "size": {
+        "width": 302.0,
+        "height": 66.0
+      },
+      "parameters": {
+        "cover": "cover.png",
+        "name": "中文测试Chinese",
+        "artist": "<unknown>",
+        "minute_off": "0",
+        "second_off": "11"
+      }
+    },
+    {
+      "design": "switch=on",
+      "size": {
+        "width": 302.0,
+        "height": 66.0
+      },
+      "parameters": {
+        "cover": "cover.png",
+        "name": "中文测试Chinese",
+        "artist": "<unknown>",
+        "minute_off": "0",
+        "second_off": "11"
+      }
+    }
+  ],
+  "adin-component-search-paths": [],
+  "image-search-paths": [],
+  "vector-search-paths": []
+}
