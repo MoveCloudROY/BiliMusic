@@ -51,15 +51,6 @@ import kotlin.math.min
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun MainFrame(topSelectBarVM: TopSelectViewModel = viewModel()) {
-    val defaultMusic = Music(
-        id = -1,
-        cover = painterResource(R.drawable.default_cover),
-        name = "No Music",
-        artist = "No Music Artist",
-    )
-    val music by remember {
-        mutableStateOf(defaultMusic)
-    }
 
     Scaffold(
         backgroundColor = Color(0xFFFFFFFF),
@@ -85,9 +76,7 @@ fun MainFrame(topSelectBarVM: TopSelectViewModel = viewModel()) {
             3 -> {}
             4 -> {}
         }
-
     }
-
 }
 
 
