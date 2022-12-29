@@ -1,0 +1,152 @@
+{
+  "name": "top_select_bar_elem",
+  "version": 32,
+  "source-key": {
+    "type": "figma",
+    "file": "fmyi8bk5JepuCfQVb7LIDl",
+    "node": "23:300",
+    "version": "2784914876"
+  },
+  "default": "Property 1=on",
+  "design": {
+    "atoms": [
+      {
+        "type": "group",
+        "id": "top_level",
+        "root": "true"
+      },
+      {
+        "type": "text",
+        "id": "ontext"
+      },
+      {
+        "type": "text",
+        "id": "offtext"
+      }
+    ],
+    "modes": {
+      "Property 1=on": {
+        "rules": [
+          {
+            "id": "top_level",
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "shrink"
+              },
+              "height-constraints": {
+                "sizing-mode": "proportional",
+                "value": "1.0"
+              }
+            },
+            "arrangement": "row",
+            "main-axis-align": "start",
+            "cross-axis-align": "end",
+            "children": [
+              "ontext"
+            ],
+            "item-spacing": "10.0",
+            "clip-content": "false"
+          },
+          {
+            "id": "ontext",
+            "font-weight": "700.0",
+            "color": {
+              "alpha": "1.0",
+              "hue": "227.75510204081633",
+              "saturation": "0.49",
+              "value": "0.39215686274509803"
+            },
+            "text-content": "$ontext",
+            "overflow": "visible",
+            "text-size": "24.0",
+            "letter-spacing": "-0.2800000011920929",
+            "line-height": "1.219000021616618",
+            "typeface": "Montserrat"
+          }
+        ]
+      },
+      "Property 1=off": {
+        "rules": [
+          {
+            "id": "top_level",
+            "padding": {
+              "top": "6.0",
+              "bottom": "6.0"
+            },
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "shrink"
+              },
+              "height-constraints": {
+                "sizing-mode": "proportional",
+                "value": "1.0"
+              }
+            },
+            "arrangement": "row",
+            "main-axis-align": "start",
+            "cross-axis-align": "end",
+            "children": [
+              "offtext"
+            ],
+            "item-spacing": "10.0",
+            "clip-content": "false"
+          },
+          {
+            "id": "offtext",
+            "font-weight": "700.0",
+            "color": {
+              "alpha": "1.0",
+              "hue": "230.52631578947367",
+              "saturation": "0.17674418604651165",
+              "value": "0.8431372549019608"
+            },
+            "text-content": "$offtext",
+            "overflow": "visible",
+            "letter-spacing": "-0.2800000011920929",
+            "line-height": "1.2189999989100866",
+            "typeface": "Montserrat"
+          }
+        ]
+      }
+    }
+  },
+  "parameters": {
+    "ontext": {
+      "data-type": "text",
+      "required": false,
+      "description": ""
+    },
+    "offtext": {
+      "data-type": "text",
+      "required": false,
+      "description": ""
+    }
+  },
+  "previews": [
+    {
+      "design": "Property 1=on",
+      "size": {
+        "width": 48.0,
+        "height": 35.0
+      },
+      "parameters": {
+        "ontext": "主页",
+        "offtext": "主页"
+      }
+    },
+    {
+      "design": "Property 1=off",
+      "size": {
+        "width": 28.0,
+        "height": 35.0
+      },
+      "parameters": {
+        "ontext": "主页",
+        "offtext": "主页"
+      }
+    }
+  ],
+  "adin-component-search-paths": [],
+  "image-search-paths": [],
+  "vector-search-paths": []
+}

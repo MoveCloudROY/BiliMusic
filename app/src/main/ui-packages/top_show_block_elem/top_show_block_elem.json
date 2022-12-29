@@ -1,0 +1,213 @@
+{
+  "name": "top_show_block_elem",
+  "version": 32,
+  "source-key": {
+    "type": "figma",
+    "file": "fmyi8bk5JepuCfQVb7LIDl",
+    "node": "26:114",
+    "version": "2784914876"
+  },
+  "default": "TopShowBlockElem",
+  "design": {
+    "atoms": [
+      {
+        "type": "group",
+        "id": "top_level",
+        "root": "true"
+      },
+      {
+        "type": "text",
+        "id": "number"
+      },
+      {
+        "type": "text",
+        "id": "type"
+      }
+    ],
+    "modes": {
+      "TopShowBlockElem": {
+        "rules": [
+          {
+            "id": "top_level",
+            "padding": {
+              "top": "5.0",
+              "bottom": "5.0"
+            },
+            "border-radius": "14.0",
+            "drop-shadow": {
+              "color": {
+                "alpha": "1.0",
+                "hue": "232.64150943396226",
+                "saturation": "0.424",
+                "value": "0.9803921568627451"
+              },
+              "blur": "4.0",
+              "offset-x": "1.0",
+              "offset-y": "2.0",
+              "spread": "0.0",
+              "blend-mode": "normal"
+            },
+            "tap-handler": "$on TopShowBlockElem tapped",
+            "main-axis-align": "start",
+            "children": [
+              "number",
+              "type"
+            ],
+            "item-spacing": "10.0",
+            "fills": [
+              {
+                "color": {},
+                "opacity": "1.0",
+                "fill-type": "lineargradient",
+                "blend-mode": "normal",
+                "color-stops": [
+                  {
+                    "color": {
+                      "alpha": "1.0",
+                      "hue": "232.5",
+                      "saturation": "0.7529411764705882",
+                      "value": "1.0"
+                    },
+                    "color-stop-position": "0.0"
+                  },
+                  {
+                    "color": {
+                      "alpha": "0.7098039215686275",
+                      "hue": "259.1489361702128",
+                      "saturation": "0.5529411764705883",
+                      "value": "1.0"
+                    },
+                    "color-stop-position": "1.0"
+                  }
+                ],
+                "gradient-handle-positions": [
+                  {
+                    "x": "0.2",
+                    "y": "1.0"
+                  },
+                  {
+                    "x": "1.0",
+                    "y": "-0.95"
+                  },
+                  {
+                    "x": "1.17",
+                    "y": "1.94"
+                  }
+                ]
+              }
+            ],
+            "clip-content": "false"
+          },
+          {
+            "id": "number",
+            "drop-shadow": {
+              "color": {
+                "alpha": "0.24705882352941178",
+                "hue": "0.0",
+                "saturation": "0.0",
+                "value": "0.0"
+              },
+              "blur": "4.0",
+              "offset-x": "2.0",
+              "offset-y": "3.0",
+              "spread": "0.0",
+              "blend-mode": "normal"
+            },
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "proportional",
+                "value": "1.0"
+              },
+              "height-constraints": {
+                "sizing-mode": "shrink"
+              }
+            },
+            "color": {
+              "alpha": "1.0",
+              "hue": "0.0",
+              "saturation": "0.0",
+              "value": "1.0"
+            },
+            "text-content": "$number",
+            "overflow": "visible",
+            "max-lines": "-1",
+            "text-size": "28.0",
+            "letter-spacing": "-0.2800000011920929",
+            "line-height": "0.77880859375",
+            "typeface": "Concert One"
+          },
+          {
+            "id": "type",
+            "drop-shadow": {
+              "color": {
+                "alpha": "0.24705882352941178",
+                "hue": "0.0",
+                "saturation": "0.0",
+                "value": "0.0"
+              },
+              "blur": "4.0",
+              "offset-x": "2.0",
+              "offset-y": "3.0",
+              "spread": "0.0",
+              "blend-mode": "normal"
+            },
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "proportional",
+                "value": "1.0"
+              },
+              "height-constraints": {
+                "sizing-mode": "shrink"
+              }
+            },
+            "color": {
+              "alpha": "1.0",
+              "hue": "0.0",
+              "saturation": "0.0",
+              "value": "1.0"
+            },
+            "text-content": "$type",
+            "overflow": "visible",
+            "max-lines": "-1",
+            "letter-spacing": "-0.2800000011920929",
+            "line-height": "1.17138671875",
+            "typeface": "Droid Sans"
+          }
+        ]
+      }
+    }
+  },
+  "parameters": {
+    "on TopShowBlockElem tapped": {
+      "data-type": "void-callback",
+      "required": false,
+      "description": ""
+    },
+    "number": {
+      "data-type": "text",
+      "required": false,
+      "description": ""
+    },
+    "type": {
+      "data-type": "text",
+      "required": false,
+      "description": ""
+    }
+  },
+  "previews": [
+    {
+      "design": "TopShowBlockElem",
+      "size": {
+        "width": 99.0,
+        "height": 60.0
+      },
+      "parameters": {
+        "number": "32",
+        "type": "歌曲"
+      }
+    }
+  ],
+  "adin-component-search-paths": [],
+  "image-search-paths": [],
+  "vector-search-paths": []
+}
