@@ -1,0 +1,859 @@
+{
+  "name": "player_command_bar",
+  "version": 32,
+  "source-key": {
+    "type": "figma",
+    "file": "fmyi8bk5JepuCfQVb7LIDl",
+    "node": "164:1543",
+    "version": "2812295384",
+    "component-id": "c071e4ee83ebea323b825e6e30afadc6c74be664"
+  },
+  "default": "status=stop",
+  "design": {
+    "atoms": [
+      {
+        "type": "group",
+        "id": "top_level",
+        "root": "true"
+      },
+      {
+        "type": "group",
+        "id": "Shuffle"
+      },
+      {
+        "type": "group",
+        "id": "PreButton"
+      },
+      {
+        "type": "group",
+        "id": "Play"
+      },
+      {
+        "type": "group",
+        "id": "NextButton"
+      },
+      {
+        "type": "group",
+        "id": "loop"
+      },
+      {
+        "type": "vector",
+        "id": "Vector"
+      },
+      {
+        "type": "group",
+        "id": "icon_out"
+      },
+      {
+        "type": "vector",
+        "id": "icon_shuffle"
+      },
+      {
+        "type": "vector",
+        "id": "Vector_ll"
+      },
+      {
+        "type": "vector",
+        "id": "Vector_l"
+      },
+      {
+        "type": "group",
+        "id": "PlayButton"
+      },
+      {
+        "type": "vector",
+        "id": "icon_play"
+      },
+      {
+        "type": "vector",
+        "id": "Vector_rr"
+      },
+      {
+        "type": "vector",
+        "id": "Vector_r"
+      },
+      {
+        "type": "vector",
+        "id": "Vector_loop"
+      },
+      {
+        "type": "group",
+        "id": "loop_out"
+      },
+      {
+        "type": "vector",
+        "id": "icon_loop"
+      },
+      {
+        "type": "group",
+        "id": "Stop"
+      },
+      {
+        "type": "vector",
+        "id": "icon_stop"
+      }
+    ],
+    "modes": {
+      "status=stop": {
+        "rules": [
+          {
+            "id": "top_level",
+            "padding": {
+              "left": "24.0",
+              "right": "24.0"
+            },
+            "arrangement": "row",
+            "main-axis-align": "space-between",
+            "children": [
+              "Shuffle",
+              "PreButton",
+              "Play",
+              "NextButton",
+              "loop"
+            ],
+            "background-color": {
+              "alpha": "1.0",
+              "hue": "0.0",
+              "saturation": "0.0",
+              "value": "1.0"
+            },
+            "clip-content": "false"
+          },
+          {
+            "id": "Shuffle",
+            "tap-handler": "$on Loop tapped",
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "fixed",
+                "value": "40.0"
+              },
+              "height-constraints": {
+                "sizing-mode": "fixed",
+                "value": "40.0"
+              }
+            },
+            "is-structured": "false",
+            "children": [
+              "Vector",
+              "icon_out"
+            ]
+          },
+          {
+            "id": "PreButton",
+            "tap-handler": "$on Pre tapped",
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "fixed",
+                "value": "45.0"
+              },
+              "height-constraints": {
+                "sizing-mode": "fixed",
+                "value": "31.0"
+              }
+            },
+            "is-structured": "false",
+            "children": [
+              "Vector_ll",
+              "Vector_l"
+            ],
+            "clip-content": "false"
+          },
+          {
+            "id": "Play",
+            "padding": {
+              "left": "15.0"
+            },
+            "tap-handler": "$on Stop tapped",
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "fixed",
+                "value": "65.0"
+              },
+              "height-constraints": {
+                "sizing-mode": "fixed",
+                "value": "63.75"
+              }
+            },
+            "arrangement": "row",
+            "main-axis-align": "start",
+            "cross-axis-align": "start",
+            "children": [
+              "PlayButton"
+            ],
+            "item-spacing": "10.0",
+            "clip-content": "false"
+          },
+          {
+            "id": "NextButton",
+            "tap-handler": "$on Next tapped",
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "fixed",
+                "value": "42.0391845703125"
+              },
+              "height-constraints": {
+                "sizing-mode": "fixed",
+                "value": "32.0"
+              }
+            },
+            "is-structured": "false",
+            "children": [
+              "Vector_rr",
+              "Vector_r"
+            ],
+            "clip-content": "false"
+          },
+          {
+            "id": "loop",
+            "tap-handler": "$on Shuffle tapped",
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "fixed",
+                "value": "40.0"
+              },
+              "height-constraints": {
+                "sizing-mode": "fixed",
+                "value": "40.0"
+              }
+            },
+            "is-structured": "false",
+            "children": [
+              "Vector_loop",
+              "loop_out"
+            ]
+          },
+          {
+            "id": "Vector",
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "proportional",
+                "value": "1.0"
+              },
+              "height-constraints": {
+                "sizing-mode": "proportional",
+                "value": "1.0"
+              }
+            }
+          },
+          {
+            "id": "icon_out",
+            "margin": {
+              "left": "11.4285888671875",
+              "top": "11.4285888671875",
+              "right": "11.4285888671875",
+              "bottom": "11.42852783203125"
+            },
+            "is-structured": "false",
+            "children": [
+              "icon_shuffle"
+            ],
+            "clip-content": "false"
+          },
+          {
+            "id": "icon_shuffle",
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "proportional",
+                "value": "1.0"
+              },
+              "height-constraints": {
+                "sizing-mode": "proportional",
+                "value": "1.0"
+              }
+            },
+            "vector-content": "icon_shuffle.svg"
+          },
+          {
+            "id": "Vector_ll",
+            "margin": {
+              "left": "3.0",
+              "top": "4.0",
+              "right": "21.257568359375",
+              "bottom": "3.22442626953125"
+            },
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "proportional",
+                "value": "1.0"
+              },
+              "height-constraints": {
+                "sizing-mode": "proportional",
+                "value": "1.0"
+              }
+            },
+            "vector-content": "vector_ll.svg"
+          },
+          {
+            "id": "Vector_l",
+            "margin": {
+              "left": "19.0",
+              "top": "4.0",
+              "right": "3.9251708984375",
+              "bottom": "3.01605224609375"
+            },
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "proportional",
+                "value": "1.0"
+              },
+              "height-constraints": {
+                "sizing-mode": "proportional",
+                "value": "1.0"
+              }
+            },
+            "vector-content": "vector_l.svg"
+          },
+          {
+            "id": "PlayButton",
+            "drop-shadow": {
+              "color": {
+                "alpha": "1.0",
+                "hue": "232.64150943396226",
+                "saturation": "0.424",
+                "value": "0.9803921568627451"
+              },
+              "blur": "25.0",
+              "offset-x": "-3.0",
+              "offset-y": "4.0",
+              "spread": "0.0",
+              "blend-mode": "normal"
+            },
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "fixed",
+                "value": "50.0"
+              },
+              "height-constraints": {
+                "sizing-mode": "fixed",
+                "value": "63.75"
+              }
+            },
+            "is-structured": "false",
+            "children": [
+              "icon_play"
+            ],
+            "clip-content": "false"
+          },
+          {
+            "id": "icon_play",
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "proportional",
+                "value": "1.0"
+              },
+              "height-constraints": {
+                "sizing-mode": "proportional",
+                "value": "1.0"
+              }
+            },
+            "vector-content": "icon_play.svg"
+          },
+          {
+            "id": "Vector_rr",
+            "margin": {
+              "left": "18.575439453125",
+              "top": "4.12109375",
+              "right": "3.5660400390625",
+              "bottom": "4.42236328125"
+            },
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "proportional",
+                "value": "1.0"
+              },
+              "height-constraints": {
+                "sizing-mode": "proportional",
+                "value": "1.0"
+              }
+            },
+            "vector-content": "vector_rr.svg"
+          },
+          {
+            "id": "Vector_r",
+            "margin": {
+              "left": "2.9329833984375",
+              "top": "3.31622314453125",
+              "right": "17.93310546875",
+              "bottom": "3.3162841796875"
+            },
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "proportional",
+                "value": "1.0"
+              },
+              "height-constraints": {
+                "sizing-mode": "proportional",
+                "value": "1.0"
+              }
+            },
+            "vector-content": "vector_r.svg"
+          },
+          {
+            "id": "Vector_loop",
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "proportional",
+                "value": "1.0"
+              },
+              "height-constraints": {
+                "sizing-mode": "proportional",
+                "value": "1.0"
+              }
+            }
+          },
+          {
+            "id": "loop_out",
+            "alignment": {
+              "horizontal": {
+                "attachment": "start",
+                "offset": "5.0"
+              },
+              "vertical": {
+                "attachment": "start",
+                "offset": "4.0"
+              }
+            },
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "fixed",
+                "value": "31.0"
+              },
+              "height-constraints": {
+                "sizing-mode": "fixed",
+                "value": "31.0"
+              }
+            },
+            "is-structured": "false",
+            "children": [
+              "icon_loop"
+            ],
+            "clip-content": "false"
+          },
+          {
+            "id": "icon_loop",
+            "margin": {
+              "left": "3.875",
+              "top": "3.83905029296875",
+              "right": "3.82177734375",
+              "bottom": "3.87353515625"
+            },
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "proportional",
+                "value": "1.0"
+              },
+              "height-constraints": {
+                "sizing-mode": "proportional",
+                "value": "1.0"
+              }
+            },
+            "vector-content": "icon_loop.svg"
+          }
+        ]
+      },
+      "status=playing": {
+        "rules": [
+          {
+            "id": "top_level",
+            "padding": {
+              "left": "24.0",
+              "right": "24.0"
+            },
+            "arrangement": "row",
+            "main-axis-align": "space-between",
+            "children": [
+              "Shuffle",
+              "PreButton",
+              "Stop",
+              "NextButton",
+              "loop"
+            ],
+            "background-color": {
+              "alpha": "1.0",
+              "hue": "0.0",
+              "saturation": "0.0",
+              "value": "1.0"
+            },
+            "clip-content": "false"
+          },
+          {
+            "id": "Shuffle",
+            "tap-handler": "$on Loop tapped",
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "fixed",
+                "value": "40.0"
+              },
+              "height-constraints": {
+                "sizing-mode": "fixed",
+                "value": "40.0"
+              }
+            },
+            "is-structured": "false",
+            "children": [
+              "Vector",
+              "icon_out"
+            ]
+          },
+          {
+            "id": "PreButton",
+            "tap-handler": "$on Pre tapped",
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "fixed",
+                "value": "45.0"
+              },
+              "height-constraints": {
+                "sizing-mode": "fixed",
+                "value": "31.0"
+              }
+            },
+            "is-structured": "false",
+            "children": [
+              "Vector_ll",
+              "Vector_l"
+            ],
+            "clip-content": "false"
+          },
+          {
+            "id": "Stop",
+            "tap-handler": "$on Play tapped",
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "fixed",
+                "value": "65.0"
+              },
+              "height-constraints": {
+                "sizing-mode": "fixed",
+                "value": "67.59027099609375"
+              }
+            },
+            "arrangement": "row",
+            "children": [
+              "PlayButton"
+            ],
+            "item-spacing": "9.164775848388672",
+            "clip-content": "false"
+          },
+          {
+            "id": "NextButton",
+            "tap-handler": "$on Next tapped",
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "fixed",
+                "value": "42.0391845703125"
+              },
+              "height-constraints": {
+                "sizing-mode": "fixed",
+                "value": "32.0"
+              }
+            },
+            "is-structured": "false",
+            "children": [
+              "Vector_rr",
+              "Vector_r"
+            ],
+            "clip-content": "false"
+          },
+          {
+            "id": "loop",
+            "tap-handler": "$on Shuffle tapped",
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "fixed",
+                "value": "40.0"
+              },
+              "height-constraints": {
+                "sizing-mode": "fixed",
+                "value": "40.0"
+              }
+            },
+            "is-structured": "false",
+            "children": [
+              "Vector_loop",
+              "loop_out"
+            ]
+          },
+          {
+            "id": "Vector",
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "proportional",
+                "value": "1.0"
+              },
+              "height-constraints": {
+                "sizing-mode": "proportional",
+                "value": "1.0"
+              }
+            }
+          },
+          {
+            "id": "icon_out",
+            "margin": "11.4285888671875",
+            "is-structured": "false",
+            "children": [
+              "icon_shuffle"
+            ],
+            "clip-content": "false"
+          },
+          {
+            "id": "icon_shuffle",
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "proportional",
+                "value": "1.0"
+              },
+              "height-constraints": {
+                "sizing-mode": "proportional",
+                "value": "1.0"
+              }
+            },
+            "vector-content": "icon_shuffle1.svg"
+          },
+          {
+            "id": "Vector_ll",
+            "margin": {
+              "left": "3.0",
+              "top": "4.0",
+              "right": "21.257568359375",
+              "bottom": "3.2244873046875"
+            },
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "proportional",
+                "value": "1.0"
+              },
+              "height-constraints": {
+                "sizing-mode": "proportional",
+                "value": "1.0"
+              }
+            },
+            "vector-content": "vector_ll1.svg"
+          },
+          {
+            "id": "Vector_l",
+            "margin": {
+              "left": "19.0",
+              "top": "4.0",
+              "right": "3.9251708984375",
+              "bottom": "3.01611328125"
+            },
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "proportional",
+                "value": "1.0"
+              },
+              "height-constraints": {
+                "sizing-mode": "proportional",
+                "value": "1.0"
+              }
+            },
+            "vector-content": "vector_l1.svg"
+          },
+          {
+            "id": "PlayButton",
+            "drop-shadow": {
+              "color": {
+                "alpha": "1.0",
+                "hue": "232.64150943396226",
+                "saturation": "0.424",
+                "value": "0.9803921568627451"
+              },
+              "blur": "22.91193962097168",
+              "offset-x": "-2.7494328022003174",
+              "offset-y": "3.665910482406616",
+              "spread": "0.0",
+              "blend-mode": "normal"
+            },
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "fixed",
+                "value": "45.8238525390625"
+              },
+              "height-constraints": {
+                "sizing-mode": "fixed",
+                "value": "58.42547607421875"
+              }
+            },
+            "is-structured": "false",
+            "children": [
+              "icon_stop"
+            ],
+            "clip-content": "false"
+          },
+          {
+            "id": "icon_stop",
+            "margin": {
+              "top": "0.81146240234375",
+              "bottom": "0.8115234375"
+            },
+            "border-radius": "13.747164726257324",
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "proportional",
+                "value": "1.0"
+              },
+              "height-constraints": {
+                "sizing-mode": "proportional",
+                "value": "1.0"
+              }
+            },
+            "vector-content": "icon_stop.svg"
+          },
+          {
+            "id": "Vector_rr",
+            "margin": {
+              "left": "18.575439453125",
+              "top": "4.12109375",
+              "right": "3.5660400390625",
+              "bottom": "4.42236328125"
+            },
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "proportional",
+                "value": "1.0"
+              },
+              "height-constraints": {
+                "sizing-mode": "proportional",
+                "value": "1.0"
+              }
+            },
+            "vector-content": "vector_rr1.svg"
+          },
+          {
+            "id": "Vector_r",
+            "margin": {
+              "left": "2.9329833984375",
+              "top": "3.3162841796875",
+              "right": "17.93310546875",
+              "bottom": "3.316162109375"
+            },
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "proportional",
+                "value": "1.0"
+              },
+              "height-constraints": {
+                "sizing-mode": "proportional",
+                "value": "1.0"
+              }
+            },
+            "vector-content": "vector_r1.svg"
+          },
+          {
+            "id": "Vector_loop",
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "proportional",
+                "value": "1.0"
+              },
+              "height-constraints": {
+                "sizing-mode": "proportional",
+                "value": "1.0"
+              }
+            }
+          },
+          {
+            "id": "loop_out",
+            "alignment": {
+              "horizontal": {
+                "attachment": "start",
+                "offset": "5.0"
+              },
+              "vertical": {
+                "attachment": "start",
+                "offset": "4.0"
+              }
+            },
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "fixed",
+                "value": "31.0"
+              },
+              "height-constraints": {
+                "sizing-mode": "fixed",
+                "value": "31.0"
+              }
+            },
+            "is-structured": "false",
+            "children": [
+              "icon_loop"
+            ],
+            "clip-content": "false"
+          },
+          {
+            "id": "icon_loop",
+            "margin": {
+              "left": "3.875",
+              "top": "3.839111328125",
+              "right": "3.82177734375",
+              "bottom": "3.8734130859375"
+            },
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "proportional",
+                "value": "1.0"
+              },
+              "height-constraints": {
+                "sizing-mode": "proportional",
+                "value": "1.0"
+              }
+            },
+            "vector-content": "icon_loop1.svg"
+          }
+        ]
+      }
+    }
+  },
+  "parameters": {
+    "on Loop tapped": {
+      "data-type": "void-callback",
+      "required": false,
+      "description": ""
+    },
+    "on Pre tapped": {
+      "data-type": "void-callback",
+      "required": false,
+      "description": ""
+    },
+    "on Stop tapped": {
+      "data-type": "void-callback",
+      "required": false,
+      "description": ""
+    },
+    "on Next tapped": {
+      "data-type": "void-callback",
+      "required": false,
+      "description": ""
+    },
+    "on Shuffle tapped": {
+      "data-type": "void-callback",
+      "required": false,
+      "description": ""
+    },
+    "on Play tapped": {
+      "data-type": "void-callback",
+      "required": false,
+      "description": ""
+    }
+  },
+  "previews": [
+    {
+      "design": "status=stop",
+      "size": {
+        "width": 446.897216796875,
+        "height": 68.0
+      }
+    },
+    {
+      "design": "status=playing",
+      "size": {
+        "width": 446.897216796875,
+        "height": 68.0
+      }
+    }
+  ],
+  "adin-component-search-paths": [],
+  "image-search-paths": [],
+  "vector-search-paths": []
+}

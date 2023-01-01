@@ -1,0 +1,159 @@
+{
+  "name": "player_cover_tuple",
+  "version": 32,
+  "source-key": {
+    "type": "figma",
+    "file": "fmyi8bk5JepuCfQVb7LIDl",
+    "node": "37:1178",
+    "version": "2811944829",
+    "component-id": "1f1c7657328429f0028affb27b5f67184ce89a3b"
+  },
+  "default": "PlayerCoverTuple",
+  "design": {
+    "atoms": [
+      {
+        "type": "group",
+        "id": "top_level",
+        "root": "true"
+      },
+      {
+        "type": "image",
+        "id": "LastMusicCover"
+      },
+      {
+        "type": "image",
+        "id": "NowMusicCover"
+      },
+      {
+        "type": "image",
+        "id": "NextMusicCover"
+      }
+    ],
+    "modes": {
+      "PlayerCoverTuple": {
+        "rules": [
+          {
+            "id": "top_level",
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "shrink"
+              },
+              "height-constraints": {
+                "sizing-mode": "shrink"
+              }
+            },
+            "arrangement": "row",
+            "main-axis-align": "start",
+            "children": [
+              "LastMusicCover",
+              "NowMusicCover",
+              "NextMusicCover"
+            ],
+            "item-spacing": "18.0",
+            "clip-content": "false"
+          },
+          {
+            "id": "LastMusicCover",
+            "border-radius": "20.0",
+            "tap-handler": "$on Last tapped",
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "fixed",
+                "value": "215.0"
+              },
+              "height-constraints": {
+                "sizing-mode": "fixed",
+                "value": "215.0"
+              }
+            },
+            "image-content": "$lastMusicCover",
+            "scale": "cover"
+          },
+          {
+            "id": "NowMusicCover",
+            "border-radius": "22.0",
+            "tap-handler": "$on Now tapped",
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "fixed",
+                "value": "290.0"
+              },
+              "height-constraints": {
+                "sizing-mode": "fixed",
+                "value": "290.0"
+              }
+            },
+            "image-content": "$nowMusicCover",
+            "scale": "cover"
+          },
+          {
+            "id": "NextMusicCover",
+            "border-radius": "20.0",
+            "tap-handler": "$on Next tapped",
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "fixed",
+                "value": "215.0"
+              },
+              "height-constraints": {
+                "sizing-mode": "fixed",
+                "value": "215.0"
+              }
+            },
+            "image-content": "$nextMusicCover",
+            "scale": "cover"
+          }
+        ]
+      }
+    }
+  },
+  "parameters": {
+    "lastMusicCover": {
+      "data-type": "image",
+      "required": false,
+      "description": ""
+    },
+    "on Last tapped": {
+      "data-type": "void-callback",
+      "required": false,
+      "description": ""
+    },
+    "nowMusicCover": {
+      "data-type": "image",
+      "required": false,
+      "description": ""
+    },
+    "on Now tapped": {
+      "data-type": "void-callback",
+      "required": false,
+      "description": ""
+    },
+    "nextMusicCover": {
+      "data-type": "image",
+      "required": false,
+      "description": ""
+    },
+    "on Next tapped": {
+      "data-type": "void-callback",
+      "required": false,
+      "description": ""
+    }
+  },
+  "previews": [
+    {
+      "design": "PlayerCoverTuple",
+      "size": {
+        "width": 756.0,
+        "height": 290.0
+      },
+      "parameters": {
+        "lastMusicCover": "last_music_cover.jpeg",
+        "nowMusicCover": "last_music_cover.jpeg",
+        "nextMusicCover": "next_music_cover.jpeg"
+      }
+    }
+  ],
+  "adin-component-search-paths": [],
+  "image-search-paths": [],
+  "vector-search-paths": []
+}
