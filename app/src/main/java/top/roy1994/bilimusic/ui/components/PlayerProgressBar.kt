@@ -25,6 +25,7 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import top.roy1994.bilimusic.R
 import top.roy1994.bilimusic.viewmodel.PlayerProgressBarViewModel
+import top.roy1994.bilimusic.viewmodel.PlayerViewModel
 
 
 /*
@@ -52,7 +53,7 @@ fun PreviewPlayerProgressBar() {
 
 @Composable
 fun PlayerProgressBar(
-    PlayerProgressBarVM: PlayerProgressBarViewModel = viewModel(),
+    PlayerBarVM: PlayerViewModel = viewModel(),
     indicatorHeight: Dp = 24.dp,
     backgroundIndicatorColor: Color = Color.LightGray.copy(alpha = 0.3f),
     indicatorPadding: Dp = 24.dp,
@@ -67,7 +68,7 @@ fun PlayerProgressBar(
     animationDuration: Int = 1000,
     animationDelay: Int = 0
 ) {
-    val playedPercentage by PlayerProgressBarVM.playedPercentage.observeAsState(initial = 0f)
+    val playedPercentage by PlayerBarVM.playedPercentage.observeAsState(initial = 0f)
 
     val animateNumber = animateFloatAsState(
         targetValue = playedPercentage,
@@ -78,7 +79,7 @@ fun PlayerProgressBar(
     )
 
     LaunchedEffect(Unit) {
-        PlayerProgressBarVM.startThreadGradient()
+        PlayerBarVM.startThreadGradient()
     }
 
     Canvas(
@@ -113,8 +114,8 @@ fun PlayerProgressBar(
         )
 
     }
-    val playedSeconds = PlayerProgressBarVM.playedSeconds.value
-    val totalSeconds = PlayerProgressBarVM.totalSeconds.value
+    val playedSeconds = PlayerBarVM.playedSeconds.value
+    val totalSeconds = PlayerBarVM.totalSeconds.value
     Row(
         modifier = Modifier
             .fillMaxWidth()

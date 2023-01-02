@@ -34,13 +34,10 @@ import top.roy1994.bilimusic.musicverticalcommentelem.MusicVerticalCommentElem
 import top.roy1994.bilimusic.redirtextbar.ReDirTextBar
 import top.roy1994.bilimusic.topselectbarelem.Property1
 import top.roy1994.bilimusic.topselectbarelem.TopSelectBarElem
-import top.roy1994.bilimusic.ui.components.BottomBar
+import top.roy1994.bilimusic.ui.components.*
 import top.roy1994.bilimusic.ui.components.topselect.Status
 
-import top.roy1994.bilimusic.ui.components.ScrollableTabRow
 import top.roy1994.bilimusic.ui.components.TabRowDefaults.tabIndicatorOffset
-import top.roy1994.bilimusic.ui.components.TopBar
-import top.roy1994.bilimusic.ui.components.drawColoredShadow
 import top.roy1994.bilimusic.ui.components.topselect.TopSelect
 import top.roy1994.bilimusic.ui.components.topshowblock.TopShowBlock
 import top.roy1994.bilimusic.ui.theme.BiliMusicTheme
@@ -48,35 +45,48 @@ import top.roy1994.bilimusic.viewmodel.*
 import kotlin.math.min
 
 
-@OptIn(ExperimentalFoundationApi::class)
+@OptIn(ExperimentalFoundationApi::class, ExperimentalMaterialApi::class)
 @Composable
-fun MainFrame(topSelectBarVM: TopSelectViewModel = viewModel()) {
+fun MainFrame(
+    topSelectBarVM: TopSelectViewModel = viewModel()
+) {
+    val playerState =
+        rememberModalBottomSheetState(
+            initialValue = ModalBottomSheetValue.Hidden,
+        )
 
-    Scaffold(
-        backgroundColor = Color(0xFFFFFFFF),
+    Player(
+        content = {
+            Scaffold(
+                backgroundColor = Color(0xFFFFFFFF),
 
-        topBar = {
-            TopBar(topSelectBarVM)
-         },
-        bottomBar = {
-            BottomBar()
+                topBar = {
+                    TopBar(topSelectBarVM)
+                },
+                bottomBar = {
+                    BottomBar(playerState)
+                },
+
+                ) {
+                when(topSelectBarVM.categoryIndex.value){
+                    0 -> {// 统计数据条
+                        MainPage(topSelectBarVM = topSelectBarVM)
+                    }
+                    1 -> {
+                        SongsPage()
+                    }
+                    2 -> {
+                        SongsSheetPage()
+                    }
+                    3 -> {}
+                    4 -> {}
+                }
+            }
         },
+        state = playerState,
 
-    ) {
-        when(topSelectBarVM.categoryIndex.value){
-            0 -> {// 统计数据条
-                MainPage(topSelectBarVM = topSelectBarVM)
-            }
-            1 -> {
-                SongsPage()
-            }
-            2 -> {
-                SongsSheetPage()
-            }
-            3 -> {}
-            4 -> {}
-        }
-    }
+    )
+
 }
 
 

@@ -22,6 +22,7 @@ import top.roy1994.bilimusic.viewmodel.PlayerViewModel
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun Player(
+    content : @Composable () -> Unit,
     state: ModalBottomSheetState,
     playerVM: PlayerViewModel = viewModel(),
     PlayerProgressBarVM: PlayerProgressBarViewModel = viewModel(),
@@ -35,17 +36,17 @@ fun Player(
                     .padding(horizontal = 24.dp, vertical = 12.dp)
                     .requiredHeight(height = 46.dp)
                     .fillMaxWidth(),
-//                onCloseTapped = {scope.launch { state.hide() }}
+                onCloseTapped = {scope.launch { state.hide() }}
             )
             PlayerCoverTuple(
                 modifier = Modifier
                     .padding(vertical = 16.dp)
                     .requiredWidth(756.dp),
-                lastMusicCover = playerVM.preMusic?.cover
+                lastMusicCover = playerVM.preMusic.value.cover
                     ?: painterResource(id = R.drawable.default_cover),
-                nowMusicCover = playerVM.nowMusic?.cover
+                nowMusicCover = playerVM.nowMusic.value.cover
                     ?: painterResource(id = R.drawable.default_cover),
-                nextMusicCover = playerVM.nxtMusic?.cover
+                nextMusicCover = playerVM.nxtMusic.value.cover
                     ?: painterResource(id = R.drawable.default_cover),
             )
 
@@ -54,15 +55,13 @@ fun Player(
                     .padding(top = 8.dp, bottom = 24.dp)
                     .requiredHeight(90.dp)
                     .fillMaxWidth(),
-                name = playerVM.nowMusic?.name
-                    ?: "No Music",
-                artist = playerVM.nowMusic?.artist
-                    ?: "test",
+                name = playerVM.nowMusic.value.name,
+                artist = playerVM.nowMusic.value.artist,
             )
-            PlayerProgressBar(PlayerProgressBarVM)
+            PlayerProgressBar(playerVM)
             PlayerCommandBar(
                 modifier = Modifier
-                    .padding(top = 16.dp),
+                    .padding(top = 8.dp),
                 status = if (playerVM.isPlaying.value) Status.Playing
                             else Status.Stop,
                 onShuffleTapped = {},
@@ -82,7 +81,7 @@ fun Player(
                 .weight(0.3f)
                 .fillMaxWidth())
         },
-        content = {}
+        content = content
     )
 }
 
@@ -91,5 +90,5 @@ fun Player(
 @Composable
 fun PreviewPlayer() {
     val modalBottomSheetState = rememberModalBottomSheetState(ModalBottomSheetValue.Expanded)
-    Player(state = modalBottomSheetState)
+    Player(state = modalBottomSheetState, content = {})
 }
