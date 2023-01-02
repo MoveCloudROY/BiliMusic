@@ -20,7 +20,7 @@ data class Music(
     val name: String = "name",
     val artist: String = "artist",
 
-    val minute: Int = 0,
-    val second: Int = 0,
+//    val minute: Int = 0,
+    val second: Int = 300,
     val times5day: Int = 0,
 )

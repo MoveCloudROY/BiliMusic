@@ -33,8 +33,8 @@ fun SongsPage(
                     ?: painterResource(id = R.drawable.default_cover),
                 name = item.name,
                 artist = item.artist,
-                minuteOff = item.minute.toString(),
-                secondOff = item.second.toString().padStart(2,'0'),
+                minuteOff = (item.second / 60).toString(),
+                secondOff = (item.second % 60).toString().padStart(2,'0'),
                 switch = if (musicListVM.listIndex.value == index) Switch.On
                 else Switch.Off,
                 onSwitchTapped = {
