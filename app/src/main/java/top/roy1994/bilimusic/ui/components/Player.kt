@@ -25,7 +25,6 @@ fun Player(
     content : @Composable () -> Unit,
     state: ModalBottomSheetState,
     playerVM: PlayerViewModel = viewModel(),
-    PlayerProgressBarVM: PlayerProgressBarViewModel = viewModel(),
 ) {
     val scope = rememberCoroutineScope()
     ModalBottomSheetLayout(
@@ -68,11 +67,9 @@ fun Player(
                 onPreTapped = {},
                 onPlayTapped = {
                     playerVM.updateIsPlaying(false)
-                    PlayerProgressBarVM.updateIsPlaying(false)
                 },
                 onStopTapped = {
                     playerVM.updateIsPlaying(true)
-                    PlayerProgressBarVM.updateIsPlaying(true)
                 },
                 onNextTapped = {},
                 onLoopTapped = {},

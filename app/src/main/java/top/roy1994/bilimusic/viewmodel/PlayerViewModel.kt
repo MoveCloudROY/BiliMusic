@@ -1,7 +1,6 @@
 package top.roy1994.bilimusic.viewmodel
 
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.ui.graphics.painter.Painter
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -9,7 +8,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import top.roy1994.bilimusic.data.struct.Music
+import top.roy1994.bilimusic.data.objects.Music
 
 class PlayerViewModel: ViewModel() {
     val preMusic = mutableStateOf(

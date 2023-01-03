@@ -1,13 +1,6 @@
-package top.roy1994.bilimusic.data.struct
+package top.roy1994.bilimusic.data.objects
 
-import android.media.Image
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.graphics.painter.Painter
-import androidx.compose.ui.res.imageResource
-import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.semantics.Role.Companion.Image
-import top.roy1994.bilimusic.R
 
 
 data class Music(

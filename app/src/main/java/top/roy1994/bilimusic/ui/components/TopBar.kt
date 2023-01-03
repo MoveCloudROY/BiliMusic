@@ -53,10 +53,9 @@ fun TopBar(
                 AddMusicDialog(addMusicVM, addMusicDialogState)
             }
         }
-
 //        addMusicVM.doSomethingMore()
     } else {
-        Toast.makeText(ctx, "Dialog Closed", Toast.LENGTH_SHORT).show()
+//        Toast.makeText(ctx, "Dialog Closed", Toast.LENGTH_SHORT).show()
         addMusicVM.addMusic()
     }
 
