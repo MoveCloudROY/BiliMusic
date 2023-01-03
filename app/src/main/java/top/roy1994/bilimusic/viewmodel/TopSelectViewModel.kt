@@ -1,10 +1,8 @@
 package top.roy1994.bilimusic.viewmodel
 
-import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
-import top.roy1994.bilimusic.data.struct.TopSelectBarCategory
+import top.roy1994.bilimusic.data.objects.TopSelectBarCategory
 
 class TopSelectViewModel: ViewModel() {
     // topSelectBar data

@@ -1,4 +1,4 @@
-package top.roy1994.bilimusic.data.struct
+package top.roy1994.bilimusic.data.objects
 
 import androidx.compose.ui.graphics.painter.Painter
 

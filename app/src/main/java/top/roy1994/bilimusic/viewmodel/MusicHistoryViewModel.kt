@@ -2,7 +2,7 @@ package top.roy1994.bilimusic.viewmodel
 
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
-import top.roy1994.bilimusic.data.struct.Music
+import top.roy1994.bilimusic.data.objects.Music
 
 class MusicHistoryViewModel: ViewModel() {
     val _5FirstHistory = mutableStateOf(
