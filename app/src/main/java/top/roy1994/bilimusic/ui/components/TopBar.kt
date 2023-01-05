@@ -30,7 +30,7 @@ import top.roy1994.bilimusic.viewmodel.TopSelectViewModel
 @Composable
 fun TopBar(
     topSelectBarVM: TopSelectViewModel,
-    addMusicVM: AddMusicViewModel = viewModel(),
+    addMusicVM: AddMusicViewModel,
 ) {
     val ctx: Context = LocalContext.current
     val addMusicDialogState: MutableState<Boolean> = remember {
@@ -56,7 +56,6 @@ fun TopBar(
 //        addMusicVM.doSomethingMore()
     } else {
 //        Toast.makeText(ctx, "Dialog Closed", Toast.LENGTH_SHORT).show()
-        addMusicVM.addMusic()
     }
 
     Column() {

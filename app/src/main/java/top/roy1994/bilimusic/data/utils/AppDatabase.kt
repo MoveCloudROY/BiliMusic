@@ -37,6 +37,13 @@ abstract class AppDatabase : RoomDatabase()  {
                     ).fallbackToDestructiveMigration()
                         .build()
 
+                    val sheetDao = instance.sheetDao()
+                    val sheetRepo = SheetRepo(sheetDao)
+                    sheetRepo.insertSheet(
+                        SheetEntity(
+                            name = "默认歌单"
+                        )
+                    )
                     INSTANCE = instance
                 }
                 return instance
@@ -44,3 +51,4 @@ abstract class AppDatabase : RoomDatabase()  {
         }
     }
 }
+
