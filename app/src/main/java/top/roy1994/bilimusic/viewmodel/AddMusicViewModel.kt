@@ -3,26 +3,26 @@ package top.roy1994.bilimusic.viewmodel
 
 import android.app.Application
 import androidx.compose.runtime.mutableStateOf
-import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import top.roy1994.bilimusic.data.objects.Music
+import top.roy1994.bilimusic.data.objects.music.MusicDao
 import top.roy1994.bilimusic.data.objects.music.MusicEntity
+import top.roy1994.bilimusic.data.objects.sheet.SheetDao
+import top.roy1994.bilimusic.data.objects.sheet.SheetEntity
 import top.roy1994.bilimusic.data.utils.AppDatabase
 import top.roy1994.bilimusic.data.utils.MusicRepo
 import top.roy1994.bilimusic.data.utils.SheetRepo
 
-class AddMusicViewModel(application: Application) : AndroidViewModel(application) {
-    private val musicRepo: MusicRepo
-    private val sheetRepo: SheetRepo
+class AddMusicViewModel(application: Application): AndroidViewModel(application) {
+    private val musicDao: MusicDao
+    private val sheetDao: SheetDao
 
     init {
         val appDb = AppDatabase.getInstance(application)
-        val musicDao = appDb.musicDao()
-        val sheetDao = appDb.sheetDao()
-        musicRepo = MusicRepo(musicDao)
-        sheetRepo = SheetRepo(sheetDao)
+        musicDao = appDb.musicDao()
+        sheetDao = appDb.sheetDao()
     }
 
     var bvid = mutableStateOf("")
@@ -30,18 +30,31 @@ class AddMusicViewModel(application: Application) : AndroidViewModel(application
     var name = mutableStateOf("")
     var sheet = mutableStateOf("默认歌单")
 
-    fun addMusic() {
-        sheetRepo.findSheet(sheet.value)
-        var sheet_id = sheetRepo.searchResults.value!![0].id
+    var addSuccess = mutableStateOf(false)
+        private set
 
-        musicRepo.insertMusic(
-            MusicEntity(
-                bvid = bvid.value,
-                part = part.value.toInt(),
-                name = name.value,
-                sheet_id = sheet_id,
-            )
-        )
+    fun addMusic() {
+        viewModelScope.launch(Dispatchers.IO) {
+            val sheets: List<SheetEntity> =
+                    sheetDao.findSheetByName(sheet.value)
+            if (sheets.isNotEmpty()) {
+                val sheetId = sheets[0].id
+                musicDao.insertMusics(
+                    MusicEntity(
+                        bvid = bvid.value,
+                        part = part.value.toInt(),
+                        name = name.value,
+                        sheet_id = sheetId,
+                    )
+                )
+            }
+            bvid.value = ""
+            part.value = "1"
+            name.value = ""
+            sheet.value = "默认歌单"
+        }
+        addSuccess.value = true
+
     }
 
     /**
@@ -52,7 +65,7 @@ class AddMusicViewModel(application: Application) : AndroidViewModel(application
     fun updateBvid(_bvid: String) {
         bvid.value = _bvid
     }
-    /**
+    /**    java.lang.RuntimeException: Unable to copy database file.
      * 更新分类下标
      *
      * @param part
@@ -76,8 +89,11 @@ class AddMusicViewModel(application: Application) : AndroidViewModel(application
     fun updateSheet(_sheet: String) {
         sheet.value = _sheet
     }
-}
 
+    fun updateStatus(_state: Boolean) {
+        addSuccess.value = _state
+    }
+}
 
 class AddMusicViewModelFactory(
     private val application: Application
