@@ -1,9 +1,14 @@
 package top.roy1994.bilimusic.ui.pages
+import android.app.Application
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.viewmodel.compose.LocalViewModelStoreOwner
 import androidx.lifecycle.viewmodel.compose.viewModel
 
 import top.roy1994.bilimusic.ui.components.*
@@ -22,13 +27,18 @@ fun MainFrame(
             initialValue = ModalBottomSheetValue.Hidden,
         )
 
+    val addMusicVM: AddMusicViewModel = viewModel(
+        factory = AddMusicViewModelFactory(
+            LocalContext.current.applicationContext as Application)
+    )
+
     Player(
         content = {
             Scaffold(
                 backgroundColor = Color(0xFFFFFFFF),
 
                 topBar = {
-                    TopBar(topSelectBarVM)
+                    TopBar(topSelectBarVM, addMusicVM)
                 },
                 bottomBar = {
                     BottomBar(playerState)
@@ -46,7 +56,7 @@ fun MainFrame(
                         SongsSheetPage()
                     }
                     3 -> {}
-                    4 -> {}
+//                    4 -> {}
                 }
             }
         },

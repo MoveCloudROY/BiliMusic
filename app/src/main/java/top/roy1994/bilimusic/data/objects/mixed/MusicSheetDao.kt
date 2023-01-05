@@ -1,10 +1,11 @@
 package top.roy1994.bilimusic.data.objects.mixed
 
-import androidx.room.MapInfo
+import androidx.room.Dao
 import androidx.room.Query
 import top.roy1994.bilimusic.data.objects.music.MusicEntity
 import top.roy1994.bilimusic.data.objects.sheet.SheetEntity
 
+@Dao
 interface MusicSheetDao {
     @Query(
         "SELECT * FROM SheetEntity " +

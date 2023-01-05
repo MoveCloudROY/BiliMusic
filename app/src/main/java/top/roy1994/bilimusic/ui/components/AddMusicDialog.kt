@@ -1,5 +1,6 @@
 package top.roy1994.bilimusic.ui.components
 
+import android.app.Application
 import android.app.Dialog
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -12,11 +13,14 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewmodel.compose.viewModel
+import top.roy1994.bilimusic.MainActivity
 import top.roy1994.bilimusic.dialogbar.DialogBar
 import top.roy1994.bilimusic.dialogok.DialogOk
 import top.roy1994.bilimusic.viewmodel.AddMusicViewModel
@@ -24,9 +28,10 @@ import top.roy1994.bilimusic.viewmodel.AddMusicViewModel
 
 @Composable
 fun AddMusicDialog(
-    addMusicVM: AddMusicViewModel = viewModel(),
+    addMusicVM: AddMusicViewModel,
     dialogState: MutableState<Boolean>,
 ) {
+
     Column(
         modifier = Modifier
             .background(Color(0xFFFFFFFF))
@@ -48,7 +53,10 @@ fun AddMusicDialog(
         )
         DialogOk(
             modifier = Modifier.align(Alignment.CenterHorizontally),
-            text = "确定"
+            text = "确定",
+            onButtonTapped = {
+                addMusicVM.addMusic()
+            }
         )
     }
 }

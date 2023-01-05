@@ -1,9 +1,11 @@
 package top.roy1994.bilimusic.data.objects.mixed
 
+import androidx.room.Dao
 import androidx.room.Query
 import top.roy1994.bilimusic.data.objects.artist.ArtistEntity
 import top.roy1994.bilimusic.data.objects.music.MusicEntity
 
+@Dao
 interface MusicArtistDao {
     @Query(
         "SELECT * FROM ArtistEntity " +
