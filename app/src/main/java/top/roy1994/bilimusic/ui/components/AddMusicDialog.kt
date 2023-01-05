@@ -56,6 +56,10 @@ fun AddMusicDialog(
             text = "确定",
             onButtonTapped = {
                 addMusicVM.addMusic()
+                if (addMusicVM.addSuccess.value)
+                {
+                    dialogState.value = false
+                }
             }
         )
     }

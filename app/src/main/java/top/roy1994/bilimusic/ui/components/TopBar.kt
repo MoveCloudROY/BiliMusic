@@ -55,7 +55,10 @@ fun TopBar(
         }
 //        addMusicVM.doSomethingMore()
     } else {
-//        Toast.makeText(ctx, "Dialog Closed", Toast.LENGTH_SHORT).show()
+        if (addMusicVM.addSuccess.value) {
+            Toast.makeText(ctx, "添加成功", Toast.LENGTH_SHORT).show()
+            addMusicVM.updateStatus(false)
+        }
     }
 
     Column() {

@@ -11,8 +11,9 @@ class SheetRepo(
 ) {
     val allSheets: LiveData<List<SheetEntity>> = sheetDao.loadAllSheets()
     val searchResults = MutableLiveData<List<SheetEntity>>()
-    private val coroutineScope = CoroutineScope(Dispatchers.Main)
+    val size: LiveData<Int> = sheetDao.count()
 
+    private val coroutineScope = CoroutineScope(Dispatchers.Main)
 
     fun insertSheet(newMusic: SheetEntity) {
         coroutineScope.launch(Dispatchers.IO) {
@@ -26,14 +27,26 @@ class SheetRepo(
         }
     }
 
-    fun findSheet(name: String) {
+    fun findSheetByName(name: String) {
         coroutineScope.launch(Dispatchers.Main) {
-            searchResults.value = asyncFind(name).await()
+            searchResults.value = asyncFindByName(name).await()
         }
     }
 
-    private fun asyncFind(name: String): Deferred<List<SheetEntity>?> =
+
+    private fun asyncFindByName(name: String): Deferred<List<SheetEntity>?> =
         coroutineScope.async(Dispatchers.IO) {
             return@async sheetDao.findSheetByName(name)
+        }
+
+    fun findSheetById(id: Int) {
+        coroutineScope.launch(Dispatchers.Main) {
+            searchResults.value = asyncFindById(id).await()
+        }
+    }
+
+    private fun asyncFindById(id: Int): Deferred<List<SheetEntity>?> =
+        coroutineScope.async(Dispatchers.IO) {
+            return@async sheetDao.findSheetById(id)
         }
 }
