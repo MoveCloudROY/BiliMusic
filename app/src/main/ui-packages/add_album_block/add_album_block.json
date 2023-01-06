@@ -1,0 +1,224 @@
+{
+  "name": "add_album_block",
+  "version": 32,
+  "source-key": {
+    "type": "figma",
+    "file": "fmyi8bk5JepuCfQVb7LIDl",
+    "node": "166:945",
+    "version": "2830660616",
+    "component-id": "e2202e46f4397a2e873be43452ea4770587b3eb3"
+  },
+  "default": "AddAlbumBlock",
+  "design": {
+    "atoms": [
+      {
+        "type": "group",
+        "id": "top_level",
+        "root": "true"
+      },
+      {
+        "type": "group",
+        "id": "Group 3"
+      },
+      {
+        "type": "text",
+        "id": "name"
+      },
+      {
+        "type": "text",
+        "id": "artist"
+      },
+      {
+        "type": "vector",
+        "id": "ocupy"
+      },
+      {
+        "type": "vector",
+        "id": "Rectangle 13"
+      },
+      {
+        "type": "vector",
+        "id": "Rectangle 14"
+      }
+    ],
+    "modes": {
+      "AddAlbumBlock": {
+        "rules": [
+          {
+            "id": "top_level",
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "shrink"
+              },
+              "height-constraints": {
+                "sizing-mode": "shrink"
+              }
+            },
+            "main-axis-align": "start",
+            "children": [
+              "Group 3",
+              "name",
+              "artist"
+            ],
+            "item-spacing": "2.0"
+          },
+          {
+            "id": "Group 3",
+            "tap-handler": "$on Add tapped",
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "fixed",
+                "value": "155.0"
+              },
+              "height-constraints": {
+                "sizing-mode": "fixed",
+                "value": "155.0"
+              }
+            },
+            "is-structured": "false",
+            "children": [
+              "ocupy",
+              "Rectangle 13",
+              "Rectangle 14"
+            ],
+            "clip-content": "false"
+          },
+          {
+            "id": "name",
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "proportional",
+                "value": "1.0"
+              },
+              "height-constraints": {
+                "sizing-mode": "shrink"
+              }
+            },
+            "font-weight": "700.0",
+            "color": {
+              "alpha": "1.0",
+              "hue": "227.75510204081633",
+              "saturation": "0.49",
+              "value": "0.39215686274509803"
+            },
+            "text-content": " ",
+            "overflow": "visible",
+            "max-lines": "-1",
+            "text-size": "15.0",
+            "line-height": "1.17138671875",
+            "typeface": "Droid Sans"
+          },
+          {
+            "id": "artist",
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "proportional",
+                "value": "1.0"
+              },
+              "height-constraints": {
+                "sizing-mode": "shrink"
+              }
+            },
+            "font-weight": "700.0",
+            "color": {
+              "alpha": "1.0",
+              "hue": "230.52631578947367",
+              "saturation": "0.17674418604651165",
+              "value": "0.8431372549019608"
+            },
+            "text-content": " ",
+            "overflow": "visible",
+            "max-lines": "-1",
+            "text-size": "13.0",
+            "line-height": "1.17138671875",
+            "typeface": "Droid Sans"
+          },
+          {
+            "id": "ocupy",
+            "border-radius": "20.0",
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "fixed",
+                "value": "155.0"
+              },
+              "height-constraints": {
+                "sizing-mode": "fixed",
+                "value": "155.0"
+              }
+            },
+            "vector-content": "ocupy.svg"
+          },
+          {
+            "id": "Rectangle 13",
+            "border-radius": "10.0",
+            "alignment": {
+              "horizontal": {
+                "attachment": "start",
+                "offset": "68.0"
+              },
+              "vertical": {
+                "attachment": "start",
+                "offset": "27.0"
+              }
+            },
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "fixed",
+                "value": "20.0"
+              },
+              "height-constraints": {
+                "sizing-mode": "fixed",
+                "value": "100.0"
+              }
+            },
+            "vector-content": "rectangle_13.svg"
+          },
+          {
+            "id": "Rectangle 14",
+            "border-radius": "10.0",
+            "alignment": {
+              "horizontal": {
+                "attachment": "start",
+                "offset": "28.0"
+              },
+              "vertical": {
+                "attachment": "start",
+                "offset": "67.0"
+              }
+            },
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "fixed",
+                "value": "100.0"
+              },
+              "height-constraints": {
+                "sizing-mode": "fixed",
+                "value": "20.0"
+              }
+            },
+            "vector-content": "rectangle_14.svg"
+          }
+        ]
+      }
+    }
+  },
+  "parameters": {
+    "on Add tapped": {
+      "data-type": "void-callback",
+      "required": false,
+      "description": ""
+    }
+  },
+  "previews": [
+    {
+      "design": "AddAlbumBlock",
+      "size": {
+        "width": 155.0,
+        "height": 192.0
+      }
+    }
+  ],
+  "adin-component-search-paths": [],
+  "image-search-paths": [],
+  "vector-search-paths": []
+}

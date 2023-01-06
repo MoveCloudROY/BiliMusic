@@ -1,0 +1,167 @@
+{
+  "name": "sheet_info",
+  "version": 32,
+  "source-key": {
+    "type": "figma",
+    "file": "fmyi8bk5JepuCfQVb7LIDl",
+    "node": "152:764",
+    "version": "2833408472",
+    "component-id": "f430cc3732279d5c8bdf2a2c04ebc35e9d29dd3a"
+  },
+  "default": "SheetInfo",
+  "design": {
+    "atoms": [
+      {
+        "type": "group",
+        "id": "top_level",
+        "root": "true"
+      },
+      {
+        "type": "image",
+        "id": "cover"
+      },
+      {
+        "type": "group",
+        "id": "Frame 2"
+      },
+      {
+        "type": "text",
+        "id": "name"
+      },
+      {
+        "type": "text",
+        "id": "artist"
+      }
+    ],
+    "modes": {
+      "SheetInfo": {
+        "rules": [
+          {
+            "id": "top_level",
+            "arrangement": "row",
+            "children": [
+              "cover",
+              "Frame 2"
+            ],
+            "item-spacing": "20.0",
+            "background-color": {
+              "alpha": "1.0",
+              "hue": "0.0",
+              "saturation": "0.0",
+              "value": "1.0"
+            }
+          },
+          {
+            "id": "cover",
+            "border-radius": "20.0",
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "fixed",
+                "value": "130.0"
+              },
+              "height-constraints": {
+                "sizing-mode": "fixed",
+                "value": "130.0"
+              }
+            },
+            "image-content": "$cover",
+            "scale": "cover"
+          },
+          {
+            "id": "Frame 2",
+            "children": [
+              "name",
+              "artist"
+            ],
+            "item-spacing": "12.0",
+            "clip-content": "false"
+          },
+          {
+            "id": "name",
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "proportional",
+                "value": "1.0"
+              },
+              "height-constraints": {
+                "sizing-mode": "shrink"
+              }
+            },
+            "font-weight": "700.0",
+            "color": {
+              "alpha": "1.0",
+              "hue": "227.75510204081633",
+              "saturation": "0.49",
+              "value": "0.39215686274509803"
+            },
+            "text-content": "$name",
+            "overflow": "visible",
+            "max-lines": "-1",
+            "text-size": "20.0",
+            "line-height": "1.17138671875",
+            "typeface": "Droid Sans"
+          },
+          {
+            "id": "artist",
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "proportional",
+                "value": "1.0"
+              },
+              "height-constraints": {
+                "sizing-mode": "shrink"
+              }
+            },
+            "font-weight": "700.0",
+            "color": {
+              "alpha": "1.0",
+              "hue": "230.52631578947367",
+              "saturation": "0.17674418604651165",
+              "value": "0.8431372549019608"
+            },
+            "text-content": "$artist",
+            "overflow": "visible",
+            "max-lines": "-1",
+            "text-size": "13.0",
+            "line-height": "1.17138671875",
+            "typeface": "Droid Sans"
+          }
+        ]
+      }
+    }
+  },
+  "parameters": {
+    "cover": {
+      "data-type": "image",
+      "required": false,
+      "description": ""
+    },
+    "name": {
+      "data-type": "text",
+      "required": false,
+      "description": ""
+    },
+    "artist": {
+      "data-type": "text",
+      "required": false,
+      "description": ""
+    }
+  },
+  "previews": [
+    {
+      "design": "SheetInfo",
+      "size": {
+        "width": 300.0,
+        "height": 130.0
+      },
+      "parameters": {
+        "cover": "cover.png",
+        "name": "Call Recordings",
+        "artist": "<unknown>"
+      }
+    }
+  ],
+  "adin-component-search-paths": [],
+  "image-search-paths": [],
+  "vector-search-paths": []
+}

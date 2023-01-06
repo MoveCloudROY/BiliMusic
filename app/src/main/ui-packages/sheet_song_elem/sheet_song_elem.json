@@ -1,0 +1,241 @@
+{
+  "name": "sheet_song_elem",
+  "version": 32,
+  "source-key": {
+    "type": "figma",
+    "file": "fmyi8bk5JepuCfQVb7LIDl",
+    "node": "154:909",
+    "version": "2833408472",
+    "component-id": "48e59b80a26646cd92d1d5c3237569a3ea2edd88"
+  },
+  "default": "SheetSongElem",
+  "design": {
+    "atoms": [
+      {
+        "type": "group",
+        "id": "top_level",
+        "root": "true"
+      },
+      {
+        "type": "text",
+        "id": "id"
+      },
+      {
+        "type": "text",
+        "id": "name"
+      },
+      {
+        "type": "group",
+        "id": "length"
+      },
+      {
+        "type": "text",
+        "id": "minute"
+      },
+      {
+        "type": "text",
+        "id": "split"
+      },
+      {
+        "type": "text",
+        "id": "second"
+      }
+    ],
+    "modes": {
+      "SheetSongElem": {
+        "rules": [
+          {
+            "id": "top_level",
+            "padding": "5.0",
+            "tap-handler": "$on Song tapped",
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "proportional",
+                "value": "1.0"
+              },
+              "height-constraints": {
+                "sizing-mode": "shrink"
+              }
+            },
+            "arrangement": "row",
+            "main-axis-align": "start",
+            "children": [
+              "id",
+              "name",
+              "length"
+            ],
+            "item-spacing": "10.0",
+            "background-color": {
+              "alpha": "1.0",
+              "hue": "0.0",
+              "saturation": "0.0",
+              "value": "1.0"
+            },
+            "clip-content": "false"
+          },
+          {
+            "id": "id",
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "fixed",
+                "value": "14.0"
+              },
+              "height-constraints": {
+                "sizing-mode": "fixed",
+                "value": "21.0"
+              }
+            },
+            "color": {
+              "alpha": "1.0",
+              "hue": "230.52631578947367",
+              "saturation": "0.17674418604651165",
+              "value": "0.8431372549019608"
+            },
+            "text-content": "$id",
+            "overflow": "visible",
+            "max-lines": "-1",
+            "text-size": "24.0",
+            "line-height": "0.77880859375",
+            "typeface": "Concert One"
+          },
+          {
+            "id": "name",
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "proportional",
+                "value": "1.0"
+              },
+              "height-constraints": {
+                "sizing-mode": "fixed",
+                "value": "16.0"
+              }
+            },
+            "font-weight": "700.0",
+            "color": {
+              "alpha": "1.0",
+              "hue": "227.75510204081633",
+              "saturation": "0.49",
+              "value": "0.39215686274509803"
+            },
+            "text-content": "$name",
+            "overflow": "visible",
+            "max-lines": "-1",
+            "text-align": "left",
+            "text-size": "16.0",
+            "line-height": "1.218999981880188",
+            "typeface": "Montserrat"
+          },
+          {
+            "id": "length",
+            "padding": {
+              "bottom": "2.0"
+            },
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "shrink"
+              },
+              "height-constraints": {
+                "sizing-mode": "shrink"
+              }
+            },
+            "arrangement": "row",
+            "children": [
+              "minute",
+              "split",
+              "second"
+            ],
+            "item-spacing": "1.0",
+            "clip-content": "false"
+          },
+          {
+            "id": "minute",
+            "color": {
+              "alpha": "1.0",
+              "hue": "230.52631578947367",
+              "saturation": "0.17674418604651165",
+              "value": "0.8431372549019608"
+            },
+            "text-content": "$minute",
+            "overflow": "visible",
+            "text-size": "16.0",
+            "line-height": "0.77880859375",
+            "typeface": "Concert One"
+          },
+          {
+            "id": "split",
+            "color": {
+              "alpha": "1.0",
+              "hue": "230.52631578947367",
+              "saturation": "0.17674418604651165",
+              "value": "0.8431372549019608"
+            },
+            "text-content": ":",
+            "overflow": "visible",
+            "text-size": "16.0",
+            "line-height": "0.77880859375",
+            "typeface": "Concert One"
+          },
+          {
+            "id": "second",
+            "color": {
+              "alpha": "1.0",
+              "hue": "230.52631578947367",
+              "saturation": "0.17674418604651165",
+              "value": "0.8431372549019608"
+            },
+            "text-content": "$second",
+            "overflow": "visible",
+            "text-size": "16.0",
+            "line-height": "0.77880859375",
+            "typeface": "Concert One"
+          }
+        ]
+      }
+    }
+  },
+  "parameters": {
+    "on Song tapped": {
+      "data-type": "void-callback",
+      "required": false,
+      "description": ""
+    },
+    "id": {
+      "data-type": "text",
+      "required": false,
+      "description": ""
+    },
+    "name": {
+      "data-type": "text",
+      "required": false,
+      "description": ""
+    },
+    "minute": {
+      "data-type": "text",
+      "required": false,
+      "description": ""
+    },
+    "second": {
+      "data-type": "text",
+      "required": false,
+      "description": ""
+    }
+  },
+  "previews": [
+    {
+      "design": "SheetSongElem",
+      "size": {
+        "width": 300.0,
+        "height": 31.0
+      },
+      "parameters": {
+        "id": "0",
+        "name": "中文测试Chinese",
+        "minute": "0",
+        "second": "11"
+      }
+    }
+  ],
+  "adin-component-search-paths": [],
+  "image-search-paths": [],
+  "vector-search-paths": []
+}

@@ -1,0 +1,268 @@
+{
+  "name": "sheet_command",
+  "version": 32,
+  "source-key": {
+    "type": "figma",
+    "file": "fmyi8bk5JepuCfQVb7LIDl",
+    "node": "153:863",
+    "version": "2833408472",
+    "component-id": "8f97fe3b5745522dab4a2a6b12f098bf4b5b5f89"
+  },
+  "default": "SheetCommand",
+  "design": {
+    "atoms": [
+      {
+        "type": "group",
+        "id": "top_level",
+        "root": "true"
+      },
+      {
+        "type": "text",
+        "id": "item"
+      },
+      {
+        "type": "vector",
+        "id": "Rectangle 12"
+      },
+      {
+        "type": "group",
+        "id": "shuffle"
+      },
+      {
+        "type": "group",
+        "id": "Play"
+      },
+      {
+        "type": "vector",
+        "id": "ocupy_shuffle"
+      },
+      {
+        "type": "vector",
+        "id": "icon_shuffle"
+      },
+      {
+        "type": "group",
+        "id": "PlayButton"
+      },
+      {
+        "type": "vector",
+        "id": "icon_play"
+      }
+    ],
+    "modes": {
+      "SheetCommand": {
+        "rules": [
+          {
+            "id": "top_level",
+            "padding": {
+              "left": "21.0",
+              "top": "4.0",
+              "right": "21.0",
+              "bottom": "4.0"
+            },
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "proportional",
+                "value": "1.0"
+              },
+              "height-constraints": {
+                "sizing-mode": "shrink"
+              }
+            },
+            "arrangement": "row",
+            "children": [
+              "item",
+              "Rectangle 12",
+              "shuffle",
+              "Play"
+            ],
+            "item-spacing": "16.0",
+            "background-color": {
+              "alpha": "1.0",
+              "hue": "0.0",
+              "saturation": "0.0",
+              "value": "1.0"
+            }
+          },
+          {
+            "id": "item",
+            "font-weight": "700.0",
+            "color": {
+              "alpha": "1.0",
+              "hue": "227.75510204081633",
+              "saturation": "0.49",
+              "value": "0.39215686274509803"
+            },
+            "text-content": "列表",
+            "overflow": "visible",
+            "text-size": "24.0",
+            "line-height": "1.17138671875",
+            "typeface": "Droid Sans"
+          },
+          {
+            "id": "Rectangle 12",
+            "border-radius": "16.0",
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "proportional",
+                "value": "1.0"
+              },
+              "height-constraints": {
+                "sizing-mode": "fixed",
+                "value": "4.0"
+              }
+            },
+            "vector-content": "rectangle_12.svg"
+          },
+          {
+            "id": "shuffle",
+            "tap-handler": "$on shuffle tapped",
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "fixed",
+                "value": "40.0"
+              },
+              "height-constraints": {
+                "sizing-mode": "fixed",
+                "value": "40.0"
+              }
+            },
+            "is-structured": "false",
+            "children": [
+              "ocupy_shuffle",
+              "icon_shuffle"
+            ],
+            "clip-content": "false"
+          },
+          {
+            "id": "Play",
+            "padding": {
+              "left": "15.0"
+            },
+            "tap-handler": "$on Play tapped",
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "fixed",
+                "value": "65.0"
+              },
+              "height-constraints": {
+                "sizing-mode": "fixed",
+                "value": "63.75"
+              }
+            },
+            "arrangement": "row",
+            "main-axis-align": "start",
+            "cross-axis-align": "start",
+            "children": [
+              "PlayButton"
+            ],
+            "item-spacing": "10.0",
+            "clip-content": "false"
+          },
+          {
+            "id": "ocupy_shuffle",
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "proportional",
+                "value": "1.0"
+              },
+              "height-constraints": {
+                "sizing-mode": "proportional",
+                "value": "1.0"
+              }
+            }
+          },
+          {
+            "id": "icon_shuffle",
+            "margin": {
+              "left": "5.0",
+              "top": "6.6597900390625",
+              "right": "5.0",
+              "bottom": "6.66668701171875"
+            },
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "proportional",
+                "value": "1.0"
+              },
+              "height-constraints": {
+                "sizing-mode": "proportional",
+                "value": "1.0"
+              }
+            },
+            "vector-content": "icon_shuffle.svg"
+          },
+          {
+            "id": "PlayButton",
+            "drop-shadow": {
+              "color": {
+                "alpha": "1.0",
+                "hue": "232.64150943396226",
+                "saturation": "0.424",
+                "value": "0.9803921568627451"
+              },
+              "blur": "12.0",
+              "offset-x": "-1.0",
+              "offset-y": "2.0",
+              "spread": "0.0",
+              "blend-mode": "normal"
+            },
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "fixed",
+                "value": "50.0"
+              },
+              "height-constraints": {
+                "sizing-mode": "fixed",
+                "value": "63.75"
+              }
+            },
+            "is-structured": "false",
+            "children": [
+              "icon_play"
+            ],
+            "clip-content": "false"
+          },
+          {
+            "id": "icon_play",
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "proportional",
+                "value": "1.0"
+              },
+              "height-constraints": {
+                "sizing-mode": "proportional",
+                "value": "1.0"
+              }
+            },
+            "vector-content": "icon_play.svg"
+          }
+        ]
+      }
+    }
+  },
+  "parameters": {
+    "on shuffle tapped": {
+      "data-type": "void-callback",
+      "required": false,
+      "description": ""
+    },
+    "on Play tapped": {
+      "data-type": "void-callback",
+      "required": false,
+      "description": ""
+    }
+  },
+  "previews": [
+    {
+      "design": "SheetCommand",
+      "size": {
+        "width": 373.0,
+        "height": 71.75
+      }
+    }
+  ],
+  "adin-component-search-paths": [],
+  "image-search-paths": [],
+  "vector-search-paths": []
+}

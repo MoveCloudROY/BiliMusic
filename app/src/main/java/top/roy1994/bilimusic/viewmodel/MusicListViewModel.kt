@@ -22,17 +22,6 @@ class MusicListViewModel(application: Application): AndroidViewModel(application
     }
 
     val musicList: LiveData<List<MusicEntity>> = musicDao.loadAllMusics()
-//        mutableStateOf(
-//        (0 until 30).map {
-//            Music(
-//                id = it,
-//                name = "歌曲${it}",
-//                artist = "作者${it}",
-//            )
-//        }
-//    )
-
-
 
     /**
      * 更新分类下标
