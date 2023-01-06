@@ -28,6 +28,7 @@ class AddMusicViewModel(application: Application): AndroidViewModel(application)
     var bvid = mutableStateOf("")
     var part = mutableStateOf("1")
     var name = mutableStateOf("")
+    var artist = mutableStateOf("默认艺术家")
     var sheet = mutableStateOf("默认歌单")
 
     var addSuccess = mutableStateOf(false)
@@ -44,6 +45,7 @@ class AddMusicViewModel(application: Application): AndroidViewModel(application)
                         bvid = bvid.value,
                         part = part.value.toInt(),
                         name = name.value,
+                        artist = artist.value,
                         sheet_id = sheetId,
                     )
                 )
@@ -51,6 +53,7 @@ class AddMusicViewModel(application: Application): AndroidViewModel(application)
             bvid.value = ""
             part.value = "1"
             name.value = ""
+            artist.value = "默认艺术家"
             sheet.value = "默认歌单"
         }
         addSuccess.value = true
@@ -80,6 +83,14 @@ class AddMusicViewModel(application: Application): AndroidViewModel(application)
      */
     fun updateName(_name: String) {
         name.value = _name
+    }
+    /**
+     * 更新分类下标
+     *
+     * @param name
+     */
+    fun updateArtist(_artist: String) {
+        name.value = _artist
     }
     /**
      * 更新分类下标
