@@ -1,5 +1,6 @@
 package top.roy1994.bilimusic.ui.components
 
+import android.app.Application
 import android.content.Context
 import android.widget.Toast
 import androidx.compose.foundation.layout.*
@@ -25,12 +26,17 @@ import top.roy1994.bilimusic.topselectbarelem.Property1
 import top.roy1994.bilimusic.topselectbarelem.TopSelectBarElem
 import top.roy1994.bilimusic.ui.components.TabRowDefaults.tabIndicatorOffset
 import top.roy1994.bilimusic.viewmodel.AddMusicViewModel
+import top.roy1994.bilimusic.viewmodel.AddMusicViewModelFactory
 import top.roy1994.bilimusic.viewmodel.TopSelectViewModel
 
 @Composable
 fun TopBar(
     topSelectBarVM: TopSelectViewModel,
-    addMusicVM: AddMusicViewModel,
+    addMusicVM: AddMusicViewModel = viewModel(
+        factory = AddMusicViewModelFactory(
+            LocalContext.current.applicationContext as Application
+        )
+    ),
 ) {
     val ctx: Context = LocalContext.current
     val addMusicDialogState: MutableState<Boolean> = remember {

@@ -5,14 +5,14 @@ import androidx.room.*
 
 @Dao
 interface ArtistDao {
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertArtists(vararg musics: ArtistEntity)
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    fun insertArtists(vararg artists: ArtistEntity)
 
     @Update
-    fun updateArtists(vararg musics: ArtistEntity)
+    fun updateArtists(vararg artists: ArtistEntity)
 
     @Delete
-    fun deleteArtists(vararg musics: ArtistEntity)
+    fun deleteArtists(vararg artists: ArtistEntity)
 
     @Query("SELECT * FROM ArtistEntity WHERE name = :name")
     fun findArtistByName(name: String): List<ArtistEntity>
