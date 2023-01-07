@@ -10,10 +10,12 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.rememberNavController
 import top.roy1994.bilimusic.ui.navigation.NavGraph
 import top.roy1994.bilimusic.ui.pages.MainFrame
 import top.roy1994.bilimusic.ui.theme.BiliMusicTheme
+import top.roy1994.bilimusic.viewmodel.PlayerViewModel
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -21,7 +23,8 @@ class MainActivity : ComponentActivity() {
         setContent {
             BiliMusicTheme {
                 val navController = rememberNavController()
-                NavGraph(navController = navController)
+                val playerVM: PlayerViewModel = viewModel()
+                NavGraph(navController = navController, playerVM = playerVM)
 //                MainFrame()
             }
         }
@@ -32,6 +35,8 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun DefaultPreview() {
     BiliMusicTheme {
-        MainFrame()
+        val navController = rememberNavController()
+        val playerVM: PlayerViewModel = viewModel()
+        NavGraph(navController = navController, playerVM = playerVM)
     }
 }

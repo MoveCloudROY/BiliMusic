@@ -5,7 +5,7 @@
     "type": "figma",
     "file": "fmyi8bk5JepuCfQVb7LIDl",
     "node": "152:764",
-    "version": "2833408472",
+    "version": "2834189588",
     "component-id": "f430cc3732279d5c8bdf2a2c04ebc35e9d29dd3a"
   },
   "default": "SheetInfo",
@@ -97,6 +97,7 @@
             "text-content": "$name",
             "overflow": "visible",
             "max-lines": "-1",
+            "text-align": "left",
             "text-size": "20.0",
             "line-height": "1.17138671875",
             "typeface": "Droid Sans"
@@ -122,6 +123,7 @@
             "text-content": "$artist",
             "overflow": "visible",
             "max-lines": "-1",
+            "text-align": "left",
             "text-size": "13.0",
             "line-height": "1.17138671875",
             "typeface": "Droid Sans"

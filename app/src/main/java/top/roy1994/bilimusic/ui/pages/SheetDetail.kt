@@ -10,15 +10,20 @@ import androidx.compose.material.ModalBottomSheetValue
 import androidx.compose.material.Scaffold
 import androidx.compose.material.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.viewmodel.compose.viewModel
 import top.roy1994.bilimusic.R
 import top.roy1994.bilimusic.backbar.BackBar
+import top.roy1994.bilimusic.data.objects.music.MusicEntity
+import top.roy1994.bilimusic.data.objects.sheet.SheetEntity
 import top.roy1994.bilimusic.musicverticalcommentelem.MusicVerticalCommentElem
 import top.roy1994.bilimusic.sheetcommand.SheetCommand
 import top.roy1994.bilimusic.sheetinfo.SheetInfo
@@ -26,12 +31,15 @@ import top.roy1994.bilimusic.sheetsongelem.SheetSongElem
 import top.roy1994.bilimusic.ui.components.BottomBar
 import top.roy1994.bilimusic.ui.components.Player
 import top.roy1994.bilimusic.ui.components.TopBar
+import top.roy1994.bilimusic.viewmodel.PlayerViewModel
 import top.roy1994.bilimusic.viewmodel.SheetDetailViewModel
 import top.roy1994.bilimusic.viewmodel.SheetDetailViewModelFactory
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun SheetDetail(
+    sheedId: Int,
+    playerVM: PlayerViewModel,
     sheetDetailVM: SheetDetailViewModel = viewModel(
         factory = SheetDetailViewModelFactory(
             LocalContext.current.applicationContext as Application
@@ -43,12 +51,14 @@ fun SheetDetail(
             initialValue = ModalBottomSheetValue.Hidden,
         )
 
+    val musicSheetMap by sheetDetailVM.musicSheetMap.observeAsState()
+
     Player(
         content = {
             Scaffold(
                 backgroundColor = Color(0xFFFFFFFF),
                 bottomBar = {
-                    BottomBar(playerState)
+                    BottomBar(playerVM, playerState)
                 },
             ) {
                 Column (
@@ -104,5 +114,14 @@ fun SheetDetail(
 @Preview
 @Composable
 fun PreviewSheetDetail() {
-    SheetDetail()
+    SheetDetail(
+        sheedId = 1,
+        sheetDetailVM = viewModel(
+            factory = SheetDetailViewModelFactory(
+                LocalContext.current.applicationContext as Application
+            )
+        ),
+        playerVM = viewModel(),
+    )
+
 }

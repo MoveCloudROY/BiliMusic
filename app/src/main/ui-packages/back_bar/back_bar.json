@@ -5,7 +5,7 @@
     "type": "figma",
     "file": "fmyi8bk5JepuCfQVb7LIDl",
     "node": "168:961",
-    "version": "2833408472",
+    "version": "2834224460",
     "component-id": "35470032a25414017c21e5d11e9da744a6cabf44"
   },
   "default": "BackBar",
@@ -65,11 +65,11 @@
             "size-constraints": {
               "width-constraints": {
                 "sizing-mode": "fixed",
-                "value": "30.0"
+                "value": "40.0"
               },
               "height-constraints": {
                 "sizing-mode": "fixed",
-                "value": "30.0"
+                "value": "40.0"
               }
             },
             "is-structured": "false",
@@ -96,7 +96,7 @@
               "saturation": "0.49",
               "value": "0.39215686274509803"
             },
-            "text-content": " ",
+            "text-content": "$title",
             "overflow": "visible",
             "max-lines": "-1",
             "text-align-vertical": "center",
@@ -144,10 +144,10 @@
           {
             "id": "icon",
             "margin": {
-              "left": "10.61767578125",
-              "top": "8.74481201171875",
-              "right": "11.88238525390625",
-              "bottom": "8.749908447265625"
+              "left": "14.15692138671875",
+              "top": "11.659759521484375",
+              "right": "15.8431396484375",
+              "bottom": "11.66656494140625"
             },
             "size-constraints": {
               "width-constraints": {
@@ -170,6 +170,11 @@
       "data-type": "void-callback",
       "required": false,
       "description": ""
+    },
+    "title": {
+      "data-type": "text",
+      "required": false,
+      "description": ""
     }
   },
   "previews": [
@@ -178,6 +183,9 @@
       "size": {
         "width": 294.0,
         "height": 46.0
+      },
+      "parameters": {
+        "title": "Title"
       }
     }
   ],

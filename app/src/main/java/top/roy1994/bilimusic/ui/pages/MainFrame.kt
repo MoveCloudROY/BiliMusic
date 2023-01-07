@@ -10,6 +10,8 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewmodel.compose.LocalViewModelStoreOwner
 import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
 
 import top.roy1994.bilimusic.ui.components.*
 
@@ -20,12 +22,15 @@ import top.roy1994.bilimusic.viewmodel.*
 @OptIn(ExperimentalFoundationApi::class, ExperimentalMaterialApi::class)
 @Composable
 fun MainFrame(
-    topSelectBarVM: TopSelectViewModel = viewModel()
+    navController: NavHostController,
+    playerVM: PlayerViewModel,
+    topSelectBarVM: TopSelectViewModel = viewModel(),
 ) {
     val playerState =
         rememberModalBottomSheetState(
             initialValue = ModalBottomSheetValue.Hidden,
         )
+
 
     Player(
         content = {
@@ -36,7 +41,7 @@ fun MainFrame(
                     TopBar(topSelectBarVM)
                 },
                 bottomBar = {
-                    BottomBar(playerState)
+                    BottomBar(playerVM, playerState)
                 },
 
                 ) {
@@ -48,7 +53,7 @@ fun MainFrame(
                         SongsPage()
                     }
                     2 -> {
-                        SongsSheetPage()
+                        SongsSheetPage(navController = navController)
                     }
                     3 -> {}
 //                    4 -> {}
@@ -66,6 +71,9 @@ fun MainFrame(
 @Composable
 fun MainFramePreview() {
     BiliMusicTheme {
-        MainFrame()
+        MainFrame(
+            rememberNavController(),
+            viewModel(),
+        )
     }
 }

@@ -22,8 +22,8 @@ import top.roy1994.bilimusic.viewmodel.TopSelectViewModel
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun BottomBar(
+    playerVM: PlayerViewModel,
     playerState: ModalBottomSheetState,
-    playerVM: PlayerViewModel = viewModel(),
 ) {
     val scope = rememberCoroutineScope()
 
