@@ -34,7 +34,7 @@ class SheetRepo(
     }
 
 
-    private fun asyncFindByName(name: String): Deferred<List<SheetEntity>?> =
+    fun asyncFindByName(name: String): Deferred<List<SheetEntity>?> =
         coroutineScope.async(Dispatchers.IO) {
             return@async sheetDao.findSheetByName(name)
         }
@@ -45,7 +45,7 @@ class SheetRepo(
         }
     }
 
-    private fun asyncFindById(id: Int): Deferred<List<SheetEntity>?> =
+    fun asyncFindById(id: Int): Deferred<List<SheetEntity>?> =
         coroutineScope.async(Dispatchers.IO) {
             return@async sheetDao.findSheetById(id)
         }

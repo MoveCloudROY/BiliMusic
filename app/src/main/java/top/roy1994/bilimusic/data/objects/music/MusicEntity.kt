@@ -12,6 +12,7 @@ data class MusicEntity (
     val part: Int = 1,
 
     val name: String,
+    val description: String = " ",
     val artist: String = "None",
     val sheet_id: Int = 0,
 

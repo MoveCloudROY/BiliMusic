@@ -14,4 +14,13 @@ data class SheetEntity (
 ) {
     @Ignore
     var cover: Painter? = null
+    companion object {
+        fun GetDefault(): SheetEntity {
+            return SheetEntity(
+                id = 1,
+                name = "默认歌单Test",
+                description = " ",
+            )
+        }
+    }
 }
