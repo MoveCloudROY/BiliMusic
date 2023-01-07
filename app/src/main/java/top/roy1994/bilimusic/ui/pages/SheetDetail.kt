@@ -124,6 +124,19 @@ fun SheetDetail(
                                 }
                             )
                         }
+                        SheetSongElem(
+                            modifier = Modifier
+                                .requiredHeight(31.dp)
+                                .padding(horizontal = 16.dp, vertical = 0.dp)
+                                .fillMaxWidth(),
+                            id = "2",
+                            name = "ASDAS",
+                            minute = "2",
+                            second = "15",
+                            onSongTapped = {
+
+                            }
+                        )
                     }
 
 

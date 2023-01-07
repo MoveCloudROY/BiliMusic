@@ -1,5 +1,6 @@
 package top.roy1994.bilimusic.ui.pages
 
+import android.app.Application
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -9,9 +10,12 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -28,10 +32,26 @@ import top.roy1994.bilimusic.viewmodel.*
 fun MainPage(
     topSelectBarVM: TopSelectViewModel,
     topShowBlockVM: TopShowBlockViewModel = viewModel(),
-    musicHistoryVM: MusicHistoryViewModel = viewModel(),
-    musicOftenVM: MusicOftenViewModel = viewModel(),
-    musicRecentVM: MusicRecentViewModel = viewModel(),
+    musicHistoryVM: MusicHistoryViewModel = viewModel(
+        factory = MusicHistoryViewModelFactory(
+            LocalContext.current.applicationContext as Application
+        )
+    ),
+    musicOftenVM: MusicOftenViewModel = viewModel(
+        factory = MusicOftenViewModelFactory(
+            LocalContext.current.applicationContext as Application
+        )
+    ),
+    musicRecentVM: MusicRecentViewModel = viewModel(
+        factory = MusicRecentViewModelFactory(
+            LocalContext.current.applicationContext as Application
+        )
+    ),
 ) {
+    val musicHistory by musicHistoryVM.musicHistory.observeAsState()
+    val musicOften by musicOftenVM.musicOften.observeAsState()
+    val musicRecent by musicRecentVM.musicRecent.observeAsState()
+
     Column (
         Modifier
             .background(Color(0xFFFFFFFF))
@@ -68,7 +88,7 @@ fun MainPage(
             contentPadding = PaddingValues(horizontal = 12.dp),
             horizontalArrangement = Arrangement.spacedBy(12.dp)
         ) {
-            itemsIndexed(musicHistoryVM._5FirstHistory.value) { index, item ->
+            itemsIndexed(musicHistory.orEmpty()) { _, item ->
                 MusicHorizonBarElem(
                     cover = item.cover
                         ?: painterResource(id = R.drawable.default_cover),
@@ -86,7 +106,7 @@ fun MainPage(
 //                        contentPadding = PaddingValues(horizontal = 12.dp),
             verticalArrangement = Arrangement.spacedBy(12.dp)
         ) {
-            musicOftenVM._5FirstOften.value.forEachIndexed { index, item ->
+            musicOften.orEmpty().forEachIndexed { _, item ->
                 MusicVerticalCommentElem(
                     cover = item.cover
                         ?: painterResource(id = R.drawable.default_cover),
@@ -107,7 +127,7 @@ fun MainPage(
 //                        contentPadding = PaddingValues(horizontal = 12.dp),
             verticalArrangement = Arrangement.spacedBy(12.dp)
         ) {
-            musicRecentVM._5FirstRecent.value.forEachIndexed { index, item ->
+            musicRecent.orEmpty().forEachIndexed { _, item ->
                 MusicVerticalCommentElem(
                     cover = item.cover
                         ?: painterResource(id = R.drawable.default_cover),

@@ -40,7 +40,7 @@ class SheetDetailViewModel(application: Application) : AndroidViewModel(applicat
         sheetInfo.value = sheetRepo.searchResults.value?.get(0)
             ?: SheetEntity.GetDefault()
         viewModelScope.launch(Dispatchers.Main) {
-            musicSheetRepo.getMap()
+            musicSheetRepo.getMap().await()
         }
         sheetElems.value = musicSheetRepo.searchResults.value?.get(sheetId.value)
             ?: listOf()

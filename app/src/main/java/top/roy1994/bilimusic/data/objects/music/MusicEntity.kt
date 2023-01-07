@@ -18,6 +18,8 @@ data class MusicEntity (
 
     val second: Int = 300,
     var times5day: Int = 0,
+    val add_time: Long = 0,
+    var last_play_time: Long,
 ) {
     @Ignore var cover: Painter? = null
 }

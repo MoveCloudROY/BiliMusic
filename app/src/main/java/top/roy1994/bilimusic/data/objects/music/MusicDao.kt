@@ -25,4 +25,14 @@ interface MusicDao {
 
     @Query("SELECT * FROM MusicEntity")
     fun loadAllMusics(): LiveData<List<MusicEntity>>
+
+    @Query("SELECT * FROM MusicEntity ORDER BY MusicEntity.add_time DESC LIMIT 5")
+    fun loadMusicsAddTimeDesc(): LiveData<List<MusicEntity>>
+
+    @Query("SELECT * FROM MusicEntity ORDER BY MusicEntity.times5day DESC LIMIT 5")
+    fun loadMusicsPlayTimesDesc(): LiveData<List<MusicEntity>>
+
+    @Query("SELECT * FROM MusicEntity ORDER BY MusicEntity.last_play_time DESC LIMIT 5")
+    fun loadMusicsLastPlayDesc(): LiveData<List<MusicEntity>>
+
 }
