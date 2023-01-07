@@ -14,6 +14,9 @@ import top.roy1994.bilimusic.data.objects.sheet.SheetEntity
 import top.roy1994.bilimusic.data.utils.AppDatabase
 import top.roy1994.bilimusic.data.utils.MusicRepo
 import top.roy1994.bilimusic.data.utils.SheetRepo
+import java.sql.Date
+import java.sql.Timestamp
+import java.time.Instant
 
 class AddMusicViewModel(application: Application): AndroidViewModel(application) {
     private val musicDao: MusicDao
@@ -47,6 +50,8 @@ class AddMusicViewModel(application: Application): AndroidViewModel(application)
                         name = name.value,
                         artist = artist.value,
                         sheet_id = sheetId,
+                        add_time = System.currentTimeMillis(),
+                        last_play_time = System.currentTimeMillis(),
                     )
                 )
             }

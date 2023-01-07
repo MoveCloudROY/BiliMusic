@@ -1,10 +1,17 @@
 package top.roy1994.bilimusic.viewmodel
 
+import android.app.Application
 import androidx.compose.runtime.mutableStateOf
+import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import top.roy1994.bilimusic.data.objects.Music
+import top.roy1994.bilimusic.data.objects.music.MusicDao
+import top.roy1994.bilimusic.data.objects.music.MusicEntity
+import top.roy1994.bilimusic.data.utils.AppDatabase
 
-class MusicHistoryViewModel: ViewModel() {
+class MusicHistoryViewModel(application: Application): AndroidViewModel(application) {
     val _5FirstHistory = mutableStateOf(
         (0 until 5).map {
             Music(
@@ -14,6 +21,30 @@ class MusicHistoryViewModel: ViewModel() {
             )
         }
     )
+    private val musicDao: MusicDao
+
+    var listIndex = mutableStateOf(0)
+        private set
+
+    init {
+        val appDb = AppDatabase.getInstance(application)
+        musicDao = appDb.musicDao()
+    }
+
+    val musicHistory: LiveData<List<MusicEntity>> = musicDao.loadMusicsLastPlayDesc()
+
+}
+
+class MusicHistoryViewModelFactory(
+    private val application: Application
+) : ViewModelProvider.Factory {
+    override fun <T : ViewModel> create(modelClass: Class<T>): T {
+        @Suppress("UNCHECKED_CAST")
+        if (modelClass.isAssignableFrom(MusicHistoryViewModel::class.java)) {
+            return MusicHistoryViewModel(application) as T
+        }
+        throw IllegalArgumentException("Unknown ViewModel class")
+    }
 }
 
 
