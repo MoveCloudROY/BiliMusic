@@ -5,7 +5,7 @@
     "type": "figma",
     "file": "fmyi8bk5JepuCfQVb7LIDl",
     "node": "153:863",
-    "version": "2833408472",
+    "version": "2834208244",
     "component-id": "8f97fe3b5745522dab4a2a6b12f098bf4b5b5f89"
   },
   "default": "SheetCommand",
@@ -194,19 +194,6 @@
           },
           {
             "id": "PlayButton",
-            "drop-shadow": {
-              "color": {
-                "alpha": "1.0",
-                "hue": "232.64150943396226",
-                "saturation": "0.424",
-                "value": "0.9803921568627451"
-              },
-              "blur": "12.0",
-              "offset-x": "-1.0",
-              "offset-y": "2.0",
-              "spread": "0.0",
-              "blend-mode": "normal"
-            },
             "size-constraints": {
               "width-constraints": {
                 "sizing-mode": "fixed",

@@ -16,20 +16,23 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
 import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
 import top.roy1994.bilimusic.R
 import top.roy1994.bilimusic.addalbumblock.AddAlbumBlock
 import top.roy1994.bilimusic.albumblockelem.AlbumBlockElem
-import top.roy1994.bilimusic.ui.components.AddMusicDialog
 import top.roy1994.bilimusic.ui.components.AddSheetDialog
 import top.roy1994.bilimusic.viewmodel.*
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun SongsSheetPage(
+    navController: NavHostController,
     musicSheetVM: MusicSheetViewModel = viewModel(
         factory = MusicSheetViewModelFactory(
             LocalContext.current.applicationContext as Application
@@ -91,7 +94,25 @@ fun SongsSheetPage(
                     ?: painterResource(id = R.drawable.default_cover),
                 name = item.name,
                 artist = item.description,
+                onAlbumBlockElemTapped = {
+                    navController.navigate(
+                        "car/{carId}"
+                            .replace(
+                                oldValue = "{carId}",
+                                newValue = "${1}"
+                            )
+                    )
+                }
             )
         }
     }
+}
+
+@Preview
+@Composable
+fun PreviewSongsSheetPage()
+{
+    SongsSheetPage(
+        rememberNavController(),
+    )
 }

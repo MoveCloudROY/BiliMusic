@@ -1,5 +1,6 @@
 package top.roy1994.bilimusic.data.objects.mixed
 
+import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Query
 import top.roy1994.bilimusic.data.objects.music.MusicEntity
@@ -11,7 +12,7 @@ interface MusicSheetDao {
         "SELECT * FROM SheetEntity " +
         "JOIN MusicEntity ON SheetEntity.id = MusicEntity.sheet_id"
     )
-    fun loadSheetAndMusics(): Map<SheetEntity, List<MusicEntity>>
+    fun loadSheetAndMusics(): LiveData<Map<SheetEntity, List<MusicEntity>>>
 
 //    @MapInfo(keyColumn = "sheetId", valueColumn = [])
 //    @Query(
