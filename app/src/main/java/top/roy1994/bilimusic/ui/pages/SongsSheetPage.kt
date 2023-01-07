@@ -27,6 +27,7 @@ import top.roy1994.bilimusic.R
 import top.roy1994.bilimusic.addalbumblock.AddAlbumBlock
 import top.roy1994.bilimusic.albumblockelem.AlbumBlockElem
 import top.roy1994.bilimusic.ui.components.AddSheetDialog
+import top.roy1994.bilimusic.ui.navigation.Screens
 import top.roy1994.bilimusic.viewmodel.*
 
 @OptIn(ExperimentalFoundationApi::class)
@@ -87,19 +88,19 @@ fun SongsSheetPage(
                 }
             )
         }
-        items(sheets.orEmpty()) { item ->
+        items(sheets.orEmpty()) { sheetEntity ->
             AlbumBlockElem(
                 modifier = Modifier.padding(vertical = 8.dp),
-                cover = item.cover
+                cover = sheetEntity.cover
                     ?: painterResource(id = R.drawable.default_cover),
-                name = item.name,
-                artist = item.description,
+                name = sheetEntity.name,
+                artist = sheetEntity.description,
                 onAlbumBlockElemTapped = {
                     navController.navigate(
-                        "car/{carId}"
+                        "${Screens.Detail.route}/{sheetId}"
                             .replace(
-                                oldValue = "{carId}",
-                                newValue = "${1}"
+                                oldValue = "{sheetId}",
+                                newValue = "${sheetEntity.id}"
                             )
                     )
                 }

@@ -1,6 +1,7 @@
 package top.roy1994.bilimusic.ui.pages
 
 import android.app.Application
+import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
@@ -20,6 +21,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
 import top.roy1994.bilimusic.R
 import top.roy1994.bilimusic.backbar.BackBar
 import top.roy1994.bilimusic.data.objects.music.MusicEntity
@@ -31,6 +34,7 @@ import top.roy1994.bilimusic.sheetsongelem.SheetSongElem
 import top.roy1994.bilimusic.ui.components.BottomBar
 import top.roy1994.bilimusic.ui.components.Player
 import top.roy1994.bilimusic.ui.components.TopBar
+import top.roy1994.bilimusic.ui.navigation.Screens
 import top.roy1994.bilimusic.viewmodel.PlayerViewModel
 import top.roy1994.bilimusic.viewmodel.SheetDetailViewModel
 import top.roy1994.bilimusic.viewmodel.SheetDetailViewModelFactory
@@ -38,7 +42,8 @@ import top.roy1994.bilimusic.viewmodel.SheetDetailViewModelFactory
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun SheetDetail(
-    sheedId: Int,
+    navController: NavHostController,
+    sheetId: Int,
     playerVM: PlayerViewModel,
     sheetDetailVM: SheetDetailViewModel = viewModel(
         factory = SheetDetailViewModelFactory(
@@ -50,8 +55,9 @@ fun SheetDetail(
         rememberModalBottomSheetState(
             initialValue = ModalBottomSheetValue.Hidden,
         )
+    sheetDetailVM.updateSheetId(sheetId)
 
-    val musicSheetMap by sheetDetailVM.musicSheetMap.observeAsState()
+    val sheetInfo by sheetDetailVM.sheetInfo.observeAsState()
 
     Player(
         content = {
@@ -72,7 +78,11 @@ fun SheetDetail(
                             .requiredHeight(height = 46.dp)
                             .fillMaxWidth(),
                         title = "",
-                        onBackTapped = {}
+                        onBackTapped = {
+                            navController.navigate(Screens.Main.route) {
+                                launchSingleTop = true
+                            }
+                        }
                     )
                     SheetInfo(
                         modifier = Modifier
@@ -80,8 +90,10 @@ fun SheetDetail(
                             .fillMaxWidth(),
                         cover = null
                             ?: painterResource(id = R.drawable.default_cover),
-                        name = "Call Recordings",
-                        artist = "<unknown>",
+                        name = sheetInfo?.name
+                            ?:"Call Recordings",
+                        artist = sheetInfo?.description
+                            ?:"<unknown>",
                     )
                     SheetCommand(
                         modifier = Modifier
@@ -91,13 +103,27 @@ fun SheetDetail(
                         onPlayTapped = {},
                     )
                     Column(
-                        modifier = Modifier.padding(horizontal = 24.dp, vertical = 12.dp),
+                        modifier = Modifier.padding(horizontal = 0.dp, vertical = 12.dp),
 //                        contentPadding = PaddingValues(horizontal = 12.dp),
-                        verticalArrangement = Arrangement.spacedBy(12.dp)
+                        verticalArrangement = Arrangement.spacedBy(8.dp)
                     ) {
-//                        SheetSongElem(
-//                            id = , name = , minute = , second =
-//                        )
+
+                        sheetDetailVM.sheetElems.value.forEachIndexed { index, item ->
+                            Log.i("UI", "${item.name}  ${item.artist}  ${item.second}")
+                            SheetSongElem(
+                                modifier = Modifier
+                                    .requiredHeight(31.dp)
+                                    .padding(horizontal = 16.dp, vertical = 0.dp)
+                                    .fillMaxWidth(),
+                                id = (index + 1).toString().padStart(2, '0'),
+                                name = item.name,
+                                minute = (item.second / 60).toString(),
+                                second = (item.second % 60).toString().padStart(2,'0'),
+                                onSongTapped = {
+
+                                }
+                            )
+                        }
                     }
 
 
@@ -115,7 +141,8 @@ fun SheetDetail(
 @Composable
 fun PreviewSheetDetail() {
     SheetDetail(
-        sheedId = 1,
+        rememberNavController(),
+        sheetId = 1,
         sheetDetailVM = viewModel(
             factory = SheetDetailViewModelFactory(
                 LocalContext.current.applicationContext as Application

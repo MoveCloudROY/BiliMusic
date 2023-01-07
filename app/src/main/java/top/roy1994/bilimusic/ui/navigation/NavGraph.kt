@@ -23,15 +23,19 @@ fun NavGraph (
         composable(route = Screens.Main.route){
             MainFrame(navController = navController, playerVM = playerVM)
         }
+
         composable(
             route = "${Screens.Detail.route}/{sheetId}",
             arguments = listOf(navArgument("sheetId") { type = NavType.IntType })
         ) { backStackEntry ->
-            val sheetId = backStackEntry.arguments?.getInt("sheetId")
+            val sheetId: Int? = backStackEntry.arguments?.getInt("sheetId")
             sheetId?.let {
-                SheetDetail(sheedId = sheetId, playerVM = playerVM)
+                SheetDetail(
+                    navController = navController,
+                    sheetId = sheetId,
+                    playerVM = playerVM
+                )
             }
-
         }
     }
 }
