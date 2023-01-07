@@ -5,7 +5,7 @@ import androidx.room.*
 
 @Dao
 interface MusicDao {
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insertMusics(vararg musics: MusicEntity)
 
     @Update

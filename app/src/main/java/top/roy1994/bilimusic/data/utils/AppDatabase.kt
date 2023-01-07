@@ -39,13 +39,20 @@ abstract class AppDatabase : RoomDatabase()  {
                     )
                         .createFromAsset("database/app_database.db")
                         .build()
-//
+
 //                    val sheetDao = instance.sheetDao()
 //                    val sheetRepo = SheetRepo(sheetDao)
+//                    val artistDao = instance.artistDao()
+//                    val artistRepo = ArtistRepo(artistDao)
 //                    if (null == sheetDao.count().value) {
 //                        sheetRepo.insertSheet(
 //                            SheetEntity(
 //                                name = "默认歌单"
+//                            )
+//                        )
+//                        artistRepo.insertArtist(
+//                            ArtistEntity(
+//                                name = "默认艺术家"
 //                            )
 //                        )
 //                    }

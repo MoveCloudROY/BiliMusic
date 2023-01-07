@@ -27,18 +27,13 @@ fun MainFrame(
             initialValue = ModalBottomSheetValue.Hidden,
         )
 
-    val addMusicVM: AddMusicViewModel = viewModel(
-        factory = AddMusicViewModelFactory(
-            LocalContext.current.applicationContext as Application)
-    )
-
     Player(
         content = {
             Scaffold(
                 backgroundColor = Color(0xFFFFFFFF),
 
                 topBar = {
-                    TopBar(topSelectBarVM, addMusicVM)
+                    TopBar(topSelectBarVM)
                 },
                 bottomBar = {
                     BottomBar(playerState)
