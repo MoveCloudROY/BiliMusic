@@ -36,6 +36,7 @@ import top.roy1994.bilimusic.ui.components.Player
 import top.roy1994.bilimusic.ui.components.TopBar
 import top.roy1994.bilimusic.ui.navigation.Screens
 import top.roy1994.bilimusic.viewmodel.PlayerViewModel
+import top.roy1994.bilimusic.viewmodel.PlayerViewModelFactory
 import top.roy1994.bilimusic.viewmodel.SheetDetailViewModel
 import top.roy1994.bilimusic.viewmodel.SheetDetailViewModelFactory
 
@@ -60,6 +61,7 @@ fun SheetDetail(
     val sheetInfo by sheetDetailVM.sheetInfo.observeAsState()
 
     Player(
+        playerVM = playerVM,
         content = {
             Scaffold(
                 backgroundColor = Color(0xFFFFFFFF),
@@ -148,7 +150,11 @@ fun PreviewSheetDetail() {
                 LocalContext.current.applicationContext as Application
             )
         ),
-        playerVM = viewModel(),
+        playerVM = viewModel(
+            factory = PlayerViewModelFactory(
+                LocalContext.current.applicationContext as Application
+            )
+        )
     )
 
 }

@@ -1,5 +1,6 @@
 package top.roy1994.bilimusic
 
+import android.app.Application
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -9,6 +10,7 @@ import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.rememberNavController
@@ -16,6 +18,7 @@ import top.roy1994.bilimusic.ui.navigation.NavGraph
 import top.roy1994.bilimusic.ui.pages.MainFrame
 import top.roy1994.bilimusic.ui.theme.BiliMusicTheme
 import top.roy1994.bilimusic.viewmodel.PlayerViewModel
+import top.roy1994.bilimusic.viewmodel.PlayerViewModelFactory
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -23,7 +26,11 @@ class MainActivity : ComponentActivity() {
         setContent {
             BiliMusicTheme {
                 val navController = rememberNavController()
-                val playerVM: PlayerViewModel = viewModel()
+                val playerVM: PlayerViewModel = viewModel(
+                    factory = PlayerViewModelFactory(
+                        LocalContext.current.applicationContext as Application
+                    )
+                )
                 NavGraph(navController = navController, playerVM = playerVM)
 //                MainFrame()
             }

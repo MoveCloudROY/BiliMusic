@@ -49,7 +49,7 @@ class BiliRepoTest {
     @Test
     @Throws(Exception::class)
     fun GetCoverUrl() = runBlocking {
-        val nBvid = "BV1rp4y1e745"
+        val nBvid = "BV13e4y1L7EG"
         val url = biliRepo.getCoverUrl(nBvid).await()
         assertNotEquals(null, url)
         println("===================================")
@@ -60,7 +60,7 @@ class BiliRepoTest {
     @Test
     @Throws(Exception::class)
     fun GetMusicUrl() = runBlocking {
-        val nBvid = "BV1rp4y1e745"
+        val nBvid = "BV13e4y1L7EG"
         val url = biliRepo.getMusicUrl(nBvid).await()
         assertNotEquals(null, url)
         println("===================================")

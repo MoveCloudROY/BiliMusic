@@ -31,6 +31,7 @@ import top.roy1994.bilimusic.viewmodel.*
 @Composable
 fun MainPage(
     topSelectBarVM: TopSelectViewModel,
+    playerVM: PlayerViewModel,
     topShowBlockVM: TopShowBlockViewModel = viewModel(),
     musicHistoryVM: MusicHistoryViewModel = viewModel(
         factory = MusicHistoryViewModelFactory(

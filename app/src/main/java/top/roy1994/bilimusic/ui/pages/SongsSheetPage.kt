@@ -34,6 +34,7 @@ import top.roy1994.bilimusic.viewmodel.*
 @Composable
 fun SongsSheetPage(
     navController: NavHostController,
+    playerVM: PlayerViewModel,
     musicSheetVM: MusicSheetViewModel = viewModel(
         factory = MusicSheetViewModelFactory(
             LocalContext.current.applicationContext as Application
@@ -115,5 +116,6 @@ fun PreviewSongsSheetPage()
 {
     SongsSheetPage(
         rememberNavController(),
+        viewModel(),
     )
 }

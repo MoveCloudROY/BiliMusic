@@ -19,7 +19,16 @@ data class MusicEntity (
     val second: Int = 300,
     var times5day: Int = 0,
     val add_time: Long = 0,
-    var last_play_time: Long,
+    var last_play_time: Long = 0,
 ) {
     @Ignore var music_cover: Painter? = null
+    companion object {
+        fun getEmpty(): MusicEntity {
+            return MusicEntity(
+                bvid = "",
+                music_name = "",
+                music_artist = "",
+            )
+        }
+    }
 }

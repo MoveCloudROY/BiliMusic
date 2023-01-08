@@ -36,10 +36,10 @@ fun BottomBar(
         content = {
             PlayBar(
                 modifier = Modifier,
-                musicCover = playerVM.nowMusic.value.cover
+                musicCover = playerVM.nowMusic.value.music_cover
                     ?: painterResource(id = R.drawable.default_cover),
-                musicName = playerVM.nowMusic.value.name,
-                musicArtist = playerVM.nowMusic.value.artist,
+                musicName = playerVM.nowMusic.value.music_name,
+                musicArtist = playerVM.nowMusic.value.music_artist,
                 status = if (playerVM.isPlaying.value) top.roy1994.bilimusic.playbar.Status.Playing
                 else top.roy1994.bilimusic.playbar.Status.Stop,
                 onPlayBarTapped = {
@@ -47,6 +47,14 @@ fun BottomBar(
                 },
                 onPlayButtonTapped = {
                     playerVM.updateIsPlaying(!playerVM.isPlaying.value)
+                    if ( playerVM.exoPlayer.isPlaying) {
+                        // pause the video
+                        playerVM.exoPlayer.pause()
+                    } else {
+                        // play the video
+                        // it's already paused
+                        playerVM.exoPlayer.play()
+                    }
                 }
             )
         }
