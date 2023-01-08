@@ -1,20 +1,19 @@
 package top.roy1994.bilimusic.viewmodel
 
 import android.app.Application
+import android.util.Log
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.lifecycle.*
 import com.google.android.exoplayer2.ExoPlayer
 import com.google.android.exoplayer2.MediaItem
-import com.google.android.exoplayer2.source.DefaultMediaSourceFactory
-import com.google.android.exoplayer2.source.MediaSource
+import com.google.android.exoplayer2.Player
 import com.google.android.exoplayer2.source.ProgressiveMediaSource
-import com.google.android.exoplayer2.source.dash.DashMediaSource
+import com.google.android.exoplayer2.source.ShuffleOrder
 import com.google.android.exoplayer2.upstream.DataSource
 import com.google.android.exoplayer2.upstream.DefaultHttpDataSource
 import kotlinx.coroutines.*
-import top.roy1994.bilimusic.data.objects.Music
 import top.roy1994.bilimusic.data.objects.biliapi.BiliService
+import top.roy1994.bilimusic.data.objects.biliapi.BiliServiceCreator
 import top.roy1994.bilimusic.data.objects.music.MusicEntity
 import top.roy1994.bilimusic.data.utils.BiliRepo
 
@@ -30,19 +29,23 @@ class PlayerViewModel(application: Application): AndroidViewModel(application) {
     )
 
     var playedPercentage = MutableLiveData<Float>(0.0f)
-    var playedSeconds = MutableLiveData<Int>(0)
+    var playedSeconds = mutableStateOf<Long>(0)
         private set
-    var totalSeconds = MutableLiveData<Int>(nowMusic.value.second)
+    var totalSeconds = mutableStateOf<Long>(300)
         private set
 
     var isPlaying = mutableStateOf(false)
         private set
+
+    // ================================================================
     var exoPlayer: ExoPlayer
 
-    lateinit var service: BiliService
-    lateinit var biliRepo: BiliRepo
-    val coroutineScope = CoroutineScope(Dispatchers.Main)
+    private var service: BiliService
+    private var biliRepo: BiliRepo
+    private val coroutineScope = CoroutineScope(Dispatchers.Main)
 
+    private var playingList: List<MusicEntity> = listOf()
+    // =========================================================
 
 
     fun addMusicToPlayList(music: MusicEntity) {
@@ -65,10 +68,12 @@ class PlayerViewModel(application: Application): AndroidViewModel(application) {
     }
 
     fun setMusicToPlayList(music: MusicEntity) {
+        exoPlayer.pause()
         val bvid = music.bvid
         preMusic.value = nowMusic.value
         nowMusic.value = music
         nxtMusic.value = MusicEntity.getEmpty()
+        resetProgressBar(music.second)
 
         coroutineScope.launch(Dispatchers.IO) {
             val url = biliRepo.getMusicUrl(bvid).await()
@@ -91,7 +96,55 @@ class PlayerViewModel(application: Application): AndroidViewModel(application) {
         updateIsPlaying(true)
     }
 
+    fun setPlayList(musicList: List<MusicEntity>) {
+        exoPlayer.pause()
+        exoPlayer.clearMediaItems()
+        playingList = musicList
+        preMusic.value = MusicEntity.getEmpty()
+        nowMusic.value = if(playingList.size > 0) playingList[0] else MusicEntity.getEmpty()
+        nxtMusic.value = if(playingList.size > 1) playingList[1] else MusicEntity.getEmpty()
+        resetProgressBar(nowMusic.value.second)
+
+        for (e in musicList) {
+
+            addMusicToPlayList(e)
+            Log.i(
+                "DATA",
+                """
+                    id:     ${e.bvid}
+                    name:   ${e.music_name}
+                    state:  ${exoPlayer.currentMediaItem.toString()}
+                """.trimIndent()
+            )
+        }
+
+        exoPlayer.apply {
+            prepare()
+            play()
+        }
+        updateIsPlaying(true)
+    }
+
+    fun setPlayerShuffle() {
+        exoPlayer.setShuffleOrder(
+            ShuffleOrder.DefaultShuffleOrder(
+                exoPlayer.mediaItemCount, System.currentTimeMillis()))
+        exoPlayer.shuffleModeEnabled = true
+    }
+
+    fun setPlayerRepeatOne() {
+        exoPlayer.shuffleModeEnabled = false
+        exoPlayer.repeatMode = Player.REPEAT_MODE_ONE
+    }
+
+    fun setPlayerRepeatAll() {
+        exoPlayer.shuffleModeEnabled = false
+        exoPlayer.repeatMode = Player.REPEAT_MODE_ALL
+    }
+
     init {
+        service = BiliServiceCreator.getInstance()
+        biliRepo = BiliRepo(service)
         exoPlayer = ExoPlayer.Builder(application)
             .build().apply {
                 playWhenReady = false
@@ -111,30 +164,37 @@ class PlayerViewModel(application: Application): AndroidViewModel(application) {
 
 
     fun startThreadGradient() {
-        val totalSize = 1024
-        var playedSize = 0
+        var totalSize: Long
+        var playedSize: Long = 0
+
         viewModelScope.launch {
+            withContext(Dispatchers.Main) {
+                totalSize = nowMusic.value.second
+                updatePlayedSeconds(0)
+                updateTotalSeconds(totalSize)
+                playedPercentage.value = 0.0f
+                while (exoPlayer.isLoading) delay(50)
+            }
             withContext(Dispatchers.Default) {
 
-                withContext(Dispatchers.Main) {
-                    totalSeconds.value = totalSize
-                }
-                while (exoPlayer.isLoading)
-                {
-                }
                 while (true) {
-                    if (isPlaying.value) {
-                        playedSize += 1
+//                    if (isPlaying.value) {
+//                        playedSize += 1
+//                    }
+//                    Log.i("DATA", "${playedSeconds.value}  |  ${totalSeconds.value}")
+
+                    withContext(Dispatchers.Main) {
+                        playedSize = exoPlayer.currentPosition / 1000
                     }
-                    if (playedSize < totalSize) {
+                    if (playedSize < totalSeconds.value!!) {
                         withContext(Dispatchers.Main) {
                             playedSeconds.value = playedSize
                             playedPercentage.value =
-                                (playedSize.toFloat() / totalSize) * 100f
+                                (playedSize.toFloat() / totalSeconds.value!!) * 100f
                         }
                     } else {
                         withContext(Dispatchers.Main) {
-                            playedSeconds.value = totalSize
+                            playedSeconds.value = totalSeconds.value
                             playedPercentage.value = 100f
                         }
                         break
@@ -146,14 +206,21 @@ class PlayerViewModel(application: Application): AndroidViewModel(application) {
         }
     }
 
-    fun updatePlayedSeconds(value: Int) {
+    fun updatePlayedSeconds(value: Long) {
         playedSeconds.value = value
     }
-    fun updateTotalSeconds(value: Int) {
+    fun updateTotalSeconds(value: Long) {
         totalSeconds.value = value
     }
     fun updateIsPlaying(value: Boolean) {
         isPlaying.value = value
+    }
+    fun resetProgressBar(second: Long) {
+        updatePlayedSeconds(0)
+        updateTotalSeconds(second)
+        playedSeconds.value = 0
+        playedPercentage.value = 0.0f
+
     }
 }
 

@@ -46,14 +46,14 @@ fun PreviewPlayerProgressBar() {
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        PlayerProgressBar()
+        PlayerProgressBar(viewModel())
     }
 }
 
 
 @Composable
 fun PlayerProgressBar(
-    PlayerBarVM: PlayerViewModel = viewModel(),
+    PlayerVM: PlayerViewModel,
     indicatorHeight: Dp = 24.dp,
     backgroundIndicatorColor: Color = Color.LightGray.copy(alpha = 0.3f),
     indicatorPadding: Dp = 24.dp,
@@ -68,7 +68,7 @@ fun PlayerProgressBar(
     animationDuration: Int = 1000,
     animationDelay: Int = 0
 ) {
-    val playedPercentage by PlayerBarVM.playedPercentage.observeAsState(initial = 0f)
+    val playedPercentage by PlayerVM.playedPercentage.observeAsState(initial = 0f)
 
     val animateNumber = animateFloatAsState(
         targetValue = playedPercentage,
@@ -79,7 +79,7 @@ fun PlayerProgressBar(
     )
 
     LaunchedEffect(Unit) {
-        PlayerBarVM.startThreadGradient()
+        PlayerVM.startThreadGradient()
     }
 
     Canvas(
@@ -114,24 +114,23 @@ fun PlayerProgressBar(
         )
 
     }
-    val playedSeconds = PlayerBarVM.playedSeconds.value
-    val totalSeconds = PlayerBarVM.totalSeconds.value
+
     Row(
         modifier = Modifier
             .fillMaxWidth()
             .padding(start = indicatorPadding, end = indicatorPadding)
     ) {
         Text(
-            text = playedSeconds?.div(60).toString().padStart(2, '0')
+            text = PlayerVM.playedSeconds.value.div(60).toString().padStart(2, '0')
                 + ":"
-                + playedSeconds?.mod(60).toString().padStart(2, '0'),
+                + PlayerVM.playedSeconds.value.mod(60).toString().padStart(2, '0'),
             style = numberStyle
         )
         Spacer(modifier = Modifier.weight(1.0f))
         Text(
-            text = totalSeconds?.div(60).toString().padStart(2, '0')
+            text = PlayerVM.totalSeconds.value.div(60).toString().padStart(2, '0')
                 + ":"
-                + totalSeconds?.mod(60).toString().padStart(2, '0'),
+                + PlayerVM.totalSeconds.value.mod(60).toString().padStart(2, '0'),
             style = numberStyle
         )
     }

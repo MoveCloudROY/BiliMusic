@@ -47,7 +47,6 @@ fun SongsPage(
         verticalArrangement =  Arrangement.spacedBy(4.dp),
     ) {
         itemsIndexed(musics.orEmpty()) { index, item ->
-            Log.d("DATA", coverMap?.get(0)?:"NULL")
             MusicListDetailElem(
                 modifier = Modifier
                     .clip(RoundedCornerShape(12.dp)),

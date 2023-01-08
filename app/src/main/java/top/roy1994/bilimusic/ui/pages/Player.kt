@@ -67,9 +67,15 @@ fun Player(
                 status = if (playerVM.isPlaying.value) Status.Playing
                             else Status.Stop,
                 onShuffleTapped = {
-
+                    playerVM.setPlayerShuffle()
                 },
                 onPreTapped = {
+                    playerVM.exoPlayer.apply {
+                        playerVM.exoPlayer.pause()
+                        playerVM.exoPlayer.seekToPrevious()
+                        playerVM.exoPlayer.prepare()
+                        playerVM.exoPlayer.play()
+                    }
 
                 },
                 onPlayTapped = {
@@ -84,10 +90,15 @@ fun Player(
                     }
                 },
                 onNextTapped = {
-
+                    playerVM.exoPlayer.apply {
+                        playerVM.exoPlayer.pause()
+                        playerVM.exoPlayer.seekToNext()
+                        playerVM.exoPlayer.prepare()
+                        playerVM.exoPlayer.play()
+                    }
                 },
                 onLoopTapped = {
-
+                    playerVM.setPlayerRepeatAll()
                 },
             )
             Spacer(modifier = Modifier

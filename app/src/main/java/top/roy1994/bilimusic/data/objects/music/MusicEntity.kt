@@ -6,7 +6,7 @@ import androidx.room.Ignore
 import androidx.room.PrimaryKey
 
 @Entity
-data class MusicEntity (
+data class MusicEntity(
     @PrimaryKey(autoGenerate = true) var music_id: Int = 0,
     val bvid: String,
     val part: Int = 1,
@@ -16,7 +16,7 @@ data class MusicEntity (
     val which_artist_id: Int = 1,
     val which_sheet_id: Int = 1,
 
-    val second: Int = 300,
+    val second: Long = 300,
     var times5day: Int = 0,
     val add_time: Long = 0,
     var last_play_time: Long = 0,
