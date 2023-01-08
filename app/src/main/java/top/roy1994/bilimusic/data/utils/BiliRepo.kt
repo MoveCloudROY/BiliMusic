@@ -78,6 +78,21 @@ class BiliRepo(
         return deferred
     }
 
+    fun getMusicInfo(bid: String): Deferred<Long?> =
+        coroutineScope.async(Dispatchers.IO) {
+            var ret: Long? = null
+            val resCid = service.getCid(bid).body()?.data?.get(0)?.cid?.toString()
+            val resUrl = resCid?.let { service.getData(bvid = bid, cid = it) }
+
+            if (resUrl!=null && resUrl.isSuccessful) {
+                ret = resUrl.body()?.data?.timelength?.toLong()?.div(1000)
+            }
+            return@async ret
+        }
 
 
+    data class MusicBase(
+        var audio_url: String?,
+        var seconds: Long?,
+    )
 }

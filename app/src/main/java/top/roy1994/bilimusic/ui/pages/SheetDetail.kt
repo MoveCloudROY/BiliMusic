@@ -101,8 +101,13 @@ fun SheetDetail(
                         modifier = Modifier
                             .padding(horizontal = 8.dp, vertical = 4.dp)
                             .fillMaxWidth(),
-                        onShuffleTapped = {},
-                        onPlayTapped = {},
+                        onShuffleTapped = {
+                            playerVM.setPlayList(sheetDetailVM.sheetElems.value)
+                            playerVM.setPlayerShuffle()
+                        },
+                        onPlayTapped = {
+                            playerVM.setPlayList(sheetDetailVM.sheetElems.value)
+                        },
                     )
                     Column(
                         modifier = Modifier.padding(horizontal = 0.dp, vertical = 12.dp),
@@ -122,6 +127,13 @@ fun SheetDetail(
                                 minute = (item.second / 60).toString(),
                                 second = (item.second % 60).toString().padStart(2,'0'),
                                 onSongTapped = {
+                                    playerVM.setPlayList(sheetDetailVM.sheetElems.value)
+                                    playerVM.exoPlayer.apply {
+                                        playerVM.exoPlayer.pause()
+                                        playerVM.exoPlayer.seekToDefaultPosition(index)
+                                        playerVM.exoPlayer.prepare()
+                                        playerVM.exoPlayer.play()
+                                    }
 
                                 }
                             )

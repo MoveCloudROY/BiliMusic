@@ -22,11 +22,13 @@ interface BiliService {
 //        @Query("platform")  platform: String = "pc",    //非必要,默认为pc
     ): Response<PlayUrlRoot>
 
+    @Headers("User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36 Edg/108.0.1462.54","Referer: https://www.bilibili.com/video/{bvid}")
     @GET("/x/player/pagelist")
     suspend fun getCid(
         @Query("bvid") bvid: String,
     ): Response<PageListRoot>
 
+    @Headers("User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36 Edg/108.0.1462.54","Referer: https://www.bilibili.com/video/{bvid}")
     @GET("/x/web-interface/view")
     suspend fun getVideoInfo(
         @Query("bvid") bvid: String,

@@ -1,8 +1,6 @@
 package top.roy1994.bilimusic
 
-import androidx.room.Dao
 import androidx.room.Room
-import androidx.test.espresso.internal.inject.InstrumentationContext
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
 import junit.framework.TestCase.assertEquals
@@ -46,7 +44,7 @@ class AppDatabaseTest {
         val musicElem = MusicEntity (
             bvid = "test",
             part = 1,
-            music_name= "test name",
+            music_name = "test name",
             last_play_time = System.currentTimeMillis(),
         )
         musicDao.insertMusics(musicElem)

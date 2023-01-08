@@ -93,7 +93,10 @@ fun MainPage(
                 MusicHorizonBarElem(
                     cover = item.music_cover
                         ?: painterResource(id = R.drawable.default_cover),
-                    name = item.music_name
+                    name = item.music_name,
+                    onHorizonBarElemTapped = {
+                        playerVM.setMusicToPlayList(item)
+                    },
                 )
             }
         }
@@ -115,6 +118,9 @@ fun MainPage(
                     artist = item.music_artist,
                     upComment = item.times5day.toString(),
                     downComment = "Times",
+                    onVerticalCommentElemTapped = {
+                        playerVM.setMusicToPlayList(item)
+                    },
                 )
             }
         }
@@ -136,6 +142,9 @@ fun MainPage(
                     artist = item.music_artist,
                     upComment = "",
                     downComment = "",
+                    onVerticalCommentElemTapped = {
+                        playerVM.setMusicToPlayList(item)
+                    },
                 )
             }
         }
