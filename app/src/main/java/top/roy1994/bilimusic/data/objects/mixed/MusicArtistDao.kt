@@ -9,7 +9,7 @@ import top.roy1994.bilimusic.data.objects.music.MusicEntity
 interface MusicArtistDao {
     @Query(
         "SELECT * FROM ArtistEntity " +
-        "JOIN MusicEntity ON ArtistEntity.id = MusicEntity.sheet_id"
+        "JOIN MusicEntity ON ArtistEntity.artist_id = MusicEntity.which_artist_id"
     )
     fun loadArtistAndMusics(): Map<ArtistEntity, List<MusicEntity>>
 }

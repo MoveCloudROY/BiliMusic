@@ -14,10 +14,10 @@ interface ArtistDao {
     @Delete
     fun deleteArtists(vararg artists: ArtistEntity)
 
-    @Query("SELECT * FROM ArtistEntity WHERE name = :name")
+    @Query("SELECT * FROM ArtistEntity WHERE artist_name = :name")
     fun findArtistByName(name: String): List<ArtistEntity>
 
-    @Query("DELETE FROM ArtistEntity WHERE name = :name")
+    @Query("DELETE FROM ArtistEntity WHERE artist_name = :name")
     fun deleteArtistByName(name: String)
 
     @Query("SELECT * FROM ArtistEntity")

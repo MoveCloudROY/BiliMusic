@@ -14,13 +14,13 @@ interface SheetDao {
     @Delete
     fun deleteSheets(vararg sheets: SheetEntity)
 
-    @Query("SELECT * FROM SheetEntity WHERE name = :name")
+    @Query("SELECT * FROM SheetEntity WHERE sheet_name = :name")
     fun findSheetByName(name: String): List<SheetEntity>
 
-    @Query("SELECT * FROM SheetEntity WHERE id = :id")
+    @Query("SELECT * FROM SheetEntity WHERE sheet_id = :id")
     fun findSheetById(id: Int): List<SheetEntity>
 
-    @Query("DELETE FROM SheetEntity WHERE name = :name")
+    @Query("DELETE FROM SheetEntity WHERE sheet_name = :name")
     fun deleteSheetByName(name: String)
 
     @Query("SELECT * FROM SheetEntity")

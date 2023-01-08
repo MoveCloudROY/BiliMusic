@@ -40,10 +40,10 @@ fun SongsPage(
             MusicListDetailElem(
                 modifier = Modifier
                     .clip(RoundedCornerShape(12.dp)),
-                cover = item.cover
+                cover = item.music_cover
                     ?: painterResource(id = R.drawable.default_cover),
-                name = item.name,
-                artist = item.artist,
+                name = item.music_name,
+                artist = item.music_artist,
                 minuteOff = (item.second / 60).toString(),
                 secondOff = (item.second % 60).toString().padStart(2,'0'),
                 switch = if (musicListVM.listIndex.value == index) Switch.On

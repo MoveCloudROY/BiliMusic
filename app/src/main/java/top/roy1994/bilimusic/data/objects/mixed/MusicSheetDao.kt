@@ -9,10 +9,10 @@ import top.roy1994.bilimusic.data.objects.sheet.SheetEntity
 
 @Dao
 interface MusicSheetDao {
-    @MapInfo(keyColumn = "id")
+    @MapInfo(keyColumn = "sheet_id")
     @Query(
         "SELECT * FROM SheetEntity " +
-        "JOIN MusicEntity ON SheetEntity.id = MusicEntity.sheet_id"
+        "JOIN MusicEntity ON SheetEntity.sheet_id = MusicEntity.which_sheet_id"
     )
     fun loadSheetAndMusics(): Map<Int, List<MusicEntity>>
 

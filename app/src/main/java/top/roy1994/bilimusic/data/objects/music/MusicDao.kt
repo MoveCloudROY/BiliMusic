@@ -14,13 +14,13 @@ interface MusicDao {
     @Delete
     suspend fun deleteMusics(vararg musics: MusicEntity)
 
-    @Query("SELECT * FROM MusicEntity WHERE name = :name")
+    @Query("SELECT * FROM MusicEntity WHERE music_name = :name")
     suspend fun findMusicByName(name: String): List<MusicEntity>
 
-    @Query("SELECT * FROM MusicEntity WHERE id = :id")
+    @Query("SELECT * FROM MusicEntity WHERE music_id = :id")
     suspend fun findMusicById(id: Int): List<MusicEntity>
 
-    @Query("DELETE FROM MusicEntity WHERE name = :name")
+    @Query("DELETE FROM MusicEntity WHERE music_name = :name")
     suspend fun deleteMusicByName(name: String)
 
     @Query("SELECT * FROM MusicEntity")

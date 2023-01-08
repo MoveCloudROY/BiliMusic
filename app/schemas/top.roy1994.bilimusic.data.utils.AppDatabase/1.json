@@ -2,28 +2,28 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "396d1c2b851c3c0a1083cb61c353e6fd",
+    "identityHash": "764f54d7da52818b394db4b96f8e288e",
     "entities": [
       {
         "tableName": "ArtistEntity",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `name` TEXT NOT NULL)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`artist_id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `artist_name` TEXT NOT NULL)",
         "fields": [
           {
-            "fieldPath": "id",
-            "columnName": "id",
+            "fieldPath": "artist_id",
+            "columnName": "artist_id",
             "affinity": "INTEGER",
             "notNull": true
           },
           {
-            "fieldPath": "name",
-            "columnName": "name",
+            "fieldPath": "artist_name",
+            "columnName": "artist_name",
             "affinity": "TEXT",
             "notNull": true
           }
         ],
         "primaryKey": {
           "columnNames": [
-            "id"
+            "artist_id"
           ],
           "autoGenerate": true
         },
@@ -32,11 +32,11 @@
       },
       {
         "tableName": "MusicEntity",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `bvid` TEXT NOT NULL, `part` INTEGER NOT NULL, `name` TEXT NOT NULL, `description` TEXT NOT NULL, `artist` TEXT NOT NULL, `sheet_id` INTEGER NOT NULL, `second` INTEGER NOT NULL, `times5day` INTEGER NOT NULL, `add_time` INTEGER NOT NULL, `last_play_time` INTEGER NOT NULL)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`music_id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `bvid` TEXT NOT NULL, `part` INTEGER NOT NULL, `music_name` TEXT NOT NULL, `music_artist` TEXT NOT NULL, `which_artist_id` INTEGER NOT NULL, `which_sheet_id` INTEGER NOT NULL, `second` INTEGER NOT NULL, `times5day` INTEGER NOT NULL, `add_time` INTEGER NOT NULL, `last_play_time` INTEGER NOT NULL)",
         "fields": [
           {
-            "fieldPath": "id",
-            "columnName": "id",
+            "fieldPath": "music_id",
+            "columnName": "music_id",
             "affinity": "INTEGER",
             "notNull": true
           },
@@ -53,26 +53,26 @@
             "notNull": true
           },
           {
-            "fieldPath": "name",
-            "columnName": "name",
+            "fieldPath": "music_name",
+            "columnName": "music_name",
             "affinity": "TEXT",
             "notNull": true
           },
           {
-            "fieldPath": "description",
-            "columnName": "description",
+            "fieldPath": "music_artist",
+            "columnName": "music_artist",
             "affinity": "TEXT",
             "notNull": true
           },
           {
-            "fieldPath": "artist",
-            "columnName": "artist",
-            "affinity": "TEXT",
+            "fieldPath": "which_artist_id",
+            "columnName": "which_artist_id",
+            "affinity": "INTEGER",
             "notNull": true
           },
           {
-            "fieldPath": "sheet_id",
-            "columnName": "sheet_id",
+            "fieldPath": "which_sheet_id",
+            "columnName": "which_sheet_id",
             "affinity": "INTEGER",
             "notNull": true
           },
@@ -103,7 +103,7 @@
         ],
         "primaryKey": {
           "columnNames": [
-            "id"
+            "music_id"
           ],
           "autoGenerate": true
         },
@@ -112,30 +112,30 @@
       },
       {
         "tableName": "SheetEntity",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `name` TEXT NOT NULL, `description` TEXT NOT NULL)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`sheet_id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `sheet_name` TEXT NOT NULL, `sheet_description` TEXT NOT NULL)",
         "fields": [
           {
-            "fieldPath": "id",
-            "columnName": "id",
+            "fieldPath": "sheet_id",
+            "columnName": "sheet_id",
             "affinity": "INTEGER",
             "notNull": true
           },
           {
-            "fieldPath": "name",
-            "columnName": "name",
+            "fieldPath": "sheet_name",
+            "columnName": "sheet_name",
             "affinity": "TEXT",
             "notNull": true
           },
           {
-            "fieldPath": "description",
-            "columnName": "description",
+            "fieldPath": "sheet_description",
+            "columnName": "sheet_description",
             "affinity": "TEXT",
             "notNull": true
           }
         ],
         "primaryKey": {
           "columnNames": [
-            "id"
+            "sheet_id"
           ],
           "autoGenerate": true
         },
@@ -146,7 +146,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '396d1c2b851c3c0a1083cb61c353e6fd')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '764f54d7da52818b394db4b96f8e288e')"
     ]
   }
 }
