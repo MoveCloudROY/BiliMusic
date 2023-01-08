@@ -90,9 +90,9 @@ fun SheetDetail(
                             .fillMaxWidth(),
                         cover = null
                             ?: painterResource(id = R.drawable.default_cover),
-                        name = sheetInfo?.name
+                        name = sheetInfo?.sheet_name
                             ?:"Call Recordings",
-                        artist = sheetInfo?.description
+                        artist = sheetInfo?.sheet_description
                             ?:"<unknown>",
                     )
                     SheetCommand(
@@ -109,14 +109,14 @@ fun SheetDetail(
                     ) {
 
                         sheetDetailVM.sheetElems.value.forEachIndexed { index, item ->
-                            Log.i("UI", "${item.name}  ${item.artist}  ${item.second}")
+                            Log.i("UI", "${item.music_name}  ${item.music_artist}  ${item.second}")
                             SheetSongElem(
                                 modifier = Modifier
                                     .requiredHeight(31.dp)
                                     .padding(horizontal = 16.dp, vertical = 0.dp)
                                     .fillMaxWidth(),
-                                id = (index + 1).toString().padStart(2, '0'),
-                                name = item.name,
+                                id = (index + 1).toString(),
+                                name = item.music_name,
                                 minute = (item.second / 60).toString(),
                                 second = (item.second % 60).toString().padStart(2,'0'),
                                 onSongTapped = {
@@ -124,19 +124,6 @@ fun SheetDetail(
                                 }
                             )
                         }
-                        SheetSongElem(
-                            modifier = Modifier
-                                .requiredHeight(31.dp)
-                                .padding(horizontal = 16.dp, vertical = 0.dp)
-                                .fillMaxWidth(),
-                            id = "2",
-                            name = "ASDAS",
-                            minute = "2",
-                            second = "15",
-                            onSongTapped = {
-
-                            }
-                        )
                     }
 
 

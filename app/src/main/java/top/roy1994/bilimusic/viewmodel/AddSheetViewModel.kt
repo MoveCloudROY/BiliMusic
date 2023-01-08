@@ -32,8 +32,8 @@ class AddSheetViewModel(application: Application): AndroidViewModel(application)
             if (sheets.isEmpty()) {
                 sheetDao.insertSheets(
                     SheetEntity(
-                        name = name.value,
-                        description = description.value,
+                        sheet_name = name.value,
+                        sheet_description = description.value,
                     )
                 )
             }

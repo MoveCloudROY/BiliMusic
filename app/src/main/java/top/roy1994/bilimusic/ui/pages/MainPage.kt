@@ -90,9 +90,9 @@ fun MainPage(
         ) {
             itemsIndexed(musicHistory.orEmpty()) { _, item ->
                 MusicHorizonBarElem(
-                    cover = item.cover
+                    cover = item.music_cover
                         ?: painterResource(id = R.drawable.default_cover),
-                    name = item.name
+                    name = item.music_name
                 )
             }
         }
@@ -108,10 +108,10 @@ fun MainPage(
         ) {
             musicOften.orEmpty().forEachIndexed { _, item ->
                 MusicVerticalCommentElem(
-                    cover = item.cover
+                    cover = item.music_cover
                         ?: painterResource(id = R.drawable.default_cover),
-                    name = item.name,
-                    artist = item.artist,
+                    name = item.music_name,
+                    artist = item.music_artist,
                     upComment = item.times5day.toString(),
                     downComment = "Times",
                 )
@@ -129,10 +129,10 @@ fun MainPage(
         ) {
             musicRecent.orEmpty().forEachIndexed { _, item ->
                 MusicVerticalCommentElem(
-                    cover = item.cover
+                    cover = item.music_cover
                         ?: painterResource(id = R.drawable.default_cover),
-                    name = item.name,
-                    artist = item.artist,
+                    name = item.music_name,
+                    artist = item.music_artist,
                     upComment = "",
                     downComment = "",
                 )

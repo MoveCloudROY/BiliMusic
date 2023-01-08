@@ -46,10 +46,11 @@ class AppDatabaseTest {
         val musicElem = MusicEntity (
             bvid = "test",
             part = 1,
-            name= "test name"
+            music_name= "test name",
+            last_play_time = System.currentTimeMillis(),
         )
         musicDao.insertMusics(musicElem)
         val getElem = musicDao.findMusicByName("test name")
-        assertEquals(getElem[0].name, "test name")
+        assertEquals(getElem[0].music_name, "test name")
     }
 }

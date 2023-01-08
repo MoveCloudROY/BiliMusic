@@ -47,12 +47,12 @@ abstract class AppDatabase : RoomDatabase()  {
 //                    if (null == sheetDao.count().value) {
 //                        sheetRepo.insertSheet(
 //                            SheetEntity(
-//                                name = "默认歌单"
+//                                sheet_name = "默认歌单"
 //                            )
 //                        )
 //                        artistRepo.insertArtist(
 //                            ArtistEntity(
-//                                name = "默认艺术家"
+//                                artist_name = "默认艺术家"
 //                            )
 //                        )
 //                    }

@@ -93,14 +93,14 @@ fun SongsSheetPage(
                 modifier = Modifier.padding(vertical = 8.dp),
                 cover = sheetEntity.cover
                     ?: painterResource(id = R.drawable.default_cover),
-                name = sheetEntity.name,
-                artist = sheetEntity.description,
+                name = sheetEntity.sheet_name,
+                artist = sheetEntity.sheet_description,
                 onAlbumBlockElemTapped = {
                     navController.navigate(
                         "${Screens.Detail.route}/{sheetId}"
                             .replace(
                                 oldValue = "{sheetId}",
-                                newValue = "${sheetEntity.id}"
+                                newValue = "${sheetEntity.sheet_id}"
                             )
                     )
                 }

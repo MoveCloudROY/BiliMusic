@@ -42,14 +42,14 @@ class AddMusicViewModel(application: Application): AndroidViewModel(application)
             val sheets: List<SheetEntity> =
                     sheetDao.findSheetByName(sheet.value)
             if (sheets.isNotEmpty()) {
-                val sheetId = sheets[0].id
+                val sheetId = sheets[0].sheet_id
                 musicDao.insertMusics(
                     MusicEntity(
                         bvid = bvid.value,
                         part = part.value.toInt(),
-                        name = name.value,
-                        artist = artist.value,
-                        sheet_id = sheetId,
+                        music_name = name.value,
+                        music_artist = artist.value,
+                        which_sheet_id = sheetId,
                         add_time = System.currentTimeMillis(),
                         last_play_time = System.currentTimeMillis(),
                     )
