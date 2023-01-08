@@ -47,13 +47,19 @@ fun MainFrame(
                 ) {
                 when(topSelectBarVM.categoryIndex.value){
                     0 -> {// 统计数据条
-                        MainPage(topSelectBarVM = topSelectBarVM)
+                        MainPage(
+                            playerVM = playerVM,
+                            topSelectBarVM = topSelectBarVM
+                        )
                     }
                     1 -> {
-                        SongsPage()
+                        SongsPage(playerVM = playerVM,)
                     }
                     2 -> {
-                        SongsSheetPage(navController = navController)
+                        SongsSheetPage(
+                            navController = navController,
+                            playerVM = playerVM,
+                        )
                     }
                     3 -> {}
 //                    4 -> {}
@@ -61,7 +67,7 @@ fun MainFrame(
             }
         },
         state = playerState,
-
+        playerVM = playerVM,
     )
 
 }

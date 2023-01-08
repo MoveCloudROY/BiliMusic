@@ -5,7 +5,7 @@
     "type": "figma",
     "file": "fmyi8bk5JepuCfQVb7LIDl",
     "node": "164:1543",
-    "version": "2812295384",
+    "version": "2837976366",
     "component-id": "c071e4ee83ebea323b825e6e30afadc6c74be664"
   },
   "default": "status=stop",
@@ -85,10 +85,6 @@
         "id": "icon_loop"
       },
       {
-        "type": "group",
-        "id": "Stop"
-      },
-      {
         "type": "vector",
         "id": "icon_stop"
       }
@@ -163,7 +159,7 @@
             "padding": {
               "left": "15.0"
             },
-            "tap-handler": "$on Stop tapped",
+            "tap-handler": "$on Play tapped",
             "size-constraints": {
               "width-constraints": {
                 "sizing-mode": "fixed",
@@ -464,7 +460,7 @@
             "children": [
               "Shuffle",
               "PreButton",
-              "Stop",
+              "Play",
               "NextButton",
               "loop"
             ],
@@ -516,7 +512,7 @@
             "clip-content": "false"
           },
           {
-            "id": "Stop",
+            "id": "Play",
             "tap-handler": "$on Play tapped",
             "size-constraints": {
               "width-constraints": {
@@ -816,7 +812,7 @@
       "required": false,
       "description": ""
     },
-    "on Stop tapped": {
+    "on Play tapped": {
       "data-type": "void-callback",
       "required": false,
       "description": ""
@@ -827,11 +823,6 @@
       "description": ""
     },
     "on Shuffle tapped": {
-      "data-type": "void-callback",
-      "required": false,
-      "description": ""
-    },
-    "on Play tapped": {
       "data-type": "void-callback",
       "required": false,
       "description": ""
