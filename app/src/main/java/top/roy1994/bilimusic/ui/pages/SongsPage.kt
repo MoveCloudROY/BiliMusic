@@ -51,7 +51,8 @@ fun SongsPage(
                 modifier = Modifier
                     .clip(RoundedCornerShape(12.dp)),
                 cover = rememberAsyncImagePainter(
-                    coverMap?.get(index)
+                    coverMap?.get(index)?:R.drawable.default_cover,
+                    transform =
                 ),
                 name = item.music_name,
                 artist = item.music_artist,
@@ -64,6 +65,7 @@ fun SongsPage(
                     playerVM.setMusicToPlayList(item)
                 },
             )
+            Log.i("SongsPage-coverMap", "${coverMap}")
         }
     }
 }

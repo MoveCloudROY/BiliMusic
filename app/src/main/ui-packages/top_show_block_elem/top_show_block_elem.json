@@ -5,7 +5,7 @@
     "type": "figma",
     "file": "fmyi8bk5JepuCfQVb7LIDl",
     "node": "26:114",
-    "version": "2795301895",
+    "version": "2838906842",
     "component-id": "35d6fe9694e13dfe0e13b7ce2d3b9808963eea27"
   },
   "default": "TopShowBlockElem",
@@ -15,6 +15,14 @@
         "type": "group",
         "id": "top_level",
         "root": "true"
+      },
+      {
+        "type": "vector",
+        "id": "Rectangle 11"
+      },
+      {
+        "type": "group",
+        "id": "Frame 4"
       },
       {
         "type": "text",
@@ -30,10 +38,6 @@
         "rules": [
           {
             "id": "top_level",
-            "padding": {
-              "top": "5.0",
-              "bottom": "5.0"
-            },
             "border-radius": "14.0",
             "drop-shadow": {
               "color": {
@@ -49,54 +53,72 @@
               "blend-mode": "normal"
             },
             "tap-handler": "$on TopShowBlockElem tapped",
+            "is-structured": "false",
+            "children": [
+              "Rectangle 11",
+              "Frame 4"
+            ],
+            "clip-content": "false"
+          },
+          {
+            "id": "Rectangle 11",
+            "border-radius": "10.0",
+            "drop-shadow": {
+              "color": {
+                "alpha": "1.0",
+                "hue": "232.64150943396226",
+                "saturation": "0.424",
+                "value": "0.9803921568627451"
+              },
+              "blur": "4.0",
+              "offset-x": "1.0",
+              "offset-y": "2.0",
+              "spread": "0.0",
+              "blend-mode": "normal"
+            },
+            "alignment": {
+              "horizontal": {
+                "attachment": "start",
+                "offset": "7.0"
+              },
+              "vertical": {
+                "attachment": "start",
+                "offset": "3.0"
+              }
+            },
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "fixed",
+                "value": "85.90478515625"
+              },
+              "height-constraints": {
+                "sizing-mode": "fixed",
+                "value": "55.0"
+              }
+            },
+            "vector-content": "rectangle_11.svg"
+          },
+          {
+            "id": "Frame 4",
+            "padding": {
+              "top": "5.0",
+              "bottom": "5.0"
+            },
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "fixed",
+                "value": "99.0"
+              },
+              "height-constraints": {
+                "sizing-mode": "shrink"
+              }
+            },
             "main-axis-align": "start",
             "children": [
               "number",
               "type"
             ],
             "item-spacing": "10.0",
-            "fills": [
-              {
-                "color": {},
-                "opacity": "1.0",
-                "fill-type": "lineargradient",
-                "blend-mode": "normal",
-                "color-stops": [
-                  {
-                    "color": {
-                      "alpha": "1.0",
-                      "hue": "232.5",
-                      "saturation": "0.7529411764705882",
-                      "value": "1.0"
-                    },
-                    "color-stop-position": "0.0"
-                  },
-                  {
-                    "color": {
-                      "alpha": "0.7098039215686275",
-                      "hue": "259.1489361702128",
-                      "saturation": "0.5529411764705883",
-                      "value": "1.0"
-                    },
-                    "color-stop-position": "1.0"
-                  }
-                ],
-                "gradient-handle-positions": [
-                  {
-                    "x": "0.2",
-                    "y": "1.0"
-                  },
-                  {
-                    "x": "1.0",
-                    "y": "-0.95"
-                  },
-                  {
-                    "x": "1.17",
-                    "y": "1.94"
-                  }
-                ]
-              }
-            ],
             "clip-content": "false"
           },
           {
@@ -116,8 +138,8 @@
             },
             "size-constraints": {
               "width-constraints": {
-                "sizing-mode": "proportional",
-                "value": "1.0"
+                "sizing-mode": "fixed",
+                "value": "99.0"
               },
               "height-constraints": {
                 "sizing-mode": "shrink"
@@ -154,8 +176,8 @@
             },
             "size-constraints": {
               "width-constraints": {
-                "sizing-mode": "proportional",
-                "value": "1.0"
+                "sizing-mode": "fixed",
+                "value": "99.0"
               },
               "height-constraints": {
                 "sizing-mode": "shrink"
@@ -200,7 +222,7 @@
       "design": "TopShowBlockElem",
       "size": {
         "width": 99.0,
-        "height": 60.0
+        "height": 58.0
       },
       "parameters": {
         "number": "32",

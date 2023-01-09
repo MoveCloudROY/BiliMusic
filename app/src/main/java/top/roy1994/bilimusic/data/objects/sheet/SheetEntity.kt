@@ -22,8 +22,8 @@ data class SheetEntity (
     companion object {
         fun GetDefault(): SheetEntity {
             return SheetEntity(
-                sheet_id = 1,
-                sheet_name = "默认歌单Test",
+                sheet_id = 0,
+                sheet_name = " ",
                 sheet_description = " ",
             )
         }

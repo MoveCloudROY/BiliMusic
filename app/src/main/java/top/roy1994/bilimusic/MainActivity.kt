@@ -2,6 +2,10 @@ package top.roy1994.bilimusic
 
 import android.app.Application
 import android.os.Bundle
+import android.view.ViewGroup
+import android.view.WindowInsets
+import android.view.WindowInsetsController
+import android.view.WindowManager
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
@@ -12,6 +16,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.core.view.*
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.rememberNavController
 import top.roy1994.bilimusic.ui.navigation.NavGraph
@@ -22,7 +27,9 @@ import top.roy1994.bilimusic.viewmodel.PlayerViewModelFactory
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
+
         super.onCreate(savedInstanceState)
+
         setContent {
             BiliMusicTheme {
                 val navController = rememberNavController()
@@ -35,6 +42,20 @@ class MainActivity : ComponentActivity() {
 //                MainFrame()
             }
         }
+        val windowInsetsController =
+            WindowCompat.getInsetsController(window, window.decorView)
+        // Configure the behavior of the hidden system bars.
+        windowInsetsController?.systemBarsBehavior =
+            WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
+        windowInsetsController?.hide(WindowInsetsCompat.Type.systemBars())
+        WindowCompat.setDecorFitsSystemWindows(window, false)
+        val controller = window.decorView.windowInsetsController
+        // 隐藏状态栏
+        // 同时隐藏状态栏和导航栏
+        controller?.hide(WindowInsets.Type.statusBars())
+        controller?.hide(WindowInsets.Type.systemBars())
+
+
     }
 }
 

@@ -22,4 +22,7 @@ interface ArtistDao {
 
     @Query("SELECT * FROM ArtistEntity")
     fun loadAllArtists(): LiveData<List<ArtistEntity>>
+
+    @Query("SELECT COUNT(*) FROM ArtistEntity")
+    fun count(): LiveData<Int>
 }
