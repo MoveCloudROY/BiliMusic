@@ -8,9 +8,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import coil.compose.rememberAsyncImagePainter
+import coil.request.ImageRequest
 import kotlinx.coroutines.launch
 import top.roy1994.bilimusic.R
 import top.roy1994.bilimusic.playbar.PlayBar
@@ -36,9 +39,14 @@ fun BottomBar(
         content = {
             PlayBar(
                 modifier = Modifier,
-                musicCover = playerVM.nowMusic.value.music_cover
-                    ?: painterResource(id = R.drawable.default_cover),
-                musicName = playerVM.nowMusic.value.music_name,
+                musicCover = rememberAsyncImagePainter(
+                    ImageRequest.Builder(LocalContext.current)
+                        .data(playerVM.nowMusic.value.cover_url?:R.drawable.notfind)//?:R.drawable.notfind
+                        .crossfade(true)
+                        .build(),
+                ),
+                musicName = if (playerVM.nowMusic.value.music_name.isEmpty()) "还没有播放"
+                        else playerVM.nowMusic.value.music_name,
                 musicArtist = playerVM.nowMusic.value.music_artist,
                 status = if (playerVM.isPlaying.value) top.roy1994.bilimusic.playbar.Status.Playing
                 else top.roy1994.bilimusic.playbar.Status.Stop,
