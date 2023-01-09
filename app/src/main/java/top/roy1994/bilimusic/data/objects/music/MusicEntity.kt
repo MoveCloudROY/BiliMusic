@@ -10,6 +10,7 @@ data class MusicEntity(
     @PrimaryKey(autoGenerate = true) var music_id: Int = 0,
     val bvid: String,
     val part: Int = 1,
+    val cover_url: String? = null,
 
     val music_name: String,
     val music_artist: String = "None",

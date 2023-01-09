@@ -11,6 +11,8 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import coil.compose.rememberAsyncImagePainter
+import coil.request.ImageRequest
 import kotlinx.coroutines.launch
 import top.roy1994.bilimusic.R
 import top.roy1994.bilimusic.playerbar.PlayerBar
@@ -44,12 +46,24 @@ fun Player(
                 modifier = Modifier
                     .padding(vertical = 16.dp)
                     .requiredWidth(756.dp),
-                lastMusicCover = playerVM.preMusic.value.music_cover
-                    ?: painterResource(id = R.drawable.default_cover),
-                nowMusicCover = playerVM.nowMusic.value.music_cover
-                    ?: painterResource(id = R.drawable.default_cover),
-                nextMusicCover = playerVM.nxtMusic.value.music_cover
-                    ?: painterResource(id = R.drawable.default_cover),
+                lastMusicCover = rememberAsyncImagePainter(
+                    ImageRequest.Builder(LocalContext.current)
+                        .data(playerVM.preMusic.value.music_cover)//?:R.drawable.notfind
+                        .crossfade(true)
+                        .build(),
+                ),
+                nowMusicCover = rememberAsyncImagePainter(
+                    ImageRequest.Builder(LocalContext.current)
+                        .data(playerVM.nowMusic.value.music_cover)//?:R.drawable.notfind
+                        .crossfade(true)
+                        .build(),
+                ),
+                nextMusicCover = rememberAsyncImagePainter(
+                    ImageRequest.Builder(LocalContext.current)
+                        .data(playerVM.nxtMusic.value.music_cover)//?:R.drawable.notfind
+                        .crossfade(true)
+                        .build(),
+                ),
             )
 
             PlayerMusicInfo(

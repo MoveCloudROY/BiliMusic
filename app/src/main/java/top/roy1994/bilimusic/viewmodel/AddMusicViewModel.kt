@@ -16,6 +16,7 @@ import top.roy1994.bilimusic.data.objects.sheet.SheetDao
 import top.roy1994.bilimusic.data.objects.sheet.SheetEntity
 import top.roy1994.bilimusic.data.utils.AppDatabase
 import top.roy1994.bilimusic.data.utils.BiliRepo
+import kotlin.math.log
 
 class AddMusicViewModel(application: Application): AndroidViewModel(application) {
     private val musicDao: MusicDao
@@ -43,7 +44,9 @@ class AddMusicViewModel(application: Application): AndroidViewModel(application)
     fun addMusic() {
         viewModelScope.launch(Dispatchers.IO) {
             val seconds = biliRepo.getMusicInfo(bvid.value).await()
+            val cover_url = biliRepo.getCoverUrl(bvid.value)
             val sheets = sheetDao.findSheetByName(sheet.value)
+            Log.i("AddMusicVM-addmusic", "cover_url: ${cover_url}")
             if (sheets.isNotEmpty() && seconds != null) {
                 val sheetId = sheets[0].sheet_id
                 musicDao.insertMusics(
@@ -55,7 +58,8 @@ class AddMusicViewModel(application: Application): AndroidViewModel(application)
                         which_sheet_id = sheetId,
                         add_time = System.currentTimeMillis(),
                         last_play_time = System.currentTimeMillis(),
-                        second = seconds
+                        second = seconds,
+                        cover_url = cover_url,
                     )
                 )
             }

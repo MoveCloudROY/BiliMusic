@@ -20,6 +20,7 @@ import androidx.lifecycle.liveData
 import androidx.lifecycle.viewmodel.compose.viewModel
 import coil.compose.rememberAsyncImagePainter
 import coil.compose.rememberImagePainter
+import coil.request.ImageRequest
 import top.roy1994.bilimusic.R
 import top.roy1994.bilimusic.data.utils.BiliRepo
 import top.roy1994.bilimusic.musiclistdetailelem.MusicListDetailElem
@@ -51,8 +52,10 @@ fun SongsPage(
                 modifier = Modifier
                     .clip(RoundedCornerShape(12.dp)),
                 cover = rememberAsyncImagePainter(
-                    coverMap?.get(index)?:R.drawable.default_cover,
-                    transform =
+                    ImageRequest.Builder(LocalContext.current)
+                        .data(item.cover_url)//?:R.drawable.notfind
+                        .crossfade(true)
+                        .build(),
                 ),
                 name = item.music_name,
                 artist = item.music_artist,

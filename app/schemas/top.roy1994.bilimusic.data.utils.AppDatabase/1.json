@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "764f54d7da52818b394db4b96f8e288e",
+    "identityHash": "650d2bfe0507c7855a0ee8b38883faf4",
     "entities": [
       {
         "tableName": "ArtistEntity",
@@ -32,7 +32,7 @@
       },
       {
         "tableName": "MusicEntity",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`music_id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `bvid` TEXT NOT NULL, `part` INTEGER NOT NULL, `music_name` TEXT NOT NULL, `music_artist` TEXT NOT NULL, `which_artist_id` INTEGER NOT NULL, `which_sheet_id` INTEGER NOT NULL, `second` INTEGER NOT NULL, `times5day` INTEGER NOT NULL, `add_time` INTEGER NOT NULL, `last_play_time` INTEGER NOT NULL)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`music_id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `bvid` TEXT NOT NULL, `part` INTEGER NOT NULL, `cover_url` TEXT, `music_name` TEXT NOT NULL, `music_artist` TEXT NOT NULL, `which_artist_id` INTEGER NOT NULL, `which_sheet_id` INTEGER NOT NULL, `second` INTEGER NOT NULL, `times5day` INTEGER NOT NULL, `add_time` INTEGER NOT NULL, `last_play_time` INTEGER NOT NULL)",
         "fields": [
           {
             "fieldPath": "music_id",
@@ -51,6 +51,12 @@
             "columnName": "part",
             "affinity": "INTEGER",
             "notNull": true
+          },
+          {
+            "fieldPath": "cover_url",
+            "columnName": "cover_url",
+            "affinity": "TEXT",
+            "notNull": false
           },
           {
             "fieldPath": "music_name",
@@ -146,7 +152,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '764f54d7da52818b394db4b96f8e288e')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '650d2bfe0507c7855a0ee8b38883faf4')"
     ]
   }
 }

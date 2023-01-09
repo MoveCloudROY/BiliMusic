@@ -20,6 +20,8 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.viewmodel.compose.viewModel
+import coil.compose.rememberAsyncImagePainter
+import coil.request.ImageRequest
 import top.roy1994.bilimusic.R
 import top.roy1994.bilimusic.musichorizonbarelem.MusicHorizonBarElem
 import top.roy1994.bilimusic.musiclistdetailelem.MusicListDetailElem
@@ -113,8 +115,12 @@ fun MainPage(
                 itemsIndexed(musicHistory.orEmpty()) { _, item ->
                     MusicHorizonBarElem(
                         Modifier.clickable { },
-                        cover = item.music_cover
-                            ?: painterResource(id = R.drawable.default_cover),
+                        cover = rememberAsyncImagePainter(
+                            ImageRequest.Builder(LocalContext.current)
+                                .data(item.cover_url)//?:R.drawable.notfind
+                                .crossfade(true)
+                                .build(),
+                        ),
                         name = item.music_name,
                         onHorizonBarElemTapped = {
                             playerVM.setMusicToPlayList(item)
@@ -146,8 +152,12 @@ fun MainPage(
             ) {
                 musicOften.orEmpty().forEachIndexed { _, item ->
                     MusicVerticalCommentElem(
-                        cover = item.music_cover
-                            ?: painterResource(id = R.drawable.default_cover),
+                        cover = rememberAsyncImagePainter(
+                            ImageRequest.Builder(LocalContext.current)
+                                .data(item.cover_url)//?:R.drawable.notfind
+                                .crossfade(true)
+                                .build(),
+                        ),
                         name = item.music_name,
                         artist = item.music_artist,
                         upComment = item.times5day.toString(),
@@ -189,8 +199,12 @@ fun MainPage(
                                 indication = LocalIndication.current,
                                 interactionSource = remember { MutableInteractionSource() }
                             ) {},
-                        cover = item.music_cover
-                            ?: painterResource(id = R.drawable.default_cover),
+                        cover = rememberAsyncImagePainter(
+                            ImageRequest.Builder(LocalContext.current)
+                                .data(item.cover_url)//?:R.drawable.notfind
+                                .crossfade(true)
+                                .build(),
+                        ),
                         name = item.music_name,
                         artist = item.music_artist,
                         upComment = "",
