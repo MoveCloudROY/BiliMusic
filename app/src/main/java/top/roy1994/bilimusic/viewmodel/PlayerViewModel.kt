@@ -44,7 +44,7 @@ class PlayerViewModel(application: Application): AndroidViewModel(application) {
     private var biliRepo: BiliRepo
     private val coroutineScope = CoroutineScope(Dispatchers.Main)
 
-    private var playingList: List<MusicEntity> = listOf()
+    private var playingList: MutableList<MusicEntity> = mutableListOf()
     // =========================================================
 
 
@@ -65,6 +65,7 @@ class PlayerViewModel(application: Application): AndroidViewModel(application) {
                 }
             }
         }
+        playingList.add(music)
     }
 
     fun setMusicToPlayList(music: MusicEntity) {
@@ -99,10 +100,8 @@ class PlayerViewModel(application: Application): AndroidViewModel(application) {
     fun setPlayList(musicList: List<MusicEntity>) {
         exoPlayer.pause()
         exoPlayer.clearMediaItems()
-        playingList = musicList
-        preMusic.value = MusicEntity.getEmpty()
-        nowMusic.value = if(playingList.size > 0) playingList[0] else MusicEntity.getEmpty()
-        nxtMusic.value = if(playingList.size > 1) playingList[1] else MusicEntity.getEmpty()
+        playingList.clear()
+
         resetProgressBar(nowMusic.value.second)
 
         for (e in musicList) {
@@ -117,6 +116,9 @@ class PlayerViewModel(application: Application): AndroidViewModel(application) {
                 """.trimIndent()
             )
         }
+        preMusic.value = MusicEntity.getEmpty()
+        nowMusic.value = if(playingList.size > 0) playingList[0] else MusicEntity.getEmpty()
+        nxtMusic.value = if(playingList.size > 1) playingList[1] else MusicEntity.getEmpty()
 
         exoPlayer.apply {
             prepare()
@@ -141,6 +143,42 @@ class PlayerViewModel(application: Application): AndroidViewModel(application) {
         exoPlayer.shuffleModeEnabled = false
         exoPlayer.repeatMode = Player.REPEAT_MODE_ALL
     }
+    fun previous() {
+
+        val pid = exoPlayer.previousMediaItemIndex
+        if (exoPlayer.hasPreviousMediaItem())
+        {
+            nxtMusic.value = nowMusic.value
+            nowMusic.value = preMusic.value
+            preMusic.value = if (pid > 0)
+                playingList[pid-1] else MusicEntity.getEmpty()
+            exoPlayer.apply {
+                pause()
+                seekToPrevious()
+                prepare()
+                play()
+            }
+        }
+    }
+    //   4 - 3
+    // 0 1 2 3
+    fun next() {
+        val nid = exoPlayer.nextMediaItemIndex
+        if (exoPlayer.hasNextMediaItem())
+        {
+            preMusic.value = nowMusic.value
+            nowMusic.value = nxtMusic.value
+            nxtMusic.value = if (nid < playingList.size - 1)
+                playingList[nid+1] else MusicEntity.getEmpty()
+            exoPlayer.apply {
+                pause()
+                seekToNext()
+                prepare()
+                play()
+            }
+        }
+    }
+
 
     init {
         service = BiliServiceCreator.getInstance()

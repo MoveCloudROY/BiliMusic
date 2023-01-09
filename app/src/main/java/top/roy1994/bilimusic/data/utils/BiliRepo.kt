@@ -40,8 +40,8 @@ class BiliRepo(
         }
         return deferred
     }
-    fun getCoverUrl(bid: String): Deferred<String?> {
-        val deferred = coroutineScope.async(Dispatchers.IO) {
+    suspend fun getCoverUrl(bid: String) =
+        withContext(Dispatchers.IO) {
             val res = service.getVideoInfo(bid)
             var ret: String? = null
             withContext(Dispatchers.Main) {
@@ -49,13 +49,11 @@ class BiliRepo(
                     responseCoverUrl.value = res.body()?.data?.pic
                     ret = responseCoverUrl.value
                 } else {
-                    Log.e("BiliRepo", "Failed to get cover url")
+                    Log.e("BiliRepo-DATA", "Failed to get cover url")
                 }
             }
             ret
         }
-        return deferred
-    }
 
     fun getMusicUrl(bid: String, part: Int = 1): Deferred<String?> {
         val deferred = coroutineScope.async(Dispatchers.IO) {

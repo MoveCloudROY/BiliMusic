@@ -24,7 +24,7 @@ import top.roy1994.bilimusic.viewmodel.*
 fun MainFrame(
     navController: NavHostController,
     playerVM: PlayerViewModel,
-    topSelectBarVM: TopSelectViewModel = viewModel(),
+    topSelectBarVM: TopSelectViewModel = viewModel()
 ) {
     val playerState =
         rememberModalBottomSheetState(

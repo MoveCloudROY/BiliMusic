@@ -1,0 +1,132 @@
+{
+  "name": "not_find",
+  "version": 32,
+  "source-key": {
+    "type": "figma",
+    "file": "fmyi8bk5JepuCfQVb7LIDl",
+    "node": "181:2321",
+    "version": "2838958044",
+    "component-id": "ed8d6da7ad80162096f99b0126653a641ebf7740"
+  },
+  "default": "NotFind",
+  "design": {
+    "atoms": [
+      {
+        "type": "group",
+        "id": "top_level",
+        "root": "true"
+      },
+      {
+        "type": "group",
+        "id": "notfound"
+      },
+      {
+        "type": "vector",
+        "id": "Rectangle 16"
+      },
+      {
+        "type": "text",
+        "id": "title"
+      }
+    ],
+    "modes": {
+      "NotFind": {
+        "rules": [
+          {
+            "id": "top_level",
+            "padding": "5.0",
+            "children": [
+              "notfound"
+            ],
+            "item-spacing": "10.0",
+            "background-color": {
+              "alpha": "1.0",
+              "hue": "0.0",
+              "saturation": "0.0",
+              "value": "1.0"
+            }
+          },
+          {
+            "id": "notfound",
+            "opacity": "0.30000001192092896",
+            "is-structured": "false",
+            "children": [
+              "Rectangle 16",
+              "title"
+            ],
+            "clip-content": "false"
+          },
+          {
+            "id": "Rectangle 16",
+            "border-radius": "20.0",
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "proportional",
+                "value": "1.0"
+              },
+              "height-constraints": {
+                "sizing-mode": "proportional",
+                "value": "1.0"
+              }
+            },
+            "vector-content": "rectangle_16.svg"
+          },
+          {
+            "id": "title",
+            "margin": {
+              "left": "98.437255859375",
+              "top": "42.09183883666992",
+              "right": "95.897705078125",
+              "bottom": "49.82596969604492"
+            },
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "proportional",
+                "value": "1.0"
+              },
+              "height-constraints": {
+                "sizing-mode": "proportional",
+                "value": "1.0"
+              }
+            },
+            "color": {
+              "alpha": "1.0",
+              "hue": "227.75510204081633",
+              "saturation": "0.49",
+              "value": "0.39215686274509803"
+            },
+            "text-content": "$title",
+            "overflow": "visible",
+            "max-lines": "-1",
+            "text-size": "20.0",
+            "letter-spacing": "-0.2800000011920929",
+            "line-height": "1.2189999580383302",
+            "typeface": "Montserrat"
+          }
+        ]
+      }
+    }
+  },
+  "parameters": {
+    "title": {
+      "data-type": "text",
+      "required": false,
+      "description": ""
+    }
+  },
+  "previews": [
+    {
+      "design": "NotFind",
+      "size": {
+        "width": 453.0,
+        "height": 120.0
+      },
+      "parameters": {
+        "title": "还没有记录哦"
+      }
+    }
+  ],
+  "adin-component-search-paths": [],
+  "image-search-paths": [],
+  "vector-search-paths": []
+}

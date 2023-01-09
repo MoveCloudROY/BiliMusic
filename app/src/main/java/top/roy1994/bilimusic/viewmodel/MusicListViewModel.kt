@@ -4,14 +4,11 @@ import android.app.Application
 import android.util.Log
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.*
-import com.google.android.exoplayer2.ExoPlayer
 import kotlinx.coroutines.*
-import top.roy1994.bilimusic.data.objects.Music
 import top.roy1994.bilimusic.data.objects.biliapi.BiliService
 import top.roy1994.bilimusic.data.objects.biliapi.BiliServiceCreator
 import top.roy1994.bilimusic.data.objects.music.MusicDao
 import top.roy1994.bilimusic.data.objects.music.MusicEntity
-import top.roy1994.bilimusic.data.objects.sheet.SheetDao
 import top.roy1994.bilimusic.data.utils.AppDatabase
 import top.roy1994.bilimusic.data.utils.BiliRepo
 
@@ -20,7 +17,7 @@ class MusicListViewModel(application: Application): AndroidViewModel(application
     val biliRepo: BiliRepo
     val service: BiliService
 
-    var listIndex = mutableStateOf(0)
+    var listIndex = mutableStateOf(-1)
         private set
 
     init {
@@ -33,39 +30,33 @@ class MusicListViewModel(application: Application): AndroidViewModel(application
     val musicList: LiveData<List<MusicEntity>> = musicDao.loadAllMusics()
     val coverMap: LiveData<List<String?>> =
         Transformations.switchMap(musicList) { l ->
-            transformMap(l)
+            val p = transformMap(l)
+            Log.i("MusicList-DATA-coverMap", "${p}")
+            p
         }
 
-    fun transformMap(l: List<MusicEntity>): LiveData<List<String?>> {
-        return liveData {
-            l.map{
+    private fun transformMap(l: List<MusicEntity>): LiveData<List<String?>> {
+        return liveData(Dispatchers.IO) {
+            emit(l.map{
                 var ret: String? = null
-                viewModelScope.launch (Dispatchers.IO) {
-                    val res = service.getVideoInfo(it.bvid)
-                    withContext(Dispatchers.Main) {
-                        if (res.isSuccessful) {
-                            ret = res.body()?.data?.pic
-                        } else {
-                            Log.e("BiliRepo", "Failed to get cover url")
-                        }
-                    }
+                withContext(viewModelScope.coroutineContext) {
+                    val url = biliRepo.getCoverUrl(it.bvid)
+                    ret = url
+                    url
                 }
-                Log.i("DATA", "bvid: ${it.bvid}; return: ${ret}")
                 ret
-            }
+            }.toList())
         }
+
     }
 
     fun getCoverUrl(bvid: String): String? {
         var ret: String? = null
-        viewModelScope.launch(Dispatchers.IO) {
-            val url = biliRepo.getCoverUrl(bvid).await()
-            withContext(Dispatchers.Main) {
-                ret = url
-            }
+        viewModelScope.launch {
+            val url = biliRepo.getCoverUrl(bvid)
+            ret = url
         }
-
-        Log.i("DATA", "bvid: $bvid; return: $ret")
+        Log.i("MusicList-getCoverUrl", "bvid: $bvid; return: $ret")
         return ret
     }
 

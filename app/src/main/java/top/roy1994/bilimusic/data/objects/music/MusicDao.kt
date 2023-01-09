@@ -35,4 +35,7 @@ interface MusicDao {
     @Query("SELECT * FROM MusicEntity ORDER BY MusicEntity.last_play_time DESC LIMIT 5")
     fun loadMusicsLastPlayDesc(): LiveData<List<MusicEntity>>
 
+    @Query("SELECT COUNT(*) FROM MusicEntity")
+    fun count(): LiveData<Int>
+
 }

@@ -70,13 +70,7 @@ fun Player(
                     playerVM.setPlayerShuffle()
                 },
                 onPreTapped = {
-                    playerVM.exoPlayer.apply {
-                        playerVM.exoPlayer.pause()
-                        playerVM.exoPlayer.seekToPrevious()
-                        playerVM.exoPlayer.prepare()
-                        playerVM.exoPlayer.play()
-                    }
-
+                    playerVM.previous()
                 },
                 onPlayTapped = {
                     playerVM.updateIsPlaying(!playerVM.isPlaying.value)
@@ -90,12 +84,7 @@ fun Player(
                     }
                 },
                 onNextTapped = {
-                    playerVM.exoPlayer.apply {
-                        playerVM.exoPlayer.pause()
-                        playerVM.exoPlayer.seekToNext()
-                        playerVM.exoPlayer.prepare()
-                        playerVM.exoPlayer.play()
-                    }
+                    playerVM.next()
                 },
                 onLoopTapped = {
                     playerVM.setPlayerRepeatAll()
