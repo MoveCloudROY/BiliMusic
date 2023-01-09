@@ -19,35 +19,27 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import top.roy1994.bilimusic.R
 import top.roy1994.bilimusic.backbar.BackBar
-import top.roy1994.bilimusic.data.objects.music.MusicEntity
-import top.roy1994.bilimusic.data.objects.sheet.SheetEntity
-import top.roy1994.bilimusic.musicverticalcommentelem.MusicVerticalCommentElem
 import top.roy1994.bilimusic.sheetcommand.SheetCommand
 import top.roy1994.bilimusic.sheetinfo.SheetInfo
 import top.roy1994.bilimusic.sheetsongelem.SheetSongElem
 import top.roy1994.bilimusic.ui.components.BottomBar
 import top.roy1994.bilimusic.ui.components.Player
-import top.roy1994.bilimusic.ui.components.TopBar
 import top.roy1994.bilimusic.ui.navigation.Screens
-import top.roy1994.bilimusic.viewmodel.PlayerViewModel
-import top.roy1994.bilimusic.viewmodel.PlayerViewModelFactory
-import top.roy1994.bilimusic.viewmodel.SheetDetailViewModel
-import top.roy1994.bilimusic.viewmodel.SheetDetailViewModelFactory
+import top.roy1994.bilimusic.viewmodel.*
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
-fun SheetDetail(
+fun ArtistDetail(
     navController: NavHostController,
-    sheetId: Int,
+    artistId: Int,
     playerVM: PlayerViewModel,
-    sheetDetailVM: SheetDetailViewModel = viewModel(
-        factory = SheetDetailViewModelFactory(
+    artistDetailVM: ArtistDetailViewModel = viewModel(
+        factory = ArtistDetailViewModelFactory(
             LocalContext.current.applicationContext as Application
         )
     ),
@@ -56,9 +48,9 @@ fun SheetDetail(
         rememberModalBottomSheetState(
             initialValue = ModalBottomSheetValue.Hidden,
         )
-    sheetDetailVM.updateSheetId(sheetId)
+    artistDetailVM.updateArtistId(artistId)
 
-    val sheetInfo by sheetDetailVM.sheetInfo.observeAsState()
+    val artistInfo by artistDetailVM.artistInfo.observeAsState()
 
     Player(
         playerVM = playerVM,
@@ -92,21 +84,20 @@ fun SheetDetail(
                             .fillMaxWidth(),
                         cover = null
                             ?: painterResource(id = R.drawable.default_cover),
-                        name = sheetInfo?.sheet_name
+                        name = artistInfo?.artist_name
                             ?:"Call Recordings",
-                        artist = sheetInfo?.sheet_description
-                            ?:"<unknown>",
+                        artist = " "
                     )
                     SheetCommand(
                         modifier = Modifier
                             .padding(horizontal = 8.dp, vertical = 4.dp)
                             .fillMaxWidth(),
                         onShuffleTapped = {
-                            playerVM.setPlayList(sheetDetailVM.sheetElems.value)
+                            playerVM.setPlayList(artistDetailVM.artistElems.value)
                             playerVM.setPlayerShuffle()
                         },
                         onPlayTapped = {
-                            playerVM.setPlayList(sheetDetailVM.sheetElems.value)
+                            playerVM.setPlayList(artistDetailVM.artistElems.value)
                         },
                     )
                     Column(
@@ -115,7 +106,7 @@ fun SheetDetail(
                         verticalArrangement = Arrangement.spacedBy(8.dp)
                     ) {
 
-                        sheetDetailVM.sheetElems.value.forEachIndexed { index, item ->
+                        artistDetailVM.artistElems.value.forEachIndexed { index, item ->
                             Log.i("UI", "${item.music_name}  ${item.music_artist}  ${item.second}")
                             SheetSongElem(
                                 modifier = Modifier
@@ -127,7 +118,7 @@ fun SheetDetail(
                                 minute = (item.second / 60).toString(),
                                 second = (item.second % 60).toString().padStart(2,'0'),
                                 onSongTapped = {
-                                    playerVM.setPlayList(sheetDetailVM.sheetElems.value)
+                                    playerVM.setPlayList(artistDetailVM.artistElems.value)
                                     playerVM.exoPlayer.apply {
                                         playerVM.exoPlayer.pause()
                                         playerVM.exoPlayer.seekToDefaultPosition(index)
@@ -140,6 +131,8 @@ fun SheetDetail(
                         }
                     }
 
+
+
                 }
 
 
@@ -151,11 +144,11 @@ fun SheetDetail(
 
 @Preview
 @Composable
-fun PreviewSheetDetail() {
-    SheetDetail(
+fun PreviewArtistDetailDetail() {
+    ArtistDetail(
         rememberNavController(),
-        sheetId = 1,
-        sheetDetailVM = viewModel(
+        artistId = 1,
+        artistDetailVM = viewModel(
             factory = SheetDetailViewModelFactory(
                 LocalContext.current.applicationContext as Application
             )

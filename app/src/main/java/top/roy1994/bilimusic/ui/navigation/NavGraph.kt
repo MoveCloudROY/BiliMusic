@@ -5,15 +5,20 @@ import androidx.navigation.NavHostController
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import androidx.navigation.compose.dialog
 import androidx.navigation.navArgument
+import top.roy1994.bilimusic.ui.components.MusicConfigDialog
+import top.roy1994.bilimusic.ui.pages.ArtistDetail
 import top.roy1994.bilimusic.ui.pages.MainFrame
 import top.roy1994.bilimusic.ui.pages.SheetDetail
 import top.roy1994.bilimusic.viewmodel.PlayerViewModel
+import top.roy1994.bilimusic.viewmodel.TopSelectViewModel
 
 @Composable
 fun NavGraph (
     navController: NavHostController,
     playerVM: PlayerViewModel,
+    topSelectBarVM: TopSelectViewModel
 ){
     NavHost(
         navController = navController,
@@ -21,11 +26,15 @@ fun NavGraph (
     )
     {
         composable(route = Screens.Main.route){
-            MainFrame(navController = navController, playerVM = playerVM)
+            MainFrame(
+                navController = navController,
+                playerVM = playerVM,
+                topSelectBarVM = topSelectBarVM,
+            )
         }
 
         composable(
-            route = "${Screens.Detail.route}/{sheetId}",
+            route = "${Screens.SheetDetail.route}/{sheetId}",
             arguments = listOf(navArgument("sheetId") { type = NavType.IntType })
         ) { backStackEntry ->
             val sheetId: Int? = backStackEntry.arguments?.getInt("sheetId")
@@ -37,5 +46,34 @@ fun NavGraph (
                 )
             }
         }
+
+        composable(
+            route = "${Screens.ArtistDetail.route}/{artistId}",
+            arguments = listOf(navArgument("artistId") { type = NavType.IntType })
+        ) { backStackEntry ->
+            val artistId: Int? = backStackEntry.arguments?.getInt("artistId")
+            artistId?.let {
+                ArtistDetail(
+                    navController = navController,
+                    artistId = artistId,
+                    playerVM = playerVM
+                )
+            }
+        }
+        dialog(
+            route = "${Screens.MusicConfig.route}/{musicId}",
+            arguments = listOf(navArgument("musicId") { type = NavType.IntType })
+        ) { backStackEntry ->
+            val musicId: Int? = backStackEntry.arguments?.getInt("musicId")
+            musicId?.let {
+                MusicConfigDialog(
+                    navController = navController,
+                    musicId = musicId,
+                )
+            }
+        }
+
+
+
     }
 }

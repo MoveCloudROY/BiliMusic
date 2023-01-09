@@ -87,6 +87,7 @@ fun PlayerProgressBar(
             .fillMaxWidth()
             .height(indicatorHeight)
             .padding(start = indicatorPadding, end = indicatorPadding)
+            .background(Color(0xFFFFFFFF)),
     ) {
 
         // Background indicator
@@ -119,6 +120,7 @@ fun PlayerProgressBar(
         modifier = Modifier
             .fillMaxWidth()
             .padding(start = indicatorPadding, end = indicatorPadding)
+            .background(Color(0xFFFFFFFF)),
     ) {
         Text(
             text = PlayerVM.playedSeconds.value.div(60).toString().padStart(2, '0')

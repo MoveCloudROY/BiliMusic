@@ -24,7 +24,7 @@ import top.roy1994.bilimusic.viewmodel.*
 fun MainFrame(
     navController: NavHostController,
     playerVM: PlayerViewModel,
-    topSelectBarVM: TopSelectViewModel = viewModel()
+    topSelectBarVM: TopSelectViewModel
 ) {
     val playerState =
         rememberModalBottomSheetState(
@@ -53,7 +53,10 @@ fun MainFrame(
                         )
                     }
                     1 -> {
-                        SongsPage(playerVM = playerVM,)
+                        SongsPage(
+                            navController = navController,
+                            playerVM = playerVM,
+                        )
                     }
                     2 -> {
                         SongsSheetPage(
@@ -62,7 +65,12 @@ fun MainFrame(
                         )
                     }
                     3 -> {}
-//                    4 -> {}
+                    4 -> {
+                        ArtistSheetPage(
+                            navController = navController,
+                            playerVM = playerVM
+                        )
+                    }
                 }
             }
         },
@@ -80,6 +88,7 @@ fun MainFramePreview() {
         MainFrame(
             rememberNavController(),
             viewModel(),
+            viewModel()
         )
     }
 }

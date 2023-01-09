@@ -1,11 +1,13 @@
 package top.roy1994.bilimusic.ui.components
 
 import android.app.Application
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -33,34 +35,37 @@ fun Player(
 ) {
     val scope = rememberCoroutineScope()
     ModalBottomSheetLayout(
+        modifier = Modifier.background(Color(0xFFFFFFFF)),
         sheetState = state,
         sheetContent = {
             PlayerBar(
                 modifier = Modifier
                     .padding(horizontal = 24.dp, vertical = 12.dp)
                     .requiredHeight(height = 46.dp)
-                    .fillMaxWidth(),
+                    .fillMaxWidth()
+                    .background(Color(0xFFFFFFFF)),
                 onCloseTapped = {scope.launch { state.hide() }}
             )
             PlayerCoverTuple(
                 modifier = Modifier
                     .padding(vertical = 16.dp)
-                    .requiredWidth(756.dp),
+                    .requiredWidth(756.dp)
+                    .background(Color(0xFFFFFFFF)),
                 lastMusicCover = rememberAsyncImagePainter(
                     ImageRequest.Builder(LocalContext.current)
-                        .data(playerVM.preMusic.value.music_cover)//?:R.drawable.notfind
+                        .data(playerVM.preMusic.value.cover_url)//?:R.drawable.notfind
                         .crossfade(true)
                         .build(),
                 ),
                 nowMusicCover = rememberAsyncImagePainter(
                     ImageRequest.Builder(LocalContext.current)
-                        .data(playerVM.nowMusic.value.music_cover)//?:R.drawable.notfind
+                        .data(playerVM.nowMusic.value.cover_url?:R.drawable.notfind)//?:R.drawable.notfind
                         .crossfade(true)
                         .build(),
                 ),
                 nextMusicCover = rememberAsyncImagePainter(
                     ImageRequest.Builder(LocalContext.current)
-                        .data(playerVM.nxtMusic.value.music_cover)//?:R.drawable.notfind
+                        .data(playerVM.nxtMusic.value.cover_url)//?:R.drawable.notfind
                         .crossfade(true)
                         .build(),
                 ),
@@ -71,7 +76,7 @@ fun Player(
                     .padding(top = 8.dp, bottom = 24.dp)
                     .requiredHeight(90.dp)
                     .fillMaxWidth(),
-                name = playerVM.nowMusic.value.music_name,
+                name = playerVM.nowMusic.value.music_name.ifEmpty { "还没有播放" },
                 artist = playerVM.nowMusic.value.music_artist,
             )
             PlayerProgressBar(playerVM)

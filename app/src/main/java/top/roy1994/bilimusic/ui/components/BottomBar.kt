@@ -45,8 +45,7 @@ fun BottomBar(
                         .crossfade(true)
                         .build(),
                 ),
-                musicName = if (playerVM.nowMusic.value.music_name.isEmpty()) "还没有播放"
-                        else playerVM.nowMusic.value.music_name,
+                musicName = playerVM.nowMusic.value.music_name.ifEmpty { "还没有播放" },
                 musicArtist = playerVM.nowMusic.value.music_artist,
                 status = if (playerVM.isPlaying.value) top.roy1994.bilimusic.playbar.Status.Playing
                 else top.roy1994.bilimusic.playbar.Status.Stop,
@@ -54,14 +53,16 @@ fun BottomBar(
                     scope.launch{ playerState.animateTo(ModalBottomSheetValue.Expanded) }
                 },
                 onPlayButtonTapped = {
-                    playerVM.updateIsPlaying(!playerVM.isPlaying.value)
-                    if ( playerVM.exoPlayer.isPlaying) {
-                        // pause the video
-                        playerVM.exoPlayer.pause()
-                    } else {
-                        // play the video
-                        // it's already paused
-                        playerVM.exoPlayer.play()
+                    if (playerVM.nowMusic.value.music_name.isNotEmpty()) {
+                        playerVM.updateIsPlaying(!playerVM.isPlaying.value)
+                        if (playerVM.exoPlayer.isPlaying) {
+                            // pause the video
+                            playerVM.exoPlayer.pause()
+                        } else {
+                            // play the video
+                            // it's already paused
+                            playerVM.exoPlayer.play()
+                        }
                     }
                 }
             )

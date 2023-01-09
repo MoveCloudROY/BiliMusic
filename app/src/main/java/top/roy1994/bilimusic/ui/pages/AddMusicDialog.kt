@@ -2,13 +2,16 @@ package top.roy1994.bilimusic.ui.components
 
 import android.app.Application
 import android.app.Dialog
+import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.OutlinedTextField
+import androidx.compose.foundation.text.KeyboardActions
+import androidx.compose.material.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Info
 import androidx.compose.runtime.*
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.material.Text
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -75,51 +78,154 @@ fun MusicInfoInputField(
             .fillMaxWidth(),
         verticalArrangement = Arrangement.SpaceBetween,
     ) {
-        OutlinedTextField(
-            modifier = Modifier
-                .align(Alignment.CenterHorizontally)
-                .padding(vertical = 12.dp),
-            value = addMusicVM.bvid.value,
-            onValueChange = { addMusicVM.updateBvid(it) },
-            label = { Text("BVid") }
-        )
+        Column {
+            OutlinedTextField(
+                modifier = Modifier
+                    .align(Alignment.CenterHorizontally)
+                    .padding(vertical = 12.dp),
+                colors = TextFieldDefaults.outlinedTextFieldColors(
+                    unfocusedLabelColor = Color.Gray,
+                    unfocusedBorderColor = Color.Gray
+                ),
+                trailingIcon = {
+                    if (addMusicVM.bvidError.value)
+                        Icon(Icons.Filled.Info, "Error", tint = MaterialTheme.colors.error)
+                },
+                keyboardActions = KeyboardActions {
+                    addMusicVM.checkBvid(addMusicVM.bvid.value)
+                },
+                singleLine = true,
+                value = addMusicVM.bvid.value,
+                onValueChange = {
+                    addMusicVM.updateBvid(it)
+                    addMusicVM.bvidError.value = false
+                                },
+                label = { Text("BVid") },
+                isError = addMusicVM.bvidError.value,
+            )
+            if (addMusicVM.bvidError.value) {
+                Text(
+                    text = "Error Bvid, It likes \'BVxxxxxxxx\'",
+                    color = MaterialTheme.colors.error,
+                    style = MaterialTheme.typography.caption,
+                    modifier = Modifier.padding(start = 16.dp)
+                )
+            }
+        }
+//        OutlinedTextField(
+//            modifier = Modifier
+//                .align(Alignment.CenterHorizontally)
+//                .padding(vertical = 12.dp),
+//            value = addMusicVM.part.value,
+//            onValueChange = { addMusicVM.updatePart(it) },
+//            label = { Text("分片") },
+//            colors = TextFieldDefaults.outlinedTextFieldColors(
+//                unfocusedBorderColor = Color.Gray)
+//        )
 
-        OutlinedTextField(
-            modifier = Modifier
-                .align(Alignment.CenterHorizontally)
-                .padding(vertical = 12.dp),
-            value = addMusicVM.part.value,
-            onValueChange = { addMusicVM.updatePart(it) },
-            label = { Text("分片") }
-        )
+        Column {
+            OutlinedTextField(
+                modifier = Modifier
+                    .align(Alignment.CenterHorizontally)
+                    .padding(vertical = 12.dp),
+                colors = TextFieldDefaults.outlinedTextFieldColors(
+                    unfocusedLabelColor = Color.Gray,
+                    unfocusedBorderColor = Color.Gray
+                ),
+                trailingIcon = {
+                    if (addMusicVM.nameError.value)
+                        Icon(Icons.Filled.Info, "Error", tint = MaterialTheme.colors.error)
+                },
+                keyboardActions = KeyboardActions {
+                    addMusicVM.checkName(addMusicVM.name.value)
+                },
+                singleLine = true,
+                value = addMusicVM.name.value,
+                onValueChange = { addMusicVM.updateName(it) },
+                label = { Text("歌曲名") },
+                isError = addMusicVM.nameError.value,
+            )
+            if (addMusicVM.nameError.value) {
+                Text(
+                    text = "Name Should be less than 10 and only CHAR or NUM",
+                    color = MaterialTheme.colors.error,
+                    style = MaterialTheme.typography.caption,
+                    modifier = Modifier.padding(start = 16.dp)
+                )
+            }
+        }
 
-        OutlinedTextField(
-            modifier = Modifier
-                .align(Alignment.CenterHorizontally)
-                .padding(vertical = 12.dp),
-            value = addMusicVM.name.value,
-            onValueChange = { addMusicVM.updateName(it) },
-            label = { Text("歌曲名") }
-        )
+        Column {
+            OutlinedTextField(
+                modifier = Modifier
+                    .align(Alignment.CenterHorizontally)
+                    .padding(vertical = 12.dp),
+                colors = TextFieldDefaults.outlinedTextFieldColors(
+                    unfocusedLabelColor = Color.Gray,
+                    unfocusedBorderColor = Color.Gray
+                ),
+                trailingIcon = {
+                    if (addMusicVM.artistError.value)
+                        Icon(Icons.Filled.Info, "Error", tint = MaterialTheme.colors.error)
+                },
+                keyboardActions = KeyboardActions {
+                    addMusicVM.checkArtist(addMusicVM.artist.value)
+                },
+                singleLine = true,
+                value = addMusicVM.artist.value,
+                onValueChange = { addMusicVM.updateArtist(it) },
+                label = { Text("艺术家") },
+                isError = addMusicVM.artistError.value,
+            )
+            if (addMusicVM.artistError.value) {
+                Text(
+                    text = "Artist Should be less than 10",
+                    color = MaterialTheme.colors.error,
+                    style = MaterialTheme.typography.caption,
+                    modifier = Modifier.padding(start = 16.dp)
+                )
+            }
+        }
 
+        Column {
+            OutlinedTextField(
+                modifier = Modifier
+                    .align(Alignment.CenterHorizontally)
+                    .padding(vertical = 12.dp),
+                colors = TextFieldDefaults.outlinedTextFieldColors(
+                    unfocusedLabelColor = Color.Gray,
+                    unfocusedBorderColor = Color.Gray
+                ),
+                trailingIcon = {
+                    if (addMusicVM.sheetError.value)
+                        Icon(Icons.Filled.Info, "Error", tint = MaterialTheme.colors.error)
+                },
+                singleLine = true,
+                value = addMusicVM.sheet.value,
+                onValueChange = {
+                    addMusicVM.updateSheet(it)
+                    addMusicVM.sheetError.value = false
+                },
+                label = { Text("目标歌单") },
+                isError = addMusicVM.sheetError.value,
+            )
+            if (addMusicVM.artistError.value) {
+                Text(
+                    text = "Not Found, please add firstly",
+                    color = MaterialTheme.colors.error,
+                    style = MaterialTheme.typography.caption,
+                    modifier = Modifier.padding(start = 16.dp)
+                )
+            }
+        }
+        Log.i("AddMusicDialog",
+        """
+            ${addMusicVM.bvidError.value}
+            ${addMusicVM.nameError.value}
+            ${addMusicVM.artistError.value}
+            ${addMusicVM.sheetError.value}
+        """.trimIndent())
 
-        OutlinedTextField(
-            modifier = Modifier
-                .align(Alignment.CenterHorizontally)
-                .padding(vertical = 12.dp),
-            value = addMusicVM.artist.value,
-            onValueChange = { addMusicVM.updateArtist(it) },
-            label = { Text("艺术家") }
-        )
-
-        OutlinedTextField(
-            modifier = Modifier
-                .align(Alignment.CenterHorizontally)
-                .padding(vertical = 12.dp),
-            value = addMusicVM.sheet.value,
-            onValueChange = { addMusicVM.updateSheet(it) },
-            label = { Text("目标歌单") }
-        )
     }
 
 }
