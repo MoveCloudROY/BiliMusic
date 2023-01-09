@@ -23,6 +23,9 @@ interface MusicDao {
     @Query("DELETE FROM MusicEntity WHERE music_name = :name")
     suspend fun deleteMusicByName(name: String)
 
+    @Query("DELETE FROM MusicEntity WHERE music_id = :id")
+    suspend fun deleteMusicById(id: Int)
+
     @Query("SELECT * FROM MusicEntity")
     fun loadAllMusics(): LiveData<List<MusicEntity>>
 

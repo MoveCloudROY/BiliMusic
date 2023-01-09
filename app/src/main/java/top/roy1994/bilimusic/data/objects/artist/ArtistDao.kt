@@ -2,6 +2,7 @@ package top.roy1994.bilimusic.data.objects.artist
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
+import top.roy1994.bilimusic.data.objects.sheet.SheetEntity
 
 @Dao
 interface ArtistDao {
@@ -13,6 +14,9 @@ interface ArtistDao {
 
     @Delete
     fun deleteArtists(vararg artists: ArtistEntity)
+
+    @Query("SELECT * FROM ArtistEntity WHERE artist_id = :id")
+    fun findArtistById(id: Int): List<ArtistEntity>
 
     @Query("SELECT * FROM ArtistEntity WHERE artist_name = :name")
     fun findArtistByName(name: String): List<ArtistEntity>

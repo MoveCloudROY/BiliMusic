@@ -15,11 +15,4 @@ interface MusicSheetDao {
         "JOIN MusicEntity ON SheetEntity.sheet_id = MusicEntity.which_sheet_id"
     )
     fun loadSheetAndMusics(): Map<Int, List<MusicEntity>>
-
-//    @MapInfo(keyColumn = "sheetId", valueColumn = [])
-//    @Query(
-//        "SELECT SheetEntity.id AS sheetId, FROM SheetEntity " +
-//        "JOIN MusicEntity ON SheetEntity.id = MusicEntity.sheet_id"
-//    )
-//    fun loadSheetAndMusicNames(): Map<SheetEntity, List<MusicEntity>>
 }

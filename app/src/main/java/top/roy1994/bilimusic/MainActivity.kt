@@ -38,7 +38,12 @@ class MainActivity : ComponentActivity() {
                         LocalContext.current.applicationContext as Application
                     )
                 )
-                NavGraph(navController = navController, playerVM = playerVM)
+
+                NavGraph(
+                    navController = navController,
+                    playerVM = playerVM,
+                    topSelectBarVM = viewModel(),
+                )
 //                MainFrame()
             }
         }
@@ -65,6 +70,10 @@ fun DefaultPreview() {
     BiliMusicTheme {
         val navController = rememberNavController()
         val playerVM: PlayerViewModel = viewModel()
-        NavGraph(navController = navController, playerVM = playerVM)
+        NavGraph(
+            navController = navController,
+            playerVM = playerVM,
+            topSelectBarVM = viewModel()
+        )
     }
 }

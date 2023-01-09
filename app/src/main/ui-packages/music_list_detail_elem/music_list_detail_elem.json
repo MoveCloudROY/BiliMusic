@@ -5,7 +5,7 @@
     "type": "figma",
     "file": "fmyi8bk5JepuCfQVb7LIDl",
     "node": "33:655",
-    "version": "2795301895",
+    "version": "2843138152",
     "component-id": "86df5cae483a30755146acbf3faa343e2623cf5d"
   },
   "default": "switch=off",
@@ -69,6 +69,7 @@
             "padding": "5.0",
             "border-radius": "9.0",
             "tap-handler": "$on switch tapped",
+            "longpress-handler": "$on long pressed",
             "size-constraints": {
               "width-constraints": {
                 "sizing-mode": "proportional",
@@ -270,6 +271,7 @@
               "blend-mode": "normal"
             },
             "tap-handler": "$on switch tapped",
+            "longpress-handler": "$on long pressed",
             "size-constraints": {
               "width-constraints": {
                 "sizing-mode": "proportional",
@@ -305,9 +307,9 @@
                   },
                   {
                     "color": {
-                      "alpha": "0.7098039215686275",
-                      "hue": "259.1489361702128",
-                      "saturation": "0.5529411764705883",
+                      "alpha": "1.0",
+                      "hue": "266.43356643356645",
+                      "saturation": "0.5607843137254902",
                       "value": "1.0"
                     },
                     "color-stop-position": "1.0"
@@ -319,12 +321,12 @@
                     "y": "1.0"
                   },
                   {
-                    "x": "1.0",
-                    "y": "-0.95"
+                    "x": "0.8",
+                    "y": "-0.34"
                   },
                   {
-                    "x": "1.17",
-                    "y": "1.94"
+                    "x": "0.86",
+                    "y": "1.68"
                   }
                 ]
               }
@@ -478,6 +480,11 @@
   },
   "parameters": {
     "on switch tapped": {
+      "data-type": "void-callback",
+      "required": false,
+      "description": ""
+    },
+    "on long pressed": {
       "data-type": "void-callback",
       "required": false,
       "description": ""

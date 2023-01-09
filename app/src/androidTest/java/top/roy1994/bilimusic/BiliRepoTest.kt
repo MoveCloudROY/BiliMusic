@@ -50,7 +50,7 @@ class BiliRepoTest {
     @Throws(Exception::class)
     fun GetCoverUrl() = runBlocking {
         val nBvid = "BV13e4y1L7EG"
-        val url = biliRepo.getCoverUrl(nBvid).await()
+        val url = biliRepo.getCoverUrl(nBvid)
         assertNotEquals(null, url)
         println("===================================")
         println("Success to get the cover url: $url")

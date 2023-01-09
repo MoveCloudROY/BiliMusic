@@ -2,8 +2,10 @@ package top.roy1994.bilimusic.viewmodel
 
 import android.app.Application
 import android.util.Log
+import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.*
+import androidx.lifecycle.viewmodel.compose.viewModel
 import kotlinx.coroutines.*
 import top.roy1994.bilimusic.data.objects.biliapi.BiliService
 import top.roy1994.bilimusic.data.objects.biliapi.BiliServiceCreator
@@ -16,6 +18,7 @@ class MusicListViewModel(application: Application): AndroidViewModel(application
     private val musicDao: MusicDao
     val biliRepo: BiliRepo
     val service: BiliService
+
 
     var listIndex = mutableStateOf(-1)
         private set
@@ -34,6 +37,7 @@ class MusicListViewModel(application: Application): AndroidViewModel(application
             Log.i("MusicList-DATA-coverMap", "${p}")
             p
         }
+
 
     private fun transformMap(l: List<MusicEntity>): LiveData<List<String?>> {
         return liveData(Dispatchers.IO) {
@@ -58,6 +62,12 @@ class MusicListViewModel(application: Application): AndroidViewModel(application
         }
         Log.i("MusicList-getCoverUrl", "bvid: $bvid; return: $ret")
         return ret
+    }
+
+    fun deleteMusic(music: MusicEntity) {
+        viewModelScope.launch(Dispatchers.IO) {
+            musicDao.deleteMusicById(music.music_id)
+        }
     }
 
 

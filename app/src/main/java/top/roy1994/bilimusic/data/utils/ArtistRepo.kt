@@ -14,11 +14,11 @@ class ArtistRepo(
     private val coroutineScope = CoroutineScope(Dispatchers.Main)
 
 
-    fun insertArtist(newMusic: ArtistEntity) {
-        coroutineScope.launch(Dispatchers.IO) {
+    suspend fun insertArtist(newMusic: ArtistEntity) =
+        withContext(Dispatchers.IO) {
             artistDao.insertArtists(newMusic)
         }
-    }
+
 
     fun deleteArtist(name: String) {
         coroutineScope.launch(Dispatchers.IO) {
@@ -26,14 +26,14 @@ class ArtistRepo(
         }
     }
 
-    fun findArtist(name: String) {
+    fun findArtistById(id: Int) {
         coroutineScope.launch(Dispatchers.Main) {
-            searchResults.value = asyncFind(name).await()
+            searchResults.value = asyncFindById(id).await()
         }
     }
 
-    private fun asyncFind(name: String): Deferred<List<ArtistEntity>?> =
+    private fun asyncFindById(id: Int): Deferred<List<ArtistEntity>?> =
         coroutineScope.async(Dispatchers.IO) {
-            return@async artistDao.findArtistByName(name)
+            return@async artistDao.findArtistById(id)
         }
 }

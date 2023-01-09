@@ -98,13 +98,14 @@ fun SongsSheetPage(
                 artist = sheetEntity.sheet_description,
                 onAlbumBlockElemTapped = {
                     navController.navigate(
-                        "${Screens.Detail.route}/{sheetId}"
+                        "${Screens.SheetDetail.route}/{sheetId}"
                             .replace(
                                 oldValue = "{sheetId}",
                                 newValue = "${sheetEntity.sheet_id}"
                             )
                     )
                 }
+
             )
         }
     }
