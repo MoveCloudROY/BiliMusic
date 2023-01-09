@@ -41,7 +41,6 @@ fun MusicConfigDialog(
         )
     ),
 ) {
-
     Column(
         modifier = Modifier
             .background(Color(0xFFFFFFFF))
@@ -60,13 +59,13 @@ fun MusicConfigDialog(
                 }
             }
         )
-        DialogOk(
-            modifier = Modifier.align(Alignment.CenterHorizontally),
-            text = "确定",
-            onButtonTapped = {
-
-            }
-        )
+//        DialogOk(
+//            modifier = Modifier.align(Alignment.CenterHorizontally),
+//            text = "确定",
+//            onButtonTapped = {
+//
+//            }
+//        )
     }
 }
 

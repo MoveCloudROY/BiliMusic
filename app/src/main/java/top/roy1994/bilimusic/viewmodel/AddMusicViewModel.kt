@@ -55,7 +55,7 @@ class AddMusicViewModel(application: Application): AndroidViewModel(application)
         checkBvid(bvid.value)
         checkName(name.value)
         checkName(artist.value)
-        if (!bvidError.value or !nameError.value or artistError.value)
+        if (bvidError.value or nameError.value or artistError.value)
             return
         viewModelScope.launch(Dispatchers.IO) {
             val seconds = biliRepo.getMusicInfo(bvid.value).await()
@@ -93,8 +93,8 @@ class AddMusicViewModel(application: Application): AndroidViewModel(application)
 
     fun checkBvid(bvid: String) {
         var p = false
-        if (bvid.length != 10) p = true
-        if (bvid.subSequence(0,1) != "BV" && bvid.subSequence(0,1) != "bv")
+        if (bvid.length != 12) p = true
+        if (bvid.subSequence(0,2) != "BV" && bvid.subSequence(0,2) != "bv")
             p = true
         bvidError.value = p
     }
