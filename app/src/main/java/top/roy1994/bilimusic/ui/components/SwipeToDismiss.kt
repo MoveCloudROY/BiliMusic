@@ -1,77 +1,60 @@
 package top.roy1994.bilimusic.ui.components
 
-import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.*
+import android.util.Log
+import androidx.compose.animation.*
+import androidx.compose.animation.core.tween
 import androidx.compose.material.*
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
-import androidx.compose.material.icons.filled.ArrowForward
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
+import androidx.compose.runtime.DisposableEffect
+import androidx.compose.runtime.SideEffect
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.unit.dp
 
 @ExperimentalMaterialApi
+@ExperimentalAnimationApi
 @Composable
-fun swipeToDismiss(
-    onDelete: () -> Unit,
-    content: @Composable () -> Unit,
+fun <T> AnimatedSwipeDismiss(
+    modifier: Modifier = Modifier,
+    item: T,
+    background: @Composable (isDismissed: Boolean) -> Unit,
+    content: @Composable (isDismissed: Boolean) -> Unit,
+    directions: Set<DismissDirection> = setOf(DismissDirection.EndToStart),
+    enter: EnterTransition = expandVertically(),
+    exit: ExitTransition = shrinkVertically(
+        animationSpec = tween(
+            durationMillis = 500,
+        )
+    ),
+    onDismiss: (T) -> Unit
 ) {
-    val dismissState = rememberDismissState(
-        initialValue = DismissValue.Default,
-        confirmStateChange = {
-            if (it == DismissValue.DismissedToStart) {
-                onDelete()
-            }
-            true
+    val dismissState = rememberDismissState()
+    val isDismissed = dismissState.isDismissed(DismissDirection.EndToStart)
+
+
+    DisposableEffect(isDismissed) {
+        if (dismissState.isDismissed(DismissDirection.EndToStart)) {
+            Log.i("SwipeToDismiss", item.toString())
+            onDismiss(item)
         }
-    )
+        onDispose {
 
+        }
 
-    SwipeToDismiss(
-        state = dismissState,
-        /***  create dismiss alert Background */
-        background = {
-            val color = when (dismissState.dismissDirection) {
-                DismissDirection.EndToStart -> Color.Red
-                else -> Color.Transparent
-            }
-            val direction = dismissState.dismissDirection
+    }
 
-            if (direction == DismissDirection.EndToStart) {
-                Box(
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .background(color)
-                        .padding(8.dp)
-                ) {
-                    Column(modifier = Modifier.align(Alignment.CenterEnd)) {
-                        Icon(
-                            imageVector = Icons.Default.ArrowBack,
-                            contentDescription = null,
-                            tint = Color.White,
-                            modifier = Modifier.align(Alignment.CenterHorizontally)
-                        )
-                        Spacer(modifier = Modifier.heightIn(5.dp))
-                        Text(
-                            text = "Move to Delete",
-                            textAlign = TextAlign.Center,
-                            fontWeight = FontWeight.Bold,
-                            color = Color.LightGray
-                        )
-
-                    }
-                }
-            }
-        },
-        /**** Dismiss Content */
-        dismissContent = {
-            content()
-        },
-        /*** Set Direction to dismiss */
-        directions = setOf(DismissDirection.EndToStart),
-    )
+    AnimatedVisibility(
+        modifier = modifier,
+        visible = !isDismissed,
+        enter = enter,
+        exit = exit
+    ) {
+        SwipeToDismiss(
+            modifier = modifier,
+            state = dismissState,
+            directions = directions,
+            background = { background(isDismissed) },
+            dismissContent = { content(isDismissed) }
+        )
+    }
 }
+

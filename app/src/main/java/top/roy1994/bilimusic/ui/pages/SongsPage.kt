@@ -22,6 +22,7 @@ import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
@@ -36,12 +37,13 @@ import top.roy1994.bilimusic.R
 import top.roy1994.bilimusic.data.utils.BiliRepo
 import top.roy1994.bilimusic.musiclistdetailelem.MusicListDetailElem
 import top.roy1994.bilimusic.musiclistdetailelem.Switch
-import top.roy1994.bilimusic.ui.components.swipeToDismiss
+import top.roy1994.bilimusic.ui.components.AnimatedSwipeDismiss
 import top.roy1994.bilimusic.ui.navigation.Screens
 import top.roy1994.bilimusic.viewmodel.MusicListViewModel
 import top.roy1994.bilimusic.viewmodel.MusicListViewModelFactory
 import top.roy1994.bilimusic.viewmodel.PlayerViewModel
 
+@OptIn(ExperimentalMaterialApi::class, ExperimentalAnimationApi::class)
 @Composable
 fun SongsPage(
     navController: NavController,
@@ -63,41 +65,65 @@ fun SongsPage(
     ) {
 
         itemsIndexed(musics.orEmpty()) { index, item ->
-                MusicListDetailElem (
-                    modifier = Modifier
-                        .clip(RoundedCornerShape(12.dp)),
+            key(item.music_id) {
+                AnimatedSwipeDismiss(
+                    item = item,
+                    background = { isDismissed ->
+                        Box(
+                            modifier = Modifier
+                                .padding(4.dp)
+                                .fillMaxSize()
+                                .background(Color.LightGray)
+                                .clip(RoundedCornerShape(12.dp)),
+                            contentAlignment = Alignment.CenterEnd
 
-                    cover = rememberAsyncImagePainter(
-                        ImageRequest.Builder(LocalContext.current)
-                            .data(item.cover_url)//?:R.drawable.notfind
-                            .crossfade(true)
-                            .build(),
-                    ),
-                    name = item.music_name,
-                    artist = item.music_artist,
-                    minuteOff = (item.second / 60).toString(),
-                    secondOff = (item.second % 60).toString().padStart(2, '0'),
-                    switch = if (musicListVM.listIndex.value == index) Switch.On
-                    else Switch.Off,
-                    onSwitchTapped = {
-                        musicListVM.updateListIndex(index)
-                        playerVM.setMusicToPlayList(item)
+                        ) {
+                            Icon(
+                                Icons.Default.Delete,
+                                contentDescription = "Icon",
+                                modifier = Modifier.scale(1.2f).padding(horizontal = 8.dp),
+                                tint = Color.Gray
+                            )
+                        }
                     },
-                    onLongPressed = {
-                        navController.navigate(
-                            "${Screens.MusicConfig.route}/{musicId}"
-                                .replace(
-                                    oldValue = "{musicId}",
-                                    newValue = "${item.music_id}"
+                    content = {
+                        MusicListDetailElem(
+                            modifier = Modifier
+                                .clip(RoundedCornerShape(12.dp)),
+
+                            cover = rememberAsyncImagePainter(
+                                ImageRequest.Builder(LocalContext.current)
+                                    .data(item.cover_url)//?:R.drawable.notfind
+                                    .crossfade(true)
+                                    .build(),
+                            ),
+                            name = item.music_name,
+                            artist = item.music_artist,
+                            minuteOff = (item.second / 60).toString(),
+                            secondOff = (item.second % 60).toString().padStart(2, '0'),
+                            switch = if (musicListVM.listIndex.value == index) Switch.On
+                            else Switch.Off,
+                            onSwitchTapped = {
+                                musicListVM.updateListIndex(index)
+                                playerVM.setMusicToPlayList(item)
+                            },
+                            onLongPressed = {
+                                navController.navigate(
+                                    "${Screens.MusicConfig.route}/{musicId}"
+                                        .replace(
+                                            oldValue = "{musicId}",
+                                            newValue = "${item.music_id}"
+                                        )
                                 )
+                            }
                         )
+                    },
+                    onDismiss = {
+                        musicListVM.deleteMusic(item)
                     }
                 )
-
-
-
-
-            Log.i("SongsPage-coverMap", "${coverMap}")
+            }
+//            Log.i("SongsPage-coverMap", "${coverMap}")
         }
     }
 }

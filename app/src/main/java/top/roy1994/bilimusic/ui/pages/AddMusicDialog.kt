@@ -99,7 +99,7 @@ fun MusicInfoInputField(
                 onValueChange = {
                     addMusicVM.updateBvid(it)
                     addMusicVM.bvidError.value = false
-                                },
+                },
                 label = { Text("BVid") },
                 isError = addMusicVM.bvidError.value,
             )
@@ -141,7 +141,10 @@ fun MusicInfoInputField(
                 },
                 singleLine = true,
                 value = addMusicVM.name.value,
-                onValueChange = { addMusicVM.updateName(it) },
+                onValueChange = {
+                    addMusicVM.updateName(it)
+                    addMusicVM.nameError.value = false
+                },
                 label = { Text("歌曲名") },
                 isError = addMusicVM.nameError.value,
             )
@@ -173,7 +176,10 @@ fun MusicInfoInputField(
                 },
                 singleLine = true,
                 value = addMusicVM.artist.value,
-                onValueChange = { addMusicVM.updateArtist(it) },
+                onValueChange = {
+                    addMusicVM.updateArtist(it)
+                    addMusicVM.artistError.value = false
+                },
                 label = { Text("艺术家") },
                 isError = addMusicVM.artistError.value,
             )

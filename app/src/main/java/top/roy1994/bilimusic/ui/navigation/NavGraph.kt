@@ -1,6 +1,10 @@
 package top.roy1994.bilimusic.ui.navigation
 
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
@@ -66,10 +70,15 @@ fun NavGraph (
         ) { backStackEntry ->
             val musicId: Int? = backStackEntry.arguments?.getInt("musicId")
             musicId?.let {
-                MusicConfigDialog(
-                    navController = navController,
-                    musicId = musicId,
-                )
+                Surface(
+                    shape = RoundedCornerShape(16.dp),
+                    color = Color.White
+                ) {
+                    MusicConfigDialog(
+                        navController = navController,
+                        musicId = musicId,
+                    )
+                }
             }
         }
 
