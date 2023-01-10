@@ -3,6 +3,9 @@ package top.roy1994.bilimusic.ui.navigation
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
@@ -69,6 +72,9 @@ fun NavGraph (
             arguments = listOf(navArgument("musicId") { type = NavType.IntType })
         ) { backStackEntry ->
             val musicId: Int? = backStackEntry.arguments?.getInt("musicId")
+            val musicConfigDialogState: MutableState<Boolean> = remember {
+                mutableStateOf(false)
+            }
             musicId?.let {
                 Surface(
                     shape = RoundedCornerShape(16.dp),

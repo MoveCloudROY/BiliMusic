@@ -144,7 +144,7 @@ class AddMusicViewModel(application: Application): AndroidViewModel(application)
      * @param name
      */
     fun updateArtist(_artist: String) {
-        name.value = _artist
+        artist.value = _artist
     }
     /**
      * 更新分类下标
