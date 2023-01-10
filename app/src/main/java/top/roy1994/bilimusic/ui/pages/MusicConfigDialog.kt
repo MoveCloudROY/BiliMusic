@@ -43,6 +43,7 @@ fun MusicConfigDialog(
             LocalContext.current.applicationContext as Application
         )
     ),
+    onClose: () -> Unit = {}
 ) {
     musicConfigVM.updateMusicId(musicId)
     Column(
@@ -70,7 +71,14 @@ fun MusicConfigDialog(
             modifier = Modifier.align(Alignment.CenterHorizontally),
             text = "确定",
             onButtonTapped = {
-
+                musicConfigVM.modifyMusic()
+                if (musicConfigVM.addSuccess.value)
+                {
+                    navController.navigate(Screens.Main.route) {
+                        launchSingleTop = true
+                    }
+                    onClose()
+                }
             }
         )
     }

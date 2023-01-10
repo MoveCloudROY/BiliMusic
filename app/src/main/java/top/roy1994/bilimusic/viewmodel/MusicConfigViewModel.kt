@@ -37,7 +37,8 @@ class MusicConfigViewModel(application: Application): AndroidViewModel(applicati
     var name = mutableStateOf("")
     var artist = mutableStateOf("默认艺术家")
     var sheet = mutableStateOf("默认歌单")
-    var now_sheet_id = mutableStateOf(1)
+    var nowSheetId = mutableStateOf(1)
+    var nowMusicEntity = mutableStateOf(MusicEntity.getEmpty())
 
     var bvidError = mutableStateOf(false)
     var nameError = mutableStateOf(false)
@@ -57,15 +58,15 @@ class MusicConfigViewModel(application: Application): AndroidViewModel(applicati
         artistRepo = ArtistRepo(artistDao)
         musicRepo = MusicRepo(musicDao)
     }
-    fun addMusic() {
-        checkBvid(bvid.value)
+    fun modifyMusic() {
+//        checkBvid(bvid.value)
         checkName(name.value)
         checkName(artist.value)
-        if (bvidError.value or nameError.value or artistError.value)
+        if (nameError.value or artistError.value)
             return
         viewModelScope.launch(Dispatchers.IO) {
-            val seconds = biliRepo.getMusicInfo(bvid.value).await()
-            val cover_url = biliRepo.getCoverUrl(bvid.value)
+//            val seconds = biliRepo.getMusicInfo(bvid.value).await()
+//            val cover_url = biliRepo.getCoverUrl(bvid.value)
             val sheets = sheetDao.findSheetByName(sheet.value)
             val artistsTest = artistDao.findArtistByName(artist.value)
             if (artistsTest.isEmpty()) {
@@ -75,20 +76,24 @@ class MusicConfigViewModel(application: Application): AndroidViewModel(applicati
                     )
                 )
             }
-            Log.i("AddMusicVM-addmusic", "cover_url: ${cover_url}")
-            if (sheets.isNotEmpty() && seconds != null) {
+            val nowArtists = artistDao.findArtistByName(artist.value)[0]
+//            Log.i("AddMusicVM-addmusic", "cover_url: ${cover_url}")
+            if (sheets.isNotEmpty()) {
                 val sheetId = sheets[0].sheet_id
-                musicDao.insertMusics(
+                musicDao.updateMusics(
                     MusicEntity(
-                        bvid = bvid.value,
+                        music_id = nowMusicEntity.value.music_id,
+                        bvid = nowMusicEntity.value.bvid,
                         part = 1,
+                        cover_url = nowMusicEntity.value.cover_url,
                         music_name = name.value,
                         music_artist = artist.value,
+                        which_artist_id = nowArtists.artist_id,
                         which_sheet_id = sheetId,
-                        add_time = System.currentTimeMillis(),
-                        last_play_time = System.currentTimeMillis(),
-                        second = seconds,
-                        cover_url = cover_url,
+                        second = nowMusicEntity.value.second,
+                        times5day = nowMusicEntity.value.times5day,
+                        add_time = nowMusicEntity.value.add_time,
+                        last_play_time = nowMusicEntity.value.last_play_time,
                     )
                 )
             }
@@ -98,7 +103,6 @@ class MusicConfigViewModel(application: Application): AndroidViewModel(applicati
             sheet.value = "默认歌单"
         }
         addSuccess.value = true
-
     }
 
     fun checkBvid(bvid: String) {
@@ -127,11 +131,12 @@ class MusicConfigViewModel(application: Application): AndroidViewModel(applicati
             val musicEntity = withContext(Dispatchers.IO) {
                 musicDao.findMusicById(id)
             }[0]
+            nowMusicEntity.value = musicEntity
             name.value = musicEntity.music_name
             artist.value = musicEntity.music_artist
-            now_sheet_id.value = musicEntity.which_sheet_id
+            nowSheetId.value = musicEntity.which_sheet_id
             val sheetEntity = withContext(Dispatchers.IO) {
-                sheetDao.findSheetById(now_sheet_id.value)
+                sheetDao.findSheetById(nowSheetId.value)
             }[0]
             sheet.value = sheetEntity.sheet_name
         }
@@ -159,7 +164,7 @@ class MusicConfigViewModel(application: Application): AndroidViewModel(applicati
      * @param name
      */
     fun updateArtist(_artist: String) {
-        name.value = _artist
+        artist.value = _artist
     }
     /**
      * 更新分类下标
