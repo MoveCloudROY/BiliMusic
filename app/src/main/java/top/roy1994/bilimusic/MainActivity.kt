@@ -1,7 +1,9 @@
 package top.roy1994.bilimusic
 
 import android.app.Application
+import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.ViewGroup
 import android.view.WindowInsets
 import android.view.WindowInsetsController
@@ -18,6 +20,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.core.view.*
 import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.Navigator
 import androidx.navigation.compose.rememberNavController
 import top.roy1994.bilimusic.ui.navigation.NavGraph
 import top.roy1994.bilimusic.ui.pages.MainFrame
@@ -26,8 +29,9 @@ import top.roy1994.bilimusic.viewmodel.PlayerViewModel
 import top.roy1994.bilimusic.viewmodel.PlayerViewModelFactory
 
 class MainActivity : ComponentActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
+    lateinit var msg: String
 
+    override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         setContent {
@@ -47,6 +51,7 @@ class MainActivity : ComponentActivity() {
 //                MainFrame()
             }
         }
+
         val windowInsetsController =
             WindowCompat.getInsetsController(window, window.decorView)
         // Configure the behavior of the hidden system bars.
@@ -59,6 +64,15 @@ class MainActivity : ComponentActivity() {
         // 同时隐藏状态栏和导航栏
         controller?.hide(WindowInsets.Type.statusBars())
         controller?.hide(WindowInsets.Type.systemBars())
+
+        // get EXTRA_TEXT share from BiliBili App
+        msg = intent.extras?.getString(Intent.EXTRA_TEXT) ?: ""
+
+        val reglist: List<String> = msg.split(Regex("\\bvideo/"))
+        if (reglist.size >= 2 && reglist[reglist.size-1].startsWith("BV")) {
+
+        }
+
 
 
     }

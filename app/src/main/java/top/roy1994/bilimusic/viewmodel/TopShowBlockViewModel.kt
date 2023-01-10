@@ -30,23 +30,10 @@ class TopShowBlockViewModel(application: Application): AndroidViewModel(applicat
         )
     )
 
-    val cat = mutableStateOf(
-        listOf(
-            "歌曲",
-            "歌单",
-            "标签",
-            "艺术家",
-        )
-    )
-    val data = listOf<LiveData<Int>>(
-        musicDao.count(),
-        sheetDao.count(),
-        liveData { emit(0) },
-        artistDao.count(),
-    )
-
-
-
+    val musicCnt = musicDao.count()
+    val sheetCnt = sheetDao.count()
+    val tagCnt = liveData { emit(0) }
+    val artistCnt = artistDao.count()
 
 }
 

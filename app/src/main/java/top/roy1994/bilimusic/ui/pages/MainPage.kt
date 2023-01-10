@@ -19,6 +19,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.liveData
 import androidx.lifecycle.viewmodel.compose.viewModel
 import coil.compose.rememberAsyncImagePainter
 import coil.request.ImageRequest
@@ -60,11 +61,12 @@ fun MainPage(
     val musicHistory by musicHistoryVM.musicHistory.observeAsState()
     val musicOften by musicOftenVM.musicOften.observeAsState()
     val musicRecent by musicRecentVM.musicRecent.observeAsState()
-//    val a: MutableList<Int> = MutableList(4) {0}
-//    a[0] by topShowBlockVM.data[0].observeAsState()
-//    a[1] by topShowBlockVM.data[1].observeAsState()
-//    a[2] by topShowBlockVM.data[2].observeAsState()
-//    a[3] by topShowBlockVM.data[3].observeAsState()
+
+    // tmp
+    val musicCnt by topShowBlockVM.musicCnt.observeAsState()
+    val sheetCnt by topShowBlockVM.sheetCnt.observeAsState()
+    val tagCnt by topShowBlockVM.tagCnt.observeAsState()
+    val artistCnt by topShowBlockVM.artistCnt.observeAsState()
 
     Column (
         Modifier
@@ -77,20 +79,67 @@ fun MainPage(
             contentPadding = PaddingValues(horizontal = 12.dp),
             horizontalArrangement = Arrangement.spacedBy(12.dp)
         ) {
-            itemsIndexed(topShowBlockVM.categories.value) { index, category ->
-                TopShowBlock(
-                    modifier = Modifier
-                        .requiredSize(width = 100.dp, height = 60.dp)
-//                                    .padding(horizontal = 8.dp)
-                        .clip(RoundedCornerShape(16.dp)),
+            item { TopShowBlock(
+                modifier = Modifier
+                    .requiredSize(width = 100.dp, height = 60.dp)
+                    .clip(RoundedCornerShape(16.dp)),
 
-                    number = category.count.toString(),
-                    type = category.title,
-                    onTopShowBlockElemTapped = {
-                        topSelectBarVM.updateCategoryIndex(index + 1)
-                    },
-                )
-            }
+                number = musicCnt?.toString()?:"0",
+                type = topShowBlockVM.categories.value[0].title,
+                onTopShowBlockElemTapped = {
+                    topSelectBarVM.updateCategoryIndex(1)
+                },
+            ) }
+            item { TopShowBlock(
+                modifier = Modifier
+                    .requiredSize(width = 100.dp, height = 60.dp)
+                    .clip(RoundedCornerShape(16.dp)),
+
+                number = sheetCnt?.toString()?:"0",
+                type = topShowBlockVM.categories.value[1].title,
+                onTopShowBlockElemTapped = {
+                    topSelectBarVM.updateCategoryIndex(2)
+                },
+            ) }
+            item { TopShowBlock(
+                modifier = Modifier
+                    .requiredSize(width = 100.dp, height = 60.dp)
+                    .clip(RoundedCornerShape(16.dp)),
+
+                number = tagCnt?.toString()?:"0",
+                type = topShowBlockVM.categories.value[2].title,
+                onTopShowBlockElemTapped = {
+                    topSelectBarVM.updateCategoryIndex(3)
+                },
+            ) }
+            item { TopShowBlock(
+                modifier = Modifier
+                    .requiredSize(width = 100.dp, height = 60.dp)
+                    .clip(RoundedCornerShape(16.dp)),
+
+                number = artistCnt?.toString()?:"0",
+                type = topShowBlockVM.categories.value[3].title,
+                onTopShowBlockElemTapped = {
+                    topSelectBarVM.updateCategoryIndex(4)
+                },
+            ) }
+
+
+
+//            itemsIndexed(topShowBlockVM.categories.value) { index, category ->
+//                TopShowBlock(
+//                    modifier = Modifier
+//                        .requiredSize(width = 100.dp, height = 60.dp)
+////                                    .padding(horizontal = 8.dp)
+//                        .clip(RoundedCornerShape(16.dp)),
+//
+//                    number = category.count.toString(),
+//                    type = category.title,
+//                    onTopShowBlockElemTapped = {
+//                        topSelectBarVM.updateCategoryIndex(index + 1)
+//                    },
+//                )
+//            }
         }
         ReDirTextBar(
             modifier = Modifier.height(50.dp),
