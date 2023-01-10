@@ -8,6 +8,7 @@ import androidx.lifecycle.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import top.roy1994.bilimusic.data.objects.artist.ArtistDao
 import top.roy1994.bilimusic.data.objects.artist.ArtistEntity
 import top.roy1994.bilimusic.data.objects.biliapi.BiliService
 import top.roy1994.bilimusic.data.objects.biliapi.BiliServiceCreator
@@ -23,6 +24,7 @@ import kotlin.math.log
 class AddMusicViewModel(application: Application): AndroidViewModel(application) {
     private val musicDao: MusicDao
     private val sheetDao: SheetDao
+    private val artistDao: ArtistDao
     private val artistRepo: ArtistRepo
     private lateinit var biliRepo: BiliRepo
     private lateinit var service: BiliService
@@ -33,7 +35,7 @@ class AddMusicViewModel(application: Application): AndroidViewModel(application)
         sheetDao = appDb.sheetDao()
         service = BiliServiceCreator.getInstance()
         biliRepo = BiliRepo(service)
-        val artistDao = appDb.artistDao()
+        artistDao = appDb.artistDao()
         artistRepo = ArtistRepo(artistDao)
     }
 
@@ -61,9 +63,14 @@ class AddMusicViewModel(application: Application): AndroidViewModel(application)
             val seconds = biliRepo.getMusicInfo(bvid.value).await()
             val cover_url = biliRepo.getCoverUrl(bvid.value)
             val sheets = sheetDao.findSheetByName(sheet.value)
-            artistRepo.insertArtist(ArtistEntity(
-                artist_name = artist.value
-            ))
+            val artistsTest = artistDao.findArtistByName(artist.value)
+            if (artistsTest.isEmpty()) {
+                artistRepo.insertArtist(
+                    ArtistEntity(
+                        artist_name = artist.value
+                    )
+                )
+            }
             Log.i("AddMusicVM-addmusic", "cover_url: ${cover_url}")
             if (sheets.isNotEmpty() && seconds != null) {
                 val sheetId = sheets[0].sheet_id

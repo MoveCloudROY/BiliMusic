@@ -73,6 +73,7 @@ fun SheetInfoInputField(
             modifier = Modifier
                 .align(Alignment.CenterHorizontally)
                 .padding(vertical = 12.dp),
+            singleLine = true,
             value = addSheetVM.name.value,
             onValueChange = { addSheetVM.updateName(it) },
             label = { Text("歌单名") }
@@ -82,6 +83,7 @@ fun SheetInfoInputField(
             modifier = Modifier
                 .align(Alignment.CenterHorizontally)
                 .padding(vertical = 12.dp),
+            singleLine = true,
             value = addSheetVM.description.value,
             onValueChange = { addSheetVM.updateDescription(it) },
             label = { Text("备注") }
