@@ -29,7 +29,7 @@ import top.roy1994.bilimusic.viewmodel.PlayerViewModel
 import top.roy1994.bilimusic.viewmodel.PlayerViewModelFactory
 
 class MainActivity : ComponentActivity() {
-    lateinit var msg: String
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -52,28 +52,19 @@ class MainActivity : ComponentActivity() {
             }
         }
 
-        val windowInsetsController =
-            WindowCompat.getInsetsController(window, window.decorView)
-        // Configure the behavior of the hidden system bars.
-        windowInsetsController?.systemBarsBehavior =
-            WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
-        windowInsetsController?.hide(WindowInsetsCompat.Type.systemBars())
+//        val windowInsetsController =
+//            WindowCompat.getInsetsController(window, window.decorView)
+//        // Configure the behavior of the hidden system bars.
+//        windowInsetsController?.systemBarsBehavior =
+//            WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
+//        windowInsetsController?.hide(WindowInsetsCompat.Type.systemBars())
+
         WindowCompat.setDecorFitsSystemWindows(window, false)
         val controller = window.decorView.windowInsetsController
         // 隐藏状态栏
         // 同时隐藏状态栏和导航栏
         controller?.hide(WindowInsets.Type.statusBars())
         controller?.hide(WindowInsets.Type.systemBars())
-
-        // get EXTRA_TEXT share from BiliBili App
-        msg = intent.extras?.getString(Intent.EXTRA_TEXT) ?: ""
-
-        val reglist: List<String> = msg.split(Regex("\\bvideo/"))
-        if (reglist.size >= 2 && reglist[reglist.size-1].startsWith("BV")) {
-
-        }
-
-
 
     }
 }

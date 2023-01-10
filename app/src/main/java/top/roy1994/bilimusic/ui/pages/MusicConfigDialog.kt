@@ -2,13 +2,16 @@ package top.roy1994.bilimusic.ui.components
 
 import android.app.Application
 import android.app.Dialog
+import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.OutlinedTextField
+import androidx.compose.foundation.text.KeyboardActions
+import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.material.Text
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Info
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -41,6 +44,7 @@ fun MusicConfigDialog(
         )
     ),
 ) {
+    musicConfigVM.updateMusicId(musicId)
     Column(
         modifier = Modifier
             .background(Color(0xFFFFFFFF))
@@ -59,74 +63,141 @@ fun MusicConfigDialog(
                 }
             }
         )
-//        DialogOk(
-//            modifier = Modifier.align(Alignment.CenterHorizontally),
-//            text = "确定",
-//            onButtonTapped = {
-//
-//            }
-//        )
+        MusicInfoModifyField(
+            musicConfigVM = musicConfigVM
+        )
+        DialogOk(
+            modifier = Modifier.align(Alignment.CenterHorizontally),
+            text = "确定",
+            onButtonTapped = {
+
+            }
+        )
     }
 }
 
-//@Composable
-//fun MusicInfoInputField(
-//    addMusicVM: AddMusicViewModel,
-//) {
-//    Column(
-//        modifier = Modifier
-//            .padding(horizontal = 24.dp, vertical = 8.dp)
-//            .fillMaxWidth(),
-//        verticalArrangement = Arrangement.SpaceBetween,
-//    ) {
-//        OutlinedTextField(
-//            modifier = Modifier
-//                .align(Alignment.CenterHorizontally)
-//                .padding(vertical = 12.dp),
-//            value = addMusicVM.bvid.value,
-//            onValueChange = { addMusicVM.updateBvid(it) },
-//            label = { Text("BVid") }
-//        )
-//
-//        OutlinedTextField(
-//            modifier = Modifier
-//                .align(Alignment.CenterHorizontally)
-//                .padding(vertical = 12.dp),
-//            value = addMusicVM.part.value,
-//            onValueChange = { addMusicVM.updatePart(it) },
-//            label = { Text("分片") }
-//        )
-//
-//        OutlinedTextField(
-//            modifier = Modifier
-//                .align(Alignment.CenterHorizontally)
-//                .padding(vertical = 12.dp),
-//            value = addMusicVM.name.value,
-//            onValueChange = { addMusicVM.updateName(it) },
-//            label = { Text("歌曲名") }
-//        )
-//
-//
-//        OutlinedTextField(
-//            modifier = Modifier
-//                .align(Alignment.CenterHorizontally)
-//                .padding(vertical = 12.dp),
-//            value = addMusicVM.artist.value,
-//            onValueChange = { addMusicVM.updateArtist(it) },
-//            label = { Text("艺术家") }
-//        )
-//
-//        OutlinedTextField(
-//            modifier = Modifier
-//                .align(Alignment.CenterHorizontally)
-//                .padding(vertical = 12.dp),
-//            value = addMusicVM.sheet.value,
-//            onValueChange = { addMusicVM.updateSheet(it) },
-//            label = { Text("目标歌单") }
-//        )
-//    }
-//
-//}
+@Composable
+fun MusicInfoModifyField(
+    musicConfigVM: MusicConfigViewModel,
+) {
+    Column(
+        modifier = Modifier
+            .padding(horizontal = 24.dp, vertical = 8.dp)
+            .fillMaxWidth(),
+        verticalArrangement = Arrangement.SpaceBetween,
+    ) {
+
+        Column {
+            OutlinedTextField(
+                modifier = Modifier
+                    .align(Alignment.CenterHorizontally)
+                    .padding(vertical = 12.dp),
+                colors = TextFieldDefaults.outlinedTextFieldColors(
+                    unfocusedLabelColor = Color.Gray,
+                    unfocusedBorderColor = Color.Gray
+                ),
+                trailingIcon = {
+                    if (musicConfigVM.nameError.value)
+                        Icon(Icons.Filled.Info, "Error", tint = MaterialTheme.colors.error)
+                },
+                keyboardActions = KeyboardActions {
+                    musicConfigVM.checkName(musicConfigVM.name.value)
+                },
+                singleLine = true,
+                value = musicConfigVM.name.value,
+                onValueChange = {
+                    musicConfigVM.updateName(it)
+                    musicConfigVM.nameError.value = false
+                },
+                label = { Text("歌曲名, 不更改保留不变") },
+                isError = musicConfigVM.nameError.value,
+            )
+            if (musicConfigVM.nameError.value) {
+                Text(
+                    text = "Name Should be less than 10 and only CHAR or NUM",
+                    color = MaterialTheme.colors.error,
+                    style = MaterialTheme.typography.caption,
+                    modifier = Modifier.padding(start = 16.dp)
+                )
+            }
+        }
+
+        Column {
+            OutlinedTextField(
+                modifier = Modifier
+                    .align(Alignment.CenterHorizontally)
+                    .padding(vertical = 12.dp),
+                colors = TextFieldDefaults.outlinedTextFieldColors(
+                    unfocusedLabelColor = Color.Gray,
+                    unfocusedBorderColor = Color.Gray
+                ),
+                trailingIcon = {
+                    if (musicConfigVM.artistError.value)
+                        Icon(Icons.Filled.Info, "Error", tint = MaterialTheme.colors.error)
+                },
+                keyboardActions = KeyboardActions {
+                    musicConfigVM.checkArtist(musicConfigVM.artist.value)
+                },
+                singleLine = true,
+                value = musicConfigVM.artist.value,
+                onValueChange = {
+                    musicConfigVM.updateArtist(it)
+                    musicConfigVM.artistError.value = false
+                },
+                label = { Text("艺术家, 不更改保留不变") },
+                isError = musicConfigVM.artistError.value,
+            )
+            if (musicConfigVM.artistError.value) {
+                Text(
+                    text = "Artist Should be less than 10",
+                    color = MaterialTheme.colors.error,
+                    style = MaterialTheme.typography.caption,
+                    modifier = Modifier.padding(start = 16.dp)
+                )
+            }
+        }
+
+        Column {
+            OutlinedTextField(
+                modifier = Modifier
+                    .align(Alignment.CenterHorizontally)
+                    .padding(vertical = 12.dp),
+                colors = TextFieldDefaults.outlinedTextFieldColors(
+                    unfocusedLabelColor = Color.Gray,
+                    unfocusedBorderColor = Color.Gray
+                ),
+                trailingIcon = {
+                    if (musicConfigVM.sheetError.value)
+                        Icon(Icons.Filled.Info, "Error", tint = MaterialTheme.colors.error)
+                },
+                singleLine = true,
+                value = musicConfigVM.sheet.value,
+                onValueChange = {
+                    musicConfigVM.updateSheet(it)
+                    musicConfigVM.sheetError.value = false
+                },
+                label = { Text("目标歌单, 不更改保留不变") },
+                isError = musicConfigVM.sheetError.value,
+            )
+            if (musicConfigVM.artistError.value) {
+                Text(
+                    text = "Not Found, please add firstly",
+                    color = MaterialTheme.colors.error,
+                    style = MaterialTheme.typography.caption,
+                    modifier = Modifier.padding(start = 16.dp)
+                )
+            }
+        }
+        Log.i("AddMusicDialog",
+            """
+            ${musicConfigVM.bvidError.value}
+            ${musicConfigVM.nameError.value}
+            ${musicConfigVM.artistError.value}
+            ${musicConfigVM.sheetError.value}
+        """.trimIndent())
+    }
+
+}
 
 @Preview
 @Composable

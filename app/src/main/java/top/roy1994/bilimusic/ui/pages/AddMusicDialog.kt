@@ -33,6 +33,7 @@ import top.roy1994.bilimusic.viewmodel.AddMusicViewModel
 fun AddMusicDialog(
     addMusicVM: AddMusicViewModel,
     dialogState: MutableState<Boolean>,
+    onClose: () -> Unit = {},
 ) {
 
     Column(
@@ -62,6 +63,7 @@ fun AddMusicDialog(
                 if (addMusicVM.addSuccess.value)
                 {
                     dialogState.value = false
+                    onClose()
                 }
             }
         )
