@@ -58,7 +58,7 @@
 
 3. 点击”构建“按钮（图中最左侧），开始构建项目
 
-   ![image-20230117160454342](/home/roy1994/.config/Typora/typora-user-images/image-20230117160454342.png)
+   ![image-20230117160454342](./docs/img/bar.png)
 
    > 目前项目存在一个 Warning，为 Room 库 Bug，在当前版本可忽视。
 
@@ -66,7 +66,7 @@
 
    点击 `Add Configuration...` 设置运行设置，如下
 
-   ![image-20230117160915825](/home/roy1994/.config/Typora/typora-user-images/image-20230117160915825.png)
+   ![image-20230117160915825](./docs/img/app.png)
 
 5. 如果您在Device Manager中拥有设备，点击Play按钮，即可运行，若无，您可以参考[这里](https://developer.android.com/studio/run/managing-avds)进行设置。
 
