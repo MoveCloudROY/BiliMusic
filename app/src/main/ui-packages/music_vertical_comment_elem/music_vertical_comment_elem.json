@@ -5,7 +5,7 @@
     "type": "figma",
     "file": "fmyi8bk5JepuCfQVb7LIDl",
     "node": "27:121",
-    "version": "2795301895",
+    "version": "2877439794",
     "component-id": "d61f8199a89a76aaf3c37b27ae1c7989c6ed66e9"
   },
   "default": "MusicVerticalCommentElem",
@@ -144,8 +144,8 @@
             "max-lines": "-1",
             "text-align": "left",
             "text-size": "16.0",
-            "line-height": "1.17138671875",
-            "typeface": "Droid Sans"
+            "line-height": "1.218999981880188",
+            "typeface": "Montserrat"
           },
           {
             "id": "artist",
@@ -158,6 +158,7 @@
                 "sizing-mode": "shrink"
               }
             },
+            "font-weight": "700.0",
             "color": {
               "alpha": "1.0",
               "hue": "230.52631578947367",
@@ -168,8 +169,8 @@
             "overflow": "visible",
             "max-lines": "-1",
             "text-align": "left",
-            "line-height": "1.17138671875",
-            "typeface": "Droid Sans"
+            "line-height": "1.2189999989100866",
+            "typeface": "Montserrat"
           },
           {
             "id": "up",

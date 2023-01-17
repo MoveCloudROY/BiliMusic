@@ -5,7 +5,7 @@
     "type": "figma",
     "file": "fmyi8bk5JepuCfQVb7LIDl",
     "node": "152:764",
-    "version": "2834189588",
+    "version": "2877393813",
     "component-id": "f430cc3732279d5c8bdf2a2c04ebc35e9d29dd3a"
   },
   "default": "SheetInfo",
@@ -99,8 +99,8 @@
             "max-lines": "-1",
             "text-align": "left",
             "text-size": "20.0",
-            "line-height": "1.17138671875",
-            "typeface": "Droid Sans"
+            "line-height": "1.2189999580383302",
+            "typeface": "Montserrat"
           },
           {
             "id": "artist",
@@ -125,8 +125,8 @@
             "max-lines": "-1",
             "text-align": "left",
             "text-size": "13.0",
-            "line-height": "1.17138671875",
-            "typeface": "Droid Sans"
+            "line-height": "1.219000009390024",
+            "typeface": "Montserrat"
           }
         ]
       }

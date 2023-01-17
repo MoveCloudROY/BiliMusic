@@ -5,7 +5,7 @@
     "type": "figma",
     "file": "fmyi8bk5JepuCfQVb7LIDl",
     "node": "26:114",
-    "version": "2838906842",
+    "version": "2877393813",
     "component-id": "35d6fe9694e13dfe0e13b7ce2d3b9808963eea27"
   },
   "default": "TopShowBlockElem",
@@ -193,8 +193,8 @@
             "overflow": "visible",
             "max-lines": "-1",
             "letter-spacing": "-0.2800000011920929",
-            "line-height": "1.17138671875",
-            "typeface": "Droid Sans"
+            "line-height": "1.2189999989100866",
+            "typeface": "Montserrat"
           }
         ]
       }

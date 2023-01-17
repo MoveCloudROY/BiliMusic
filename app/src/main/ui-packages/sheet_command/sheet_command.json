@@ -5,7 +5,7 @@
     "type": "figma",
     "file": "fmyi8bk5JepuCfQVb7LIDl",
     "node": "153:863",
-    "version": "2834208244",
+    "version": "2877393813",
     "component-id": "8f97fe3b5745522dab4a2a6b12f098bf4b5b5f89"
   },
   "default": "SheetCommand",
@@ -96,8 +96,8 @@
             "text-content": "列表",
             "overflow": "visible",
             "text-size": "24.0",
-            "line-height": "1.17138671875",
-            "typeface": "Droid Sans"
+            "line-height": "1.219000021616618",
+            "typeface": "Montserrat"
           },
           {
             "id": "Rectangle 12",

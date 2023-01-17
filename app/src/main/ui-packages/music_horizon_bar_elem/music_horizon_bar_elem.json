@@ -5,7 +5,7 @@
     "type": "figma",
     "file": "fmyi8bk5JepuCfQVb7LIDl",
     "node": "26:248",
-    "version": "2795301895",
+    "version": "2877439794",
     "component-id": "1fd8d54468668e177c4bc530628bf41c2442a715"
   },
   "default": "MusicHorizonBarElem",
@@ -84,8 +84,8 @@
             "overflow": "visible",
             "max-lines": "-1",
             "text-size": "11.0",
-            "line-height": "1.17138671875",
-            "typeface": "Droid Sans"
+            "line-height": "1.2189999493685635",
+            "typeface": "Montserrat"
           }
         ]
       }

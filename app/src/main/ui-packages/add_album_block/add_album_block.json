@@ -5,7 +5,7 @@
     "type": "figma",
     "file": "fmyi8bk5JepuCfQVb7LIDl",
     "node": "166:945",
-    "version": "2830660616",
+    "version": "2877393813",
     "component-id": "e2202e46f4397a2e873be43452ea4770587b3eb3"
   },
   "default": "AddAlbumBlock",
@@ -105,8 +105,8 @@
             "overflow": "visible",
             "max-lines": "-1",
             "text-size": "15.0",
-            "line-height": "1.17138671875",
-            "typeface": "Droid Sans"
+            "line-height": "1.218999989827474",
+            "typeface": "Montserrat"
           },
           {
             "id": "artist",
@@ -130,8 +130,8 @@
             "overflow": "visible",
             "max-lines": "-1",
             "text-size": "13.0",
-            "line-height": "1.17138671875",
-            "typeface": "Droid Sans"
+            "line-height": "1.219000009390024",
+            "typeface": "Montserrat"
           },
           {
             "id": "ocupy",
@@ -214,7 +214,7 @@
       "design": "AddAlbumBlock",
       "size": {
         "width": 155.0,
-        "height": 192.0
+        "height": 193.0
       }
     }
   ],

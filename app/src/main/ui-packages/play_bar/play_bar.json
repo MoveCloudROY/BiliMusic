@@ -5,7 +5,7 @@
     "type": "figma",
     "file": "fmyi8bk5JepuCfQVb7LIDl",
     "node": "95:1428",
-    "version": "2795301895",
+    "version": "2877424131",
     "component-id": "abee446462930efb39a9df52e2ccc04a9f6500c8"
   },
   "default": "status=stop",
@@ -168,8 +168,8 @@
             "max-lines": "-1",
             "text-align": "left",
             "text-size": "16.0",
-            "line-height": "1.17138671875",
-            "typeface": "Droid Sans"
+            "line-height": "1.218999981880188",
+            "typeface": "Montserrat"
           },
           {
             "id": "artist",
@@ -193,8 +193,8 @@
             "overflow": "visible",
             "max-lines": "-1",
             "text-align": "left",
-            "line-height": "1.17138671875",
-            "typeface": "Droid Sans"
+            "line-height": "1.2189999989100866",
+            "typeface": "Montserrat"
           },
           {
             "id": "_PlayButton_icon",
@@ -332,8 +332,8 @@
             "max-lines": "-1",
             "text-align": "left",
             "text-size": "16.0",
-            "line-height": "1.17138671875",
-            "typeface": "Droid Sans"
+            "line-height": "1.218999981880188",
+            "typeface": "Montserrat"
           },
           {
             "id": "artist",
@@ -357,8 +357,8 @@
             "overflow": "visible",
             "max-lines": "-1",
             "text-align": "left",
-            "line-height": "1.17138671875",
-            "typeface": "Droid Sans"
+            "line-height": "1.2189999989100866",
+            "typeface": "Montserrat"
           },
           {
             "id": "_PlayButton_icon",

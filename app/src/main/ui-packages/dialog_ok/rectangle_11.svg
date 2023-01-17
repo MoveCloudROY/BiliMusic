@@ -1,6 +1,6 @@
 <svg width="168" height="45" viewBox="0 0 168 45" fill="none" xmlns="http://www.w3.org/2000/svg">
 <g filter="url(#filter0_d_37_1857)">
-<rect width="168" height="45" rx="10" fill="url(#paint0_linear_37_1857)" shape-rendering="crispEdges"/>
+<rect width="168" height="45" rx="10" fill="url(#paint0_linear_37_1857)"/>
 </g>
 <defs>
 <filter id="filter0_d_37_1857" x="-3" y="-2" width="176" height="53" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
@@ -13,9 +13,9 @@
 <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_37_1857"/>
 <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_37_1857" result="shape"/>
 </filter>
-<linearGradient id="paint0_linear_37_1857" x1="33.2673" y1="45" x2="62.9204" y2="-69.7643" gradientUnits="userSpaceOnUse">
+<linearGradient id="paint0_linear_37_1857" x1="33.2673" y1="45" x2="56.0365" y2="-37.2309" gradientUnits="userSpaceOnUse">
 <stop stop-color="#3F57FF"/>
-<stop offset="1" stop-color="#9F72FF" stop-opacity="0.71"/>
+<stop offset="1" stop-color="#AF71FF"/>
 </linearGradient>
 </defs>
 </svg>

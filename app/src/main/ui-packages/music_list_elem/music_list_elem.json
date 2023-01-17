@@ -5,7 +5,7 @@
     "type": "figma",
     "file": "fmyi8bk5JepuCfQVb7LIDl",
     "node": "132:1151",
-    "version": "2795301895",
+    "version": "2877439794",
     "component-id": "6bd70eba3c1901159b3dcafbd352e07edfcba977"
   },
   "default": "status=off",
@@ -68,6 +68,7 @@
           {
             "id": "top_level",
             "padding": "5.0",
+            "tap-handler": "$on status=off tapped",
             "size-constraints": {
               "width-constraints": {
                 "sizing-mode": "proportional",
@@ -163,8 +164,8 @@
             "max-lines": "-1",
             "text-align": "left",
             "text-size": "16.0",
-            "line-height": "1.17138671875",
-            "typeface": "Droid Sans"
+            "line-height": "1.218999981880188",
+            "typeface": "Montserrat"
           },
           {
             "id": "artist",
@@ -188,8 +189,8 @@
             "overflow": "visible",
             "max-lines": "-1",
             "text-align": "left",
-            "line-height": "1.17138671875",
-            "typeface": "Droid Sans"
+            "line-height": "1.2189999989100866",
+            "typeface": "Montserrat"
           },
           {
             "id": "minute",
@@ -199,7 +200,7 @@
               "saturation": "0.17674418604651165",
               "value": "0.8431372549019608"
             },
-            "text-content": "0",
+            "text-content": "$minute",
             "overflow": "visible",
             "text-size": "16.0",
             "line-height": "0.77880859375",
@@ -227,7 +228,7 @@
               "saturation": "0.17674418604651165",
               "value": "0.8431372549019608"
             },
-            "text-content": "11",
+            "text-content": "$second",
             "overflow": "visible",
             "text-size": "16.0",
             "line-height": "0.77880859375",
@@ -253,6 +254,7 @@
               "spread": "0.0",
               "blend-mode": "normal"
             },
+            "tap-handler": "$on status=off tapped",
             "size-constraints": {
               "width-constraints": {
                 "sizing-mode": "proportional",
@@ -288,9 +290,9 @@
                   },
                   {
                     "color": {
-                      "alpha": "0.7098039215686275",
-                      "hue": "259.1489361702128",
-                      "saturation": "0.5529411764705883",
+                      "alpha": "1.0",
+                      "hue": "266.43356643356645",
+                      "saturation": "0.5607843137254902",
                       "value": "1.0"
                     },
                     "color-stop-position": "1.0"
@@ -302,12 +304,12 @@
                     "y": "1.0"
                   },
                   {
-                    "x": "1.0",
-                    "y": "-0.95"
+                    "x": "0.8",
+                    "y": "-0.34"
                   },
                   {
-                    "x": "1.17",
-                    "y": "1.94"
+                    "x": "0.86",
+                    "y": "1.68"
                   }
                 ]
               }
@@ -379,8 +381,8 @@
             "max-lines": "-1",
             "text-align": "left",
             "text-size": "16.0",
-            "line-height": "1.17138671875",
-            "typeface": "Droid Sans"
+            "line-height": "1.218999981880188",
+            "typeface": "Montserrat"
           },
           {
             "id": "artist",
@@ -404,8 +406,8 @@
             "overflow": "visible",
             "max-lines": "-1",
             "text-align": "left",
-            "line-height": "1.17138671875",
-            "typeface": "Droid Sans"
+            "line-height": "1.2189999989100866",
+            "typeface": "Montserrat"
           },
           {
             "id": "occupy",
@@ -445,6 +447,11 @@
     }
   },
   "parameters": {
+    "on status=off tapped": {
+      "data-type": "void-callback",
+      "required": false,
+      "description": ""
+    },
     "cover": {
       "data-type": "image",
       "required": false,
@@ -456,6 +463,16 @@
       "description": ""
     },
     "artist": {
+      "data-type": "text",
+      "required": false,
+      "description": ""
+    },
+    "minute": {
+      "data-type": "text",
+      "required": false,
+      "description": ""
+    },
+    "second": {
       "data-type": "text",
       "required": false,
       "description": ""
@@ -471,7 +488,9 @@
       "parameters": {
         "cover": "cover.png",
         "name": "中文测试Chinese",
-        "artist": "<unknown>"
+        "artist": "<unknown>",
+        "minute": "0",
+        "second": "11"
       }
     },
     {
@@ -483,7 +502,9 @@
       "parameters": {
         "cover": "cover.png",
         "name": "中文测试Chinese",
-        "artist": "<unknown>"
+        "artist": "<unknown>",
+        "minute": "0",
+        "second": "11"
       }
     }
   ],
