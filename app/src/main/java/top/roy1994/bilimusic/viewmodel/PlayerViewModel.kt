@@ -7,13 +7,18 @@ import androidx.lifecycle.*
 import com.google.android.exoplayer2.ExoPlayer
 import com.google.android.exoplayer2.MediaItem
 import com.google.android.exoplayer2.Player
+import com.google.android.exoplayer2.Player.STATE_BUFFERING
+import com.google.android.exoplayer2.Player.STATE_ENDED
+import com.google.android.exoplayer2.Player.STATE_IDLE
+import com.google.android.exoplayer2.Player.STATE_READY
 import com.google.android.exoplayer2.source.ProgressiveMediaSource
 import com.google.android.exoplayer2.source.ShuffleOrder
 import com.google.android.exoplayer2.upstream.DataSource
 import com.google.android.exoplayer2.upstream.DefaultHttpDataSource
+import com.google.android.exoplayer2.util.EventLogger
 import kotlinx.coroutines.*
 import top.roy1994.bilimusic.data.objects.biliapi.BiliService
-import top.roy1994.bilimusic.data.objects.biliapi.BiliServiceCreator
+import top.roy1994.bilimusic.data.objects.biliapi.BiliCreator
 import top.roy1994.bilimusic.data.objects.music.MusicEntity
 import top.roy1994.bilimusic.data.utils.BiliRepo
 
@@ -37,6 +42,7 @@ class PlayerViewModel(application: Application): AndroidViewModel(application) {
     var isPlaying = mutableStateOf(false)
         private set
 
+    var playingId = -1;
     // ================================================================
     var exoPlayer: ExoPlayer
 
@@ -47,34 +53,8 @@ class PlayerViewModel(application: Application): AndroidViewModel(application) {
     private var playingList: MutableList<MusicEntity> = mutableListOf()
     // =========================================================
 
-
-    fun addMusicToPlayList(music: MusicEntity) {
+    fun prepareMusic(music: MusicEntity) {
         val bvid = music.bvid
-
-        coroutineScope.launch(Dispatchers.IO) {
-            val url = biliRepo.getMusicUrl(bvid).await()
-            withContext(Dispatchers.Main) {
-                if (url != null) {
-                    val dataSourceFactory: DataSource.Factory = DefaultHttpDataSource.Factory()
-                        .setUserAgent("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36 Edg/108.0.1462.54")
-                        .setDefaultRequestProperties(hashMapOf("Referer" to "https://www.bilibili.com/video/${bvid}"))
-                    exoPlayer.addMediaSource(
-                        ProgressiveMediaSource.Factory(dataSourceFactory)
-                            .createMediaSource(MediaItem.fromUri(url))
-                    )
-                }
-            }
-        }
-        playingList.add(music)
-    }
-
-    fun setMusicToPlayList(music: MusicEntity) {
-        exoPlayer.pause()
-        val bvid = music.bvid
-        preMusic.value = nowMusic.value
-        nowMusic.value = music
-        nxtMusic.value = MusicEntity.getEmpty()
-        resetProgressBar(music.second)
 
         coroutineScope.launch(Dispatchers.IO) {
             val url = biliRepo.getMusicUrl(bvid).await()
@@ -90,6 +70,39 @@ class PlayerViewModel(application: Application): AndroidViewModel(application) {
                 }
             }
         }
+    }
+
+    fun addMusicToPlayList(music: MusicEntity) {
+        prepareMusic(music)
+        playingList.add(music)
+    }
+
+    fun setMusicToPlayList(music: MusicEntity) {
+        exoPlayer.pause()
+        val bvid = music.bvid
+        preMusic.value = nowMusic.value
+        nowMusic.value = music
+        nxtMusic.value = MusicEntity.getEmpty()
+        resetProgressBar(music.second)
+
+        prepareMusic(music)
+//        coroutineScope.launch(Dispatchers.IO) {
+//            val url = biliRepo.getMusicUrl(bvid).await()
+//            withContext(Dispatchers.Main) {
+//                if (url != null) {
+//                    val dataSourceFactory: DataSource.Factory = DefaultHttpDataSource.Factory()
+//                        .setUserAgent("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36 Edg/108.0.1462.54")
+//                        .setDefaultRequestProperties(hashMapOf("Referer" to "https://www.bilibili.com/video/${bvid}"))
+//                    exoPlayer.setMediaSource(
+//                        ProgressiveMediaSource.Factory(dataSourceFactory)
+//                            .createMediaSource(MediaItem.fromUri(url))
+//                    )
+//                }
+//            }
+//        }
+        playingList.add(music)
+        playingId = playingList.size - 1;
+
         exoPlayer.apply {
             prepare()
             play()
@@ -97,34 +110,40 @@ class PlayerViewModel(application: Application): AndroidViewModel(application) {
         updateIsPlaying(true)
     }
 
+
     fun setPlayList(musicList: List<MusicEntity>) {
         exoPlayer.pause()
         exoPlayer.clearMediaItems()
-        playingList.clear()
+        clear()
 
         resetProgressBar(nowMusic.value.second)
 
         for (e in musicList) {
-
             addMusicToPlayList(e)
             Log.i(
-                "DATA",
+                "Player",
                 """
                     id:     ${e.bvid}
                     name:   ${e.music_name}
+                    length: ${e.second}
                     state:  ${exoPlayer.currentMediaItem.toString()}
                 """.trimIndent()
             )
         }
+
         preMusic.value = MusicEntity.getEmpty()
         nowMusic.value = if(playingList.size > 0) playingList[0] else MusicEntity.getEmpty()
         nxtMusic.value = if(playingList.size > 1) playingList[1] else MusicEntity.getEmpty()
-
-        exoPlayer.apply {
-            prepare()
-            play()
+        if (playingList.size > 0) {
+            prepareMusic(playingList[0])
+            playingId = 0;
+            exoPlayer.apply {
+                prepare()
+                play()
+            }
+            updateIsPlaying(true)
         }
-        updateIsPlaying(true)
+
     }
 
     fun setPlayerShuffle() {
@@ -145,16 +164,23 @@ class PlayerViewModel(application: Application): AndroidViewModel(application) {
     }
     fun previous() {
 
-        val pid = exoPlayer.previousMediaItemIndex
-        if (exoPlayer.hasPreviousMediaItem())
+        val pid = playingId - 1;
+        if (pid >= 0)
         {
+
+            exoPlayer.apply {
+                pause()
+            }
+
             nxtMusic.value = nowMusic.value
             nowMusic.value = preMusic.value
             preMusic.value = if (pid > 0)
                 playingList[pid-1] else MusicEntity.getEmpty()
+            playingId = pid;
+
+            prepareMusic(nowMusic.value)
+
             exoPlayer.apply {
-                pause()
-                seekToPrevious()
                 prepare()
                 play()
             }
@@ -163,41 +189,71 @@ class PlayerViewModel(application: Application): AndroidViewModel(application) {
     //   4 - 3
     // 0 1 2 3
     fun next() {
-        val nid = exoPlayer.nextMediaItemIndex
-        if (exoPlayer.hasNextMediaItem())
+        val nid = playingId+1;
+        if (nid < playingList.size)
         {
+            exoPlayer.apply {
+                pause()
+            }
+
+
             preMusic.value = nowMusic.value
             nowMusic.value = nxtMusic.value
             nxtMusic.value = if (nid < playingList.size - 1)
                 playingList[nid+1] else MusicEntity.getEmpty()
-            exoPlayer.apply {
-                pause()
-                seekToNext()
+            playingId = nid;
+
+            prepareMusic(nowMusic.value)
+
+            exoPlayer.apply{
                 prepare()
                 play()
             }
         }
     }
 
+    fun clear() {
+        playingId = -1;
+        playingList.clear();
+    }
+
+    fun registerListener() {
+        exoPlayer.addListener(
+            object : Player.Listener {
+                override fun onPlaybackStateChanged(playbackState: Int) {
+                    super.onPlaybackStateChanged(playbackState)
+                    when (playbackState) {
+                        STATE_IDLE -> {
+
+                        }
+                        STATE_BUFFERING -> {
+
+                        }
+                        STATE_READY-> {
+
+                        }
+
+                        STATE_ENDED -> {
+
+                        }
+                    }
+                }
+            }
+        )
+    }
+
 
     init {
-        service = BiliServiceCreator.getInstance()
-        biliRepo = BiliRepo(service)
+        service = BiliCreator.getServiceInstance()
+        biliRepo = BiliCreator.getInstance()
         exoPlayer = ExoPlayer.Builder(application)
-            .build().apply {
+            .build()
+            .apply {
                 playWhenReady = false
             }
+        registerListener()
+        exoPlayer.addAnalyticsListener(EventLogger())
 
-//        val bvid = "BV1rp4y1e745"
-//        val url = "https://upos-hz-mirrorakam.akamaized.net/upgcxcode/65/46/244954665/244954665_f9-1-30280.m4s?e=ig8euxZM2rNcNbdlhoNvNC8BqJIzNbfqXBvEqxTEto8BTrNvN0GvT90W5JZMkX_YN0MvXg8gNEV4NC8xNEV4N03eN0B5tZlqNxTEto8BTrNvNeZVuJ10Kj_g2UB02J0mN0B5tZlqNCNEto8BTrNvNC7MTX502C8f2jmMQJ6mqF2fka1mqx6gqj0eN0B599M=&uipk=5&nbs=1&deadline=1673192775&gen=playurlv2&os=akam&oi=1736926806&trid=422afb4cd8a44b95ad868af53647d370u&mid=0&platform=pc&upsig=2c5da64ec59b9d0d3edc9c04b917a9ca&uparams=e,uipk,nbs,deadline,gen,os,oi,trid,mid,platform&hdnts=exp=1673192775~hmac=ee9ab454e9feb63508ad6d32ebfbae235b01b49b5d9f8ce8f0bde4124f90479b&bvc=vod&nettype=0&orderid=0,1&buvid=&build=0&agrr=0&bw=41220&logo=80000000"
-//        val dataSourceFactory: DataSource.Factory = DefaultHttpDataSource.Factory()
-//            .setUserAgent("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36 Edg/108.0.1462.54")
-//            .setDefaultRequestProperties(hashMapOf("Referer" to "https://www.bilibili.com/video/${bvid}"))
-//        val mediaSource: MediaSource = ProgressiveMediaSource.Factory(dataSourceFactory)
-//            .createMediaSource(MediaItem.fromUri(url))
-
-//        exoPlayer.addMediaSource(mediaSource)
-//        exoPlayer.prepare()
     }
 
 
@@ -224,15 +280,15 @@ class PlayerViewModel(application: Application): AndroidViewModel(application) {
                     withContext(Dispatchers.Main) {
                         playedSize = exoPlayer.currentPosition / 1000
                     }
-                    if (playedSize < totalSeconds.value!!) {
+                    if (playedSize < nowMusic.value.second!!) {
                         withContext(Dispatchers.Main) {
                             playedSeconds.value = playedSize
                             playedPercentage.value =
-                                (playedSize.toFloat() / totalSeconds.value!!) * 100f
+                                (playedSize.toFloat() / nowMusic.value.second!!) * 100f
                         }
                     } else {
                         withContext(Dispatchers.Main) {
-                            playedSeconds.value = totalSeconds.value
+                            playedSeconds.value = nowMusic.value.second
                             playedPercentage.value = 100f
                         }
                         break

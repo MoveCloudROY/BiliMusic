@@ -1,12 +1,6 @@
 package top.roy1994.bilimusic
 
-import android.util.Log
-import androidx.room.Room
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import androidx.test.platform.app.InstrumentationRegistry
-import junit.framework.TestCase
-import kotlinx.coroutines.async
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.runBlocking
 import org.junit.After
 import org.junit.Assert.assertEquals
@@ -15,9 +9,7 @@ import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 import top.roy1994.bilimusic.data.objects.biliapi.BiliService
-import top.roy1994.bilimusic.data.objects.biliapi.BiliServiceCreator
-import top.roy1994.bilimusic.data.objects.music.MusicEntity
-import top.roy1994.bilimusic.data.utils.AppDatabase
+import top.roy1994.bilimusic.data.objects.biliapi.BiliCreator
 import top.roy1994.bilimusic.data.utils.BiliRepo
 import java.io.IOException
 
@@ -29,7 +21,7 @@ class BiliRepoTest {
 
     @Before
     fun create() {
-        service = BiliServiceCreator.getInstance()
+        service = BiliCreator.getServiceInstance()
         biliRepo = BiliRepo(service)
     }
 

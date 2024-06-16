@@ -50,6 +50,7 @@ fun AddMusicDialog(
             title = "添加歌曲",
             onCloseTapped = {
                 dialogState.value = false
+                onClose()
             }
         )
         MusicInfoInputField(

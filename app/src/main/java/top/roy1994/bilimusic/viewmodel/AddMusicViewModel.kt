@@ -7,19 +7,16 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import top.roy1994.bilimusic.data.objects.artist.ArtistDao
 import top.roy1994.bilimusic.data.objects.artist.ArtistEntity
 import top.roy1994.bilimusic.data.objects.biliapi.BiliService
-import top.roy1994.bilimusic.data.objects.biliapi.BiliServiceCreator
+import top.roy1994.bilimusic.data.objects.biliapi.BiliCreator
 import top.roy1994.bilimusic.data.objects.music.MusicDao
 import top.roy1994.bilimusic.data.objects.music.MusicEntity
 import top.roy1994.bilimusic.data.objects.sheet.SheetDao
-import top.roy1994.bilimusic.data.objects.sheet.SheetEntity
 import top.roy1994.bilimusic.data.utils.AppDatabase
 import top.roy1994.bilimusic.data.utils.ArtistRepo
 import top.roy1994.bilimusic.data.utils.BiliRepo
-import kotlin.math.log
 
 class AddMusicViewModel(application: Application): AndroidViewModel(application) {
     private val musicDao: MusicDao
@@ -33,7 +30,7 @@ class AddMusicViewModel(application: Application): AndroidViewModel(application)
         val appDb = AppDatabase.getInstance(application)
         musicDao = appDb.musicDao()
         sheetDao = appDb.sheetDao()
-        service = BiliServiceCreator.getInstance()
+        service = BiliCreator.getServiceInstance()
         biliRepo = BiliRepo(service)
         artistDao = appDb.artistDao()
         artistRepo = ArtistRepo(artistDao)
@@ -57,6 +54,7 @@ class AddMusicViewModel(application: Application): AndroidViewModel(application)
         checkBvid(bvid.value)
         checkName(name.value)
         checkName(artist.value)
+        Log.i("AddMusicVM", "addMusic: Pass Basic Check!")
         if (bvidError.value or nameError.value or artistError.value)
             return
         viewModelScope.launch(Dispatchers.IO) {
@@ -71,7 +69,7 @@ class AddMusicViewModel(application: Application): AndroidViewModel(application)
                     )
                 )
             }
-            Log.i("AddMusicVM-addmusic", "cover_url: ${cover_url}")
+            Log.i("AddMusicVM", "addMusic: cover_url: ${cover_url}")
             if (sheets.isNotEmpty() && seconds != null) {
                 val sheetId = sheets[0].sheet_id
                 musicDao.insertMusics(
@@ -93,9 +91,8 @@ class AddMusicViewModel(application: Application): AndroidViewModel(application)
             name.value = ""
             artist.value = "默认艺术家"
             sheet.value = "默认歌单"
+            addSuccess.value = true
         }
-        addSuccess.value = true
-
     }
 
     fun checkBvid(bvid: String) {

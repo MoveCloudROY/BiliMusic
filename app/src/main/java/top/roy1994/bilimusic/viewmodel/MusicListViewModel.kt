@@ -2,13 +2,11 @@ package top.roy1994.bilimusic.viewmodel
 
 import android.app.Application
 import android.util.Log
-import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.*
-import androidx.lifecycle.viewmodel.compose.viewModel
 import kotlinx.coroutines.*
 import top.roy1994.bilimusic.data.objects.biliapi.BiliService
-import top.roy1994.bilimusic.data.objects.biliapi.BiliServiceCreator
+import top.roy1994.bilimusic.data.objects.biliapi.BiliCreator
 import top.roy1994.bilimusic.data.objects.music.MusicDao
 import top.roy1994.bilimusic.data.objects.music.MusicEntity
 import top.roy1994.bilimusic.data.utils.AppDatabase
@@ -26,7 +24,7 @@ class MusicListViewModel(application: Application): AndroidViewModel(application
     init {
         val appDb = AppDatabase.getInstance(application)
         musicDao = appDb.musicDao()
-        service = BiliServiceCreator.getInstance()
+        service = BiliCreator.getServiceInstance()
         biliRepo = BiliRepo(service)
     }
 

@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
@@ -40,17 +41,19 @@ fun Player(
         sheetContent = {
             PlayerBar(
                 modifier = Modifier
+                    .background(Color(0xFFFFFFFF))
                     .padding(horizontal = 24.dp, vertical = 12.dp)
                     .requiredHeight(height = 46.dp)
-                    .fillMaxWidth()
-                    .background(Color(0xFFFFFFFF)),
+                    .fillMaxWidth(),
                 onCloseTapped = {scope.launch { state.hide() }}
             )
             PlayerCoverTuple(
                 modifier = Modifier
+                    .background(Color(0xFFFFFFFF))
                     .padding(vertical = 16.dp)
                     .requiredWidth(756.dp)
-                    .background(Color(0xFFFFFFFF)),
+                    .align(alignment = Alignment.CenterHorizontally),
+
                 lastMusicCover = rememberAsyncImagePainter(
                     ImageRequest.Builder(LocalContext.current)
                         .data(playerVM.preMusic.value.cover_url)//?:R.drawable.notfind
@@ -73,6 +76,7 @@ fun Player(
 
             PlayerMusicInfo(
                 modifier = Modifier
+                    .background(Color(0xFFFFFFFF))
                     .padding(top = 8.dp, bottom = 24.dp)
                     .requiredHeight(90.dp)
                     .fillMaxWidth(),
@@ -82,6 +86,7 @@ fun Player(
             PlayerProgressBar(playerVM)
             PlayerCommandBar(
                 modifier = Modifier
+                    .background(Color(0xFFFFFFFF))
                     .padding(top = 8.dp),
                 status = if (playerVM.isPlaying.value) Status.Playing
                             else Status.Stop,
@@ -92,14 +97,15 @@ fun Player(
                     playerVM.previous()
                 },
                 onPlayTapped = {
-                    playerVM.updateIsPlaying(!playerVM.isPlaying.value)
                     if ( playerVM.exoPlayer.isPlaying) {
                         // pause the video
                         playerVM.exoPlayer.pause()
+                        playerVM.updateIsPlaying(false)
                     } else {
                         // play the video
                         // it's already paused
                         playerVM.exoPlayer.play()
+                        playerVM.updateIsPlaying(true)
                     }
                 },
                 onNextTapped = {

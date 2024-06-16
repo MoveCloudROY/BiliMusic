@@ -2,26 +2,22 @@ package top.roy1994.bilimusic.viewmodel
 
 
 import android.app.Application
-import android.util.Log
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import okhttp3.Dispatcher
 import top.roy1994.bilimusic.data.objects.artist.ArtistDao
 import top.roy1994.bilimusic.data.objects.artist.ArtistEntity
 import top.roy1994.bilimusic.data.objects.biliapi.BiliService
-import top.roy1994.bilimusic.data.objects.biliapi.BiliServiceCreator
+import top.roy1994.bilimusic.data.objects.biliapi.BiliCreator
 import top.roy1994.bilimusic.data.objects.music.MusicDao
 import top.roy1994.bilimusic.data.objects.music.MusicEntity
 import top.roy1994.bilimusic.data.objects.sheet.SheetDao
-import top.roy1994.bilimusic.data.objects.sheet.SheetEntity
 import top.roy1994.bilimusic.data.utils.AppDatabase
 import top.roy1994.bilimusic.data.utils.ArtistRepo
 import top.roy1994.bilimusic.data.utils.BiliRepo
 import top.roy1994.bilimusic.data.utils.MusicRepo
-import kotlin.math.log
 
 class MusicConfigViewModel(application: Application): AndroidViewModel(application) {
     private val musicDao: MusicDao
@@ -53,7 +49,7 @@ class MusicConfigViewModel(application: Application): AndroidViewModel(applicati
         musicDao = appDb.musicDao()
         sheetDao = appDb.sheetDao()
         artistDao = appDb.artistDao()
-        service = BiliServiceCreator.getInstance()
+        service = BiliCreator.getServiceInstance()
         biliRepo = BiliRepo(service)
         artistRepo = ArtistRepo(artistDao)
         musicRepo = MusicRepo(musicDao)

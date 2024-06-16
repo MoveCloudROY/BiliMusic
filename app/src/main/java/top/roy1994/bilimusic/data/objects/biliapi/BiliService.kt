@@ -1,10 +1,12 @@
 package top.roy1994.bilimusic.data.objects.biliapi
 
+import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Headers
 import retrofit2.http.Query
+import retrofit2.http.Url
 
 interface BiliService {
     @Headers("User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36 Edg/108.0.1462.54","Referer: https://www.bilibili.com/video/{bvid}")

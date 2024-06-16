@@ -128,12 +128,6 @@ fun SheetDetail(
                                 second = (item.second % 60).toString().padStart(2,'0'),
                                 onSongTapped = {
                                     playerVM.setPlayList(sheetDetailVM.sheetElems.value)
-                                    playerVM.exoPlayer.apply {
-                                        playerVM.exoPlayer.pause()
-                                        playerVM.exoPlayer.seekToDefaultPosition(index)
-                                        playerVM.exoPlayer.prepare()
-                                        playerVM.exoPlayer.play()
-                                    }
 
                                 }
                             )

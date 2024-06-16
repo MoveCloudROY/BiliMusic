@@ -84,10 +84,10 @@ fun PlayerProgressBar(
 
     Canvas(
         modifier = Modifier
+            .background(Color(0xFFFFFFFF))
             .fillMaxWidth()
             .height(indicatorHeight)
-            .padding(start = indicatorPadding, end = indicatorPadding)
-            .background(Color(0xFFFFFFFF)),
+            .padding(start = indicatorPadding, end = indicatorPadding),
     ) {
 
         // Background indicator
@@ -118,9 +118,9 @@ fun PlayerProgressBar(
 
     Row(
         modifier = Modifier
+            .background(Color(0xFFFFFFFF))
             .fillMaxWidth()
-            .padding(start = indicatorPadding, end = indicatorPadding)
-            .background(Color(0xFFFFFFFF)),
+            .padding(start = indicatorPadding, end = indicatorPadding),
     ) {
         Text(
             text = PlayerVM.playedSeconds.value.div(60).toString().padStart(2, '0')
@@ -130,9 +130,9 @@ fun PlayerProgressBar(
         )
         Spacer(modifier = Modifier.weight(1.0f))
         Text(
-            text = PlayerVM.totalSeconds.value.div(60).toString().padStart(2, '0')
+            text = PlayerVM.nowMusic.value.second.div(60).toString().padStart(2, '0')
                 + ":"
-                + PlayerVM.totalSeconds.value.mod(60).toString().padStart(2, '0'),
+                + PlayerVM.nowMusic.value.second.mod(60).toString().padStart(2, '0'),
             style = numberStyle
         )
     }
