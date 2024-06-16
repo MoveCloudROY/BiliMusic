@@ -43,6 +43,7 @@ class PlayerViewModel(application: Application): AndroidViewModel(application) {
         private set
 
     var playingId = -1;
+    var isMusicEnded = true //
     // ================================================================
     var exoPlayer: ExoPlayer
 
@@ -72,34 +73,15 @@ class PlayerViewModel(application: Application): AndroidViewModel(application) {
         }
     }
 
-    fun addMusicToPlayList(music: MusicEntity) {
-        prepareMusic(music)
-        playingList.add(music)
-    }
 
-    fun setMusicToPlayList(music: MusicEntity) {
+    fun addMusicToPlayList(music: MusicEntity) {
         exoPlayer.pause()
-        val bvid = music.bvid
         preMusic.value = nowMusic.value
         nowMusic.value = music
         nxtMusic.value = MusicEntity.getEmpty()
         resetProgressBar(music.second)
-
         prepareMusic(music)
-//        coroutineScope.launch(Dispatchers.IO) {
-//            val url = biliRepo.getMusicUrl(bvid).await()
-//            withContext(Dispatchers.Main) {
-//                if (url != null) {
-//                    val dataSourceFactory: DataSource.Factory = DefaultHttpDataSource.Factory()
-//                        .setUserAgent("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36 Edg/108.0.1462.54")
-//                        .setDefaultRequestProperties(hashMapOf("Referer" to "https://www.bilibili.com/video/${bvid}"))
-//                    exoPlayer.setMediaSource(
-//                        ProgressiveMediaSource.Factory(dataSourceFactory)
-//                            .createMediaSource(MediaItem.fromUri(url))
-//                    )
-//                }
-//            }
-//        }
+
         playingList.add(music)
         playingId = playingList.size - 1;
 
@@ -119,7 +101,7 @@ class PlayerViewModel(application: Application): AndroidViewModel(application) {
         resetProgressBar(nowMusic.value.second)
 
         for (e in musicList) {
-            addMusicToPlayList(e)
+            playingList.add(e)
             Log.i(
                 "Player",
                 """
@@ -165,13 +147,10 @@ class PlayerViewModel(application: Application): AndroidViewModel(application) {
     fun previous() {
 
         val pid = playingId - 1;
-        if (pid >= 0)
-        {
-
+        if (pid >= 0) {
             exoPlayer.apply {
                 pause()
             }
-
             nxtMusic.value = nowMusic.value
             nowMusic.value = preMusic.value
             preMusic.value = if (pid > 0)
@@ -184,31 +163,29 @@ class PlayerViewModel(application: Application): AndroidViewModel(application) {
                 prepare()
                 play()
             }
+            updateIsPlaying(true);
         }
     }
     //   4 - 3
     // 0 1 2 3
     fun next() {
         val nid = playingId+1;
-        if (nid < playingList.size)
-        {
+        if (nid < playingList.size) {
             exoPlayer.apply {
                 pause()
             }
-
-
             preMusic.value = nowMusic.value
             nowMusic.value = nxtMusic.value
             nxtMusic.value = if (nid < playingList.size - 1)
                 playingList[nid+1] else MusicEntity.getEmpty()
             playingId = nid;
-
             prepareMusic(nowMusic.value)
 
             exoPlayer.apply{
                 prepare()
                 play()
             }
+            updateIsPlaying(true);
         }
     }
 
@@ -218,6 +195,7 @@ class PlayerViewModel(application: Application): AndroidViewModel(application) {
     }
 
     fun registerListener() {
+
         exoPlayer.addListener(
             object : Player.Listener {
                 override fun onPlaybackStateChanged(playbackState: Int) {
@@ -230,11 +208,14 @@ class PlayerViewModel(application: Application): AndroidViewModel(application) {
 
                         }
                         STATE_READY-> {
-
+                            isMusicEnded = false
                         }
 
                         STATE_ENDED -> {
-
+                            if (!isMusicEnded) {
+                                next()
+                                isMusicEnded = true;
+                            }
                         }
                     }
                 }

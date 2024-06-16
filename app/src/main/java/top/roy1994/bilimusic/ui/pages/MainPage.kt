@@ -4,7 +4,6 @@ import android.app.Application
 import androidx.compose.foundation.*
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -16,17 +15,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.liveData
 import androidx.lifecycle.viewmodel.compose.viewModel
 import coil.compose.rememberAsyncImagePainter
 import coil.request.ImageRequest
-import top.roy1994.bilimusic.R
 import top.roy1994.bilimusic.musichorizonbarelem.MusicHorizonBarElem
-import top.roy1994.bilimusic.musiclistdetailelem.MusicListDetailElem
-import top.roy1994.bilimusic.musiclistdetailelem.Switch
 import top.roy1994.bilimusic.musicverticalcommentelem.MusicVerticalCommentElem
 import top.roy1994.bilimusic.notfind.NotFind
 import top.roy1994.bilimusic.redirtextbar.ReDirTextBar
@@ -172,7 +165,7 @@ fun MainPage(
                         ),
                         name = item.music_name,
                         onHorizonBarElemTapped = {
-                            playerVM.setMusicToPlayList(item)
+                            playerVM.addMusicToPlayList(item)
                         },
                     )
                 }
@@ -212,7 +205,7 @@ fun MainPage(
                         upComment = item.times5day.toString(),
                         downComment = "Times",
                         onVerticalCommentElemTapped = {
-                            playerVM.setMusicToPlayList(item)
+                            playerVM.addMusicToPlayList(item)
                         },
                     )
                 }
@@ -259,7 +252,7 @@ fun MainPage(
                         upComment = "",
                         downComment = "",
                         onVerticalCommentElemTapped = {
-                            playerVM.setMusicToPlayList(item)
+                            playerVM.addMusicToPlayList(item)
                         },
                     )
                 }

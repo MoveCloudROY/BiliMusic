@@ -36,7 +36,7 @@ fun Player(
 ) {
     val scope = rememberCoroutineScope()
     ModalBottomSheetLayout(
-        modifier = Modifier.background(Color(0xFFFFFFFF)),
+        modifier = Modifier,
         sheetState = state,
         sheetContent = {
             PlayerBar(
@@ -97,7 +97,7 @@ fun Player(
                     playerVM.previous()
                 },
                 onPlayTapped = {
-                    if ( playerVM.exoPlayer.isPlaying) {
+                    if (playerVM.isPlaying.value && playerVM.exoPlayer.isPlaying) {
                         // pause the video
                         playerVM.exoPlayer.pause()
                         playerVM.updateIsPlaying(false)

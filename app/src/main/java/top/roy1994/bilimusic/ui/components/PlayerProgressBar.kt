@@ -126,14 +126,26 @@ fun PlayerProgressBar(
             text = PlayerVM.playedSeconds.value.div(60).toString().padStart(2, '0')
                 + ":"
                 + PlayerVM.playedSeconds.value.mod(60).toString().padStart(2, '0'),
-            style = numberStyle
+            style = numberStyle,
+            color = Color(
+                alpha = 255,
+                red = 51,
+                green = 61,
+                blue = 100
+            ),
         )
         Spacer(modifier = Modifier.weight(1.0f))
         Text(
             text = PlayerVM.nowMusic.value.second.div(60).toString().padStart(2, '0')
                 + ":"
                 + PlayerVM.nowMusic.value.second.mod(60).toString().padStart(2, '0'),
-            style = numberStyle
+            style = numberStyle,
+            color = Color(
+                alpha = 255,
+                red = 51,
+                green = 61,
+                blue = 100
+            ),
         )
     }
 
