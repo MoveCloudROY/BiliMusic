@@ -89,7 +89,7 @@ class PlayerViewModel(application: Application): AndroidViewModel(application) {
             prepare()
             play()
         }
-        updateIsPlaying(true)
+        setPlayState(true)
     }
 
 
@@ -123,7 +123,7 @@ class PlayerViewModel(application: Application): AndroidViewModel(application) {
                 prepare()
                 play()
             }
-            updateIsPlaying(true)
+            setPlayState(true)
         }
 
     }
@@ -163,7 +163,7 @@ class PlayerViewModel(application: Application): AndroidViewModel(application) {
                 prepare()
                 play()
             }
-            updateIsPlaying(true);
+            setPlayState(true);
         }
     }
     //   4 - 3
@@ -185,13 +185,17 @@ class PlayerViewModel(application: Application): AndroidViewModel(application) {
                 prepare()
                 play()
             }
-            updateIsPlaying(true);
+            setPlayState(true);
         }
     }
 
     fun clear() {
         playingId = -1;
         playingList.clear();
+    }
+
+    fun setProgress(value: UInt) {
+
     }
 
     fun registerListener() {
@@ -287,7 +291,7 @@ class PlayerViewModel(application: Application): AndroidViewModel(application) {
     fun updateTotalSeconds(value: Long) {
         totalSeconds.value = value
     }
-    fun updateIsPlaying(value: Boolean) {
+    fun setPlayState(value: Boolean) {
         isPlaying.value = value
     }
     fun resetProgressBar(second: Long) {

@@ -80,12 +80,14 @@ fun MusicInfoInputField(
             .padding(horizontal = 24.dp, vertical = 8.dp)
             .fillMaxWidth(),
         verticalArrangement = Arrangement.SpaceBetween,
+        horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Column {
             OutlinedTextField(
                 modifier = Modifier
                     .align(Alignment.CenterHorizontally)
-                    .padding(vertical = 12.dp),
+                    .padding(vertical = 12.dp)
+                    .fillMaxWidth(),
                 colors = TextFieldDefaults.outlinedTextFieldColors(
                     unfocusedLabelColor = Color.Gray,
                     unfocusedBorderColor = Color.Gray
@@ -130,7 +132,8 @@ fun MusicInfoInputField(
             OutlinedTextField(
                 modifier = Modifier
                     .align(Alignment.CenterHorizontally)
-                    .padding(vertical = 12.dp),
+                    .padding(vertical = 12.dp)
+                    .fillMaxWidth(),
                 colors = TextFieldDefaults.outlinedTextFieldColors(
                     unfocusedLabelColor = Color.Gray,
                     unfocusedBorderColor = Color.Gray
@@ -165,7 +168,8 @@ fun MusicInfoInputField(
             OutlinedTextField(
                 modifier = Modifier
                     .align(Alignment.CenterHorizontally)
-                    .padding(vertical = 12.dp),
+                    .padding(vertical = 12.dp)
+                    .fillMaxWidth(),
                 colors = TextFieldDefaults.outlinedTextFieldColors(
                     unfocusedLabelColor = Color.Gray,
                     unfocusedBorderColor = Color.Gray
@@ -199,8 +203,9 @@ fun MusicInfoInputField(
         Column {
             OutlinedTextField(
                 modifier = Modifier
-                    .align(Alignment.CenterHorizontally)
-                    .padding(vertical = 12.dp),
+                    .padding(vertical = 12.dp)
+                    .align(alignment = Alignment.CenterHorizontally)
+                    .fillMaxWidth(),
                 colors = TextFieldDefaults.outlinedTextFieldColors(
                     unfocusedLabelColor = Color.Gray,
                     unfocusedBorderColor = Color.Gray

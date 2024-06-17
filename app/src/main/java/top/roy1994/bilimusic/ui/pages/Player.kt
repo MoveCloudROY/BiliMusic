@@ -10,7 +10,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -23,7 +22,6 @@ import top.roy1994.bilimusic.playercommandbar.PlayerCommandBar
 import top.roy1994.bilimusic.playercommandbar.Status
 import top.roy1994.bilimusic.playercovertuple.PlayerCoverTuple
 import top.roy1994.bilimusic.playermusicinfo.PlayerMusicInfo
-import top.roy1994.bilimusic.viewmodel.PlayerProgressBarViewModel
 import top.roy1994.bilimusic.viewmodel.PlayerViewModel
 import top.roy1994.bilimusic.viewmodel.PlayerViewModelFactory
 
@@ -100,12 +98,12 @@ fun Player(
                     if (playerVM.isPlaying.value && playerVM.exoPlayer.isPlaying) {
                         // pause the video
                         playerVM.exoPlayer.pause()
-                        playerVM.updateIsPlaying(false)
+                        playerVM.setPlayState(false)
                     } else {
                         // play the video
                         // it's already paused
                         playerVM.exoPlayer.play()
-                        playerVM.updateIsPlaying(true)
+                        playerVM.setPlayState(true)
                     }
                 },
                 onNextTapped = {

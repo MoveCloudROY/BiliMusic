@@ -4,6 +4,8 @@ import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
+import androidx.compose.foundation.gestures.detectDragGestures
+import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.runtime.*
@@ -14,6 +16,9 @@ import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.StrokeCap
+import androidx.compose.ui.graphics.drawscope.Fill
+import androidx.compose.ui.graphics.drawscope.Stroke
+import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
@@ -78,6 +83,11 @@ fun PlayerProgressBar(
         )
     )
 
+    // bar是否被按下
+    var barPressed by remember { mutableStateOf(false) }
+    // 锚点的半径, 根据barPressed的状态'平滑'地改变自身的大小
+    val radius by animateFloatAsState(if (barPressed) 45f else 35f)
+
     LaunchedEffect(Unit) {
         PlayerVM.startThreadGradient()
     }
@@ -87,7 +97,36 @@ fun PlayerProgressBar(
             .background(Color(0xFFFFFFFF))
             .fillMaxWidth()
             .height(indicatorHeight)
-            .padding(start = indicatorPadding, end = indicatorPadding),
+            .padding(start = indicatorPadding, end = indicatorPadding)
+
+            .pointerInput(Unit) {
+                detectDragGestures( // 响应滑动事件
+                    onDragStart = { barPressed = true },
+                    onDragCancel = { barPressed = false },
+                    onDragEnd = {
+                        // 滑动结束时， 恢复锚点大小，并回调onProgressChanged函数
+                        barPressed = false
+//                        onProgressChanged.invoke(progress)
+                    },
+                    onDrag = { change, dragAmount ->
+                        // 滑动过程中， 实时刷新progress的值(注意左右边界的问题)，
+                        // 此值一旦改变， 整个Seekbar就会重组(刷新)
+//                        progress = if (change.position.x < 0) {
+//                            0f
+//                        } else if (change.position.x > size.width) {
+//                            1f
+//                        } else {
+//                            (change.position.x / this.size.width)
+//                        }
+                    })
+            }
+            .pointerInput(Unit) {
+                // 响应点击事件， 直接跳到该进度处
+                detectTapGestures(onTap = {
+//                    progress = (it.x / size.width)
+                    barPressed = false
+                })
+            },
     ) {
 
         // Background indicator
@@ -112,6 +151,17 @@ fun PlayerProgressBar(
             strokeWidth = size.height,
             start = Offset(x = 0f, y = 0f),
             end = Offset(x = progress, y = 0f)
+        )
+
+        // anchor
+        drawCircle(
+//            brush = Brush.radialGradient(
+//                colors = gradientColors
+//            ),
+            color = Color(0xFFFFFFFF),
+            radius = radius,
+            center = Offset(x = progress, y = 0f),
+            style = Stroke(10f)
         )
 
     }
