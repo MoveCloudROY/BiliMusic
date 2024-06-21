@@ -19,7 +19,10 @@ import com.google.android.exoplayer2.util.EventLogger
 import kotlinx.coroutines.*
 import top.roy1994.bilimusic.data.objects.biliapi.BiliService
 import top.roy1994.bilimusic.data.objects.biliapi.BiliCreator
+import top.roy1994.bilimusic.data.objects.music.MusicCntUpdate
+import top.roy1994.bilimusic.data.objects.music.MusicDao
 import top.roy1994.bilimusic.data.objects.music.MusicEntity
+import top.roy1994.bilimusic.data.utils.AppDatabase
 import top.roy1994.bilimusic.data.utils.BiliRepo
 
 class PlayerViewModel(application: Application): AndroidViewModel(application) {
@@ -48,6 +51,7 @@ class PlayerViewModel(application: Application): AndroidViewModel(application) {
     var exoPlayer: ExoPlayer
 
     private var service: BiliService
+    private val musicDao: MusicDao
     private var biliRepo: BiliRepo
     private val coroutineScope = CoroutineScope(Dispatchers.Main)
 
@@ -76,6 +80,7 @@ class PlayerViewModel(application: Application): AndroidViewModel(application) {
 
     fun addMusicToPlayList(music: MusicEntity) {
         exoPlayer.pause()
+
         preMusic.value = nowMusic.value
         nowMusic.value = music
         nxtMusic.value = MusicEntity.getEmpty()
@@ -144,6 +149,11 @@ class PlayerViewModel(application: Application): AndroidViewModel(application) {
         exoPlayer.shuffleModeEnabled = false
         exoPlayer.repeatMode = Player.REPEAT_MODE_ALL
     }
+
+    fun isEmptyMusic() : Boolean {
+        return nowMusic.value.music_id == 0
+    }
+
     fun previous() {
 
         val pid = playingId - 1;
@@ -194,8 +204,9 @@ class PlayerViewModel(application: Application): AndroidViewModel(application) {
         playingList.clear();
     }
 
-    fun setProgress(value: UInt) {
-
+    fun setProgressPercentage(per: Float) {
+        playedPercentage.value = per * 100
+        exoPlayer.seekTo((per * nowMusic.value.second * 1000).toLong())
     }
 
     fun registerListener() {
@@ -217,6 +228,12 @@ class PlayerViewModel(application: Application): AndroidViewModel(application) {
 
                         STATE_ENDED -> {
                             if (!isMusicEnded) {
+                                viewModelScope.launch(Dispatchers.IO) {
+                                    musicDao.updateMusicPlayCnt(MusicCntUpdate(
+                                        nowMusic.value.music_id,
+                                        nowMusic.value.times5day+1
+                                    ))
+                                }
                                 next()
                                 isMusicEnded = true;
                             }
@@ -229,6 +246,8 @@ class PlayerViewModel(application: Application): AndroidViewModel(application) {
 
 
     init {
+        val appDb = AppDatabase.getInstance(application)
+        musicDao = appDb.musicDao()
         service = BiliCreator.getServiceInstance()
         biliRepo = BiliCreator.getInstance()
         exoPlayer = ExoPlayer.Builder(application)

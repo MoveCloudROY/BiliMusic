@@ -32,4 +32,18 @@ data class MusicEntity(
             )
         }
     }
+
+    override fun hashCode(): Int {
+        return music_id;
+    }
+    override fun equals(other: Any?): Boolean {
+        return hashCode() == other.hashCode();
+    }
 }
+
+@Entity
+data class MusicCntUpdate(
+    val music_id: Int = 0,
+    var times5day: Int = 0,
+) {}
+

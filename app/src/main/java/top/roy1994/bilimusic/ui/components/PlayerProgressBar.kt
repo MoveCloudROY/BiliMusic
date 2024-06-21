@@ -1,5 +1,6 @@
 package top.roy1994.bilimusic.ui.components
 
+import android.util.Log
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Canvas
@@ -16,7 +17,6 @@ import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.StrokeCap
-import androidx.compose.ui.graphics.drawscope.Fill
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.text.TextStyle
@@ -29,7 +29,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import top.roy1994.bilimusic.R
-import top.roy1994.bilimusic.viewmodel.PlayerProgressBarViewModel
 import top.roy1994.bilimusic.viewmodel.PlayerViewModel
 
 
@@ -59,7 +58,7 @@ fun PreviewPlayerProgressBar() {
 @Composable
 fun PlayerProgressBar(
     PlayerVM: PlayerViewModel,
-    indicatorHeight: Dp = 24.dp,
+    indicatorHeight: Dp = 16.dp,
     backgroundIndicatorColor: Color = Color.LightGray.copy(alpha = 0.3f),
     indicatorPadding: Dp = 24.dp,
     gradientColors: List<Color> = listOf(
@@ -73,20 +72,24 @@ fun PlayerProgressBar(
     animationDuration: Int = 1000,
     animationDelay: Int = 0
 ) {
+    // bar是否被按下
+    var isBarPressed by remember { mutableStateOf(false) }
+    // 锚点的半径, 根据barPressed的状态'平滑'地改变自身的大小
+    val radius by animateFloatAsState(if (isBarPressed) 40f else 32f)
+
     val playedPercentage by PlayerVM.playedPercentage.observeAsState(initial = 0f)
+    var dragedPercentage by remember { mutableStateOf(0f) }
+
+
 
     val animateNumber = animateFloatAsState(
-        targetValue = playedPercentage,
+        targetValue = if (isBarPressed) dragedPercentage else playedPercentage,
         animationSpec = tween(
-            durationMillis = animationDuration,
+            durationMillis = if (isBarPressed) 0  else animationDuration,
             delayMillis = animationDelay
         )
     )
 
-    // bar是否被按下
-    var barPressed by remember { mutableStateOf(false) }
-    // 锚点的半径, 根据barPressed的状态'平滑'地改变自身的大小
-    val radius by animateFloatAsState(if (barPressed) 45f else 35f)
 
     LaunchedEffect(Unit) {
         PlayerVM.startThreadGradient()
@@ -98,36 +101,48 @@ fun PlayerProgressBar(
             .fillMaxWidth()
             .height(indicatorHeight)
             .padding(start = indicatorPadding, end = indicatorPadding)
-
             .pointerInput(Unit) {
                 detectDragGestures( // 响应滑动事件
-                    onDragStart = { barPressed = true },
-                    onDragCancel = { barPressed = false },
+                    onDragStart = {
+                        if (!PlayerVM.isEmptyMusic()) {
+                            dragedPercentage = playedPercentage
+                            isBarPressed = true
+                        }
+                    },
+                    onDragCancel = { isBarPressed = false },
                     onDragEnd = {
-                        // 滑动结束时， 恢复锚点大小，并回调onProgressChanged函数
-                        barPressed = false
-//                        onProgressChanged.invoke(progress)
+                        // 滑动结束时， 回调setProgressPercentage函数
+                        // 恢复锚点大小
+                        PlayerVM.setProgressPercentage(dragedPercentage/100f)
+                        isBarPressed = false
                     },
                     onDrag = { change, dragAmount ->
                         // 滑动过程中， 实时刷新progress的值(注意左右边界的问题)，
                         // 此值一旦改变， 整个Seekbar就会重组(刷新)
-//                        progress = if (change.position.x < 0) {
-//                            0f
-//                        } else if (change.position.x > size.width) {
-//                            1f
-//                        } else {
-//                            (change.position.x / this.size.width)
-//                        }
+                        dragedPercentage = if (change.position.x < 0) {
+                            0f
+                        } else if (change.position.x > size.width) {
+                            1f
+                        } else {
+                            (change.position.x / this.size.width)
+                        } * 100f
+                        Log.i("Player", """
+                            dragedPercentage:   ${dragedPercentage},
+                            animateNumber:      ${animateNumber.value}
+                        """.trimIndent())
                     })
             }
             .pointerInput(Unit) {
                 // 响应点击事件， 直接跳到该进度处
                 detectTapGestures(onTap = {
-//                    progress = (it.x / size.width)
-                    barPressed = false
+                    if (!PlayerVM.isEmptyMusic()) {
+                        PlayerVM.setProgressPercentage(it.x / size.width)
+                        isBarPressed = false
+                    }
                 })
             },
     ) {
+
 
         // Background indicator
         drawLine(
@@ -155,14 +170,18 @@ fun PlayerProgressBar(
 
         // anchor
         drawCircle(
-//            brush = Brush.radialGradient(
-//                colors = gradientColors
-//            ),
-            color = Color(0xFFFFFFFF),
+            color =  Color(0xFFFFFFFF),
             radius = radius,
             center = Offset(x = progress, y = 0f),
-            style = Stroke(10f)
+//            style = Stroke(9f)
         )
+        drawCircle(
+            color =  Color(0x8F8F8F8F),
+            radius = radius,
+            center = Offset(x = progress, y = 0f),
+            style = Stroke(12f)
+        )
+
 
     }
 

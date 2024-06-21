@@ -11,6 +11,9 @@ interface MusicDao {
     @Update
     suspend fun updateMusics(vararg musics: MusicEntity)
 
+    @Update(entity = MusicEntity::class)
+    suspend fun updateMusicPlayCnt(vararg musicCntUpdate: MusicCntUpdate)
+
     @Delete
     suspend fun deleteMusics(vararg musics: MusicEntity)
 

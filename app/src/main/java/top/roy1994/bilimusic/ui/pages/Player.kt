@@ -95,15 +95,17 @@ fun Player(
                     playerVM.previous()
                 },
                 onPlayTapped = {
-                    if (playerVM.isPlaying.value && playerVM.exoPlayer.isPlaying) {
-                        // pause the video
-                        playerVM.exoPlayer.pause()
-                        playerVM.setPlayState(false)
-                    } else {
-                        // play the video
-                        // it's already paused
-                        playerVM.exoPlayer.play()
-                        playerVM.setPlayState(true)
+                    if (!playerVM.isEmptyMusic()) {
+                        if (playerVM.isPlaying.value && playerVM.exoPlayer.isPlaying) {
+                            // pause the video
+                            playerVM.exoPlayer.pause()
+                            playerVM.setPlayState(false)
+                        } else {
+                            // play the video
+                            // it's already paused
+                            playerVM.exoPlayer.play()
+                            playerVM.setPlayState(true)
+                        }
                     }
                 },
                 onNextTapped = {
