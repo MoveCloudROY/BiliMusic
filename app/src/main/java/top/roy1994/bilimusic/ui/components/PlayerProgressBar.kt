@@ -104,10 +104,10 @@ fun PlayerProgressBar(
             .pointerInput(Unit) {
                 detectDragGestures( // 响应滑动事件
                     onDragStart = {
-                        if (!PlayerVM.isEmptyMusic()) {
+//                        if (!PlayerVM.isEmptyMusic()) {
                             dragedPercentage = playedPercentage
                             isBarPressed = true
-                        }
+//                        }
                     },
                     onDragCancel = { isBarPressed = false },
                     onDragEnd = {
