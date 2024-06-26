@@ -5,8 +5,9 @@ import android.content.Context
 import android.widget.Toast
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.lazy.GridCells
-import androidx.compose.foundation.lazy.LazyVerticalGrid
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Surface
@@ -79,7 +80,7 @@ fun SongsSheetPage(
     LazyVerticalGrid(
         modifier = Modifier
             .padding(start = 12.dp, end = 12.dp, top = 6.dp, bottom = 85.dp),
-        cells = GridCells.Adaptive(minSize = 160.dp)
+        columns = GridCells.Adaptive(minSize = 160.dp)
     ) {
         item {
             AddAlbumBlock(

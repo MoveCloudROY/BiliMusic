@@ -2,28 +2,35 @@ package top.roy1994.bilimusic.viewmodel
 
 import android.app.Application
 import android.util.Log
+import androidx.annotation.OptIn
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.*
-import com.google.android.exoplayer2.ExoPlayer
-import com.google.android.exoplayer2.MediaItem
-import com.google.android.exoplayer2.Player
-import com.google.android.exoplayer2.Player.STATE_BUFFERING
-import com.google.android.exoplayer2.Player.STATE_ENDED
-import com.google.android.exoplayer2.Player.STATE_IDLE
-import com.google.android.exoplayer2.Player.STATE_READY
-import com.google.android.exoplayer2.source.ProgressiveMediaSource
-import com.google.android.exoplayer2.source.ShuffleOrder
-import com.google.android.exoplayer2.upstream.DataSource
-import com.google.android.exoplayer2.upstream.DefaultHttpDataSource
-import com.google.android.exoplayer2.util.EventLogger
+import androidx.media3.common.MediaItem
+import androidx.media3.common.Player
+import androidx.media3.common.Player.STATE_BUFFERING
+import androidx.media3.common.Player.STATE_ENDED
+import androidx.media3.common.Player.STATE_IDLE
+import androidx.media3.common.Player.STATE_READY
+import androidx.media3.common.util.UnstableApi
+import androidx.media3.datasource.DataSource
+import androidx.media3.datasource.DefaultHttpDataSource
+import androidx.media3.exoplayer.ExoPlayer
+import androidx.media3.exoplayer.source.ProgressiveMediaSource
+import androidx.media3.exoplayer.util.EventLogger
+import androidx.media3.extractor.DefaultExtractorsFactory
+
 import kotlinx.coroutines.*
 import top.roy1994.bilimusic.data.objects.biliapi.BiliService
 import top.roy1994.bilimusic.data.objects.biliapi.BiliCreator
 import top.roy1994.bilimusic.data.objects.music.MusicCntUpdate
 import top.roy1994.bilimusic.data.objects.music.MusicDao
 import top.roy1994.bilimusic.data.objects.music.MusicEntity
+import top.roy1994.bilimusic.data.objects.music.MusicIncompleteDao
+import top.roy1994.bilimusic.data.objects.music.MusicIncompleteEntity
+import top.roy1994.bilimusic.data.objects.music.MusicLastPlayTimeUpdate
 import top.roy1994.bilimusic.data.utils.AppDatabase
 import top.roy1994.bilimusic.data.utils.BiliRepo
+import kotlin.math.min
 
 class PlayerViewModel(application: Application): AndroidViewModel(application) {
     val preMusic = mutableStateOf(
@@ -46,19 +53,24 @@ class PlayerViewModel(application: Application): AndroidViewModel(application) {
         private set
 
     var playingId = -1;
-    var isMusicEnded = true //
+    var isMusicEnded = true
+    var isNewPlay = false
+    var startPer : Float = -1f
     // ================================================================
     var exoPlayer: ExoPlayer
 
     private var service: BiliService
     private val musicDao: MusicDao
+    private val incompteDao: MusicIncompleteDao
     private var biliRepo: BiliRepo
     private val coroutineScope = CoroutineScope(Dispatchers.Main)
 
     private var playingList: MutableList<MusicEntity> = mutableListOf()
     // =========================================================
 
+    @OptIn(UnstableApi::class)
     fun prepareMusic(music: MusicEntity) {
+        Log.i("Player", "Invoke `Func prepareMusic()")
         val bvid = music.bvid
 
         coroutineScope.launch(Dispatchers.IO) {
@@ -68,6 +80,7 @@ class PlayerViewModel(application: Application): AndroidViewModel(application) {
                     val dataSourceFactory: DataSource.Factory = DefaultHttpDataSource.Factory()
                         .setUserAgent("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36 Edg/108.0.1462.54")
                         .setDefaultRequestProperties(hashMapOf("Referer" to "https://www.bilibili.com/video/${bvid}"))
+
                     exoPlayer.setMediaSource(
                         ProgressiveMediaSource.Factory(dataSourceFactory)
                             .createMediaSource(MediaItem.fromUri(url))
@@ -78,29 +91,23 @@ class PlayerViewModel(application: Application): AndroidViewModel(application) {
     }
 
 
-    fun addMusicToPlayList(music: MusicEntity) {
-        exoPlayer.pause()
-
-        preMusic.value = nowMusic.value
-        nowMusic.value = music
-        nxtMusic.value = MusicEntity.getEmpty()
-        resetProgressBar(music.second)
-        prepareMusic(music)
-
-        playingList.add(music)
-        playingId = playingList.size - 1;
-
-        exoPlayer.apply {
-            prepare()
-            play()
+    fun addMusicToPlayList(music: MusicEntity, playedPer: Float = 0f) {
+        Log.i("Player", "Invoke `Func addMusicToPlayList()")
+        if (playingList.contains(music)) {
+            val item = playingList.indexOf(music)
+            playAt(item, playedPer)
+            return
         }
-        setPlayState(true)
+        playingList.add(music)
+        playAt(playingList.size - 1, playedPer)
     }
 
+    fun setPlayList(musicList: List<MusicEntity>, start: Int = 0) {
+        Log.i("Player", "Invoke `Func setPlayList()")
+        if (start < 0 || start >= musicList.size)
+            return
 
-    fun setPlayList(musicList: List<MusicEntity>) {
         exoPlayer.pause()
-        exoPlayer.clearMediaItems()
         clear()
 
         resetProgressBar(nowMusic.value.second)
@@ -118,25 +125,21 @@ class PlayerViewModel(application: Application): AndroidViewModel(application) {
             )
         }
 
-        preMusic.value = MusicEntity.getEmpty()
-        nowMusic.value = if(playingList.size > 0) playingList[0] else MusicEntity.getEmpty()
-        nxtMusic.value = if(playingList.size > 1) playingList[1] else MusicEntity.getEmpty()
+        preMusic.value = if (start == 0) MusicEntity.getEmpty() else playingList[start-1]
+        nowMusic.value = if(playingList.size > start) playingList[start] else MusicEntity.getEmpty()
+        nxtMusic.value = if(playingList.size > start+1) playingList[start+1] else MusicEntity.getEmpty()
         if (playingList.size > 0) {
             prepareMusic(playingList[0])
-            playingId = 0;
-            exoPlayer.apply {
-                prepare()
-                play()
-            }
-            setPlayState(true)
+            playingId = 0
+            playImpl()
         }
 
     }
 
     fun setPlayerShuffle() {
-        exoPlayer.setShuffleOrder(
-            ShuffleOrder.DefaultShuffleOrder(
-                exoPlayer.mediaItemCount, System.currentTimeMillis()))
+//        exoPlayer.setShuffleOrder(
+//            ShuffleOrder.DefaultShuffleOrder(
+//                exoPlayer.mediaItemCount, System.currentTimeMillis()))
         exoPlayer.shuffleModeEnabled = true
     }
 
@@ -155,61 +158,120 @@ class PlayerViewModel(application: Application): AndroidViewModel(application) {
     }
 
     fun previous() {
-
+        Log.i("Player", "Invoke `Func previous()")
         val pid = playingId - 1;
         if (pid >= 0) {
-            exoPlayer.apply {
-                pause()
-            }
-            nxtMusic.value = nowMusic.value
-            nowMusic.value = preMusic.value
-            preMusic.value = if (pid > 0)
-                playingList[pid-1] else MusicEntity.getEmpty()
-            playingId = pid;
-
-            prepareMusic(nowMusic.value)
-
-            exoPlayer.apply {
-                prepare()
-                play()
-            }
-            setPlayState(true);
+            playAt(pid);
         }
     }
     //   4 - 3
     // 0 1 2 3
     fun next() {
+        Log.i("Player", "Invoke `Func next()")
         val nid = playingId+1;
         if (nid < playingList.size) {
-            exoPlayer.apply {
-                pause()
-            }
-            preMusic.value = nowMusic.value
-            nowMusic.value = nxtMusic.value
-            nxtMusic.value = if (nid < playingList.size - 1)
-                playingList[nid+1] else MusicEntity.getEmpty()
-            playingId = nid;
-            prepareMusic(nowMusic.value)
-
-            exoPlayer.apply{
-                prepare()
-                play()
-            }
-            setPlayState(true);
+            playAt(nid)
         }
     }
 
     fun clear() {
+        Log.i("Player", "Invoke `Func clear()")
         playingId = -1;
         playingList.clear();
     }
 
-    fun setProgressPercentage(per: Float) {
-        playedPercentage.value = per * 100
-        exoPlayer.seekTo((per * nowMusic.value.second * 1000).toLong())
+
+    private fun playImpl(playedPer: Float = 0f) {
+        Log.i("Player", "Invoke `Func playImpl()")
+        prepareMusic(nowMusic.value)
+
+        exoPlayer.apply{
+            prepare()
+            play()
+        }
+        startPer = playedPer
+        isNewPlay = true
+        viewModelScope.launch(Dispatchers.IO) {
+            musicDao.updateMusicLastPlayTime(
+                MusicLastPlayTimeUpdate(
+                    nowMusic.value.music_id,
+                    System.currentTimeMillis()
+                )
+            )
+        }
+
+        setPlayState(true);
+
     }
 
-    fun registerListener() {
+    private fun playAt(playListId: Int, playedPer: Float = 0f) {
+        Log.i("Player", "Invoke `Func playAt()")
+        if(playListId < 0 || playListId >= playingList.size) {
+            return
+        }
+        if (exoPlayer.isPlaying || (playedPercentage.value!! > 1 && playedPercentage.value!! < 99)) {
+            recordIncompMusic(nowMusic.value)
+        }
+        exoPlayer.pause()
+        preMusic.value = if (playListId > 0) playingList[playListId-1] else MusicEntity.getEmpty()
+        nowMusic.value = playingList[playListId]
+        nxtMusic.value = if (playListId < playingList.size-1) playingList[playListId+1] else MusicEntity.getEmpty()
+        playingId = playListId;
+
+        resetProgressBar(nowMusic.value.second)
+        playImpl(playedPer)
+    }
+
+    fun resetProgressBar(second: Long) {
+        Log.i("Player", "Invoke `Func resetProgressBar()")
+        playedPercentage.value = 0.0f
+        updatePlayedSeconds(0)
+        updateTotalSeconds(second)
+    }
+
+    fun setProgressPercentage(per: Float) {
+        Log.i("Player", "Invoke `Func setProgressPercentage()")
+        playedPercentage.value = per * 100
+        playedSeconds.value = (per * nowMusic.value.second).toLong()
+        Log.i("Player", """
+            [setProgressPercentage] SetProgress
+                nowMusic:   ${nowMusic.value.music_name}
+                per:        $per
+                sec:        ${nowMusic.value.second}
+                playedPer:  ${playedPercentage.value}
+                playedSec:  ${playedSeconds.value}
+            """.trimIndent())
+
+        if(per > 1e-4) {// 避免杂音
+            Log.i("Player", """
+                [setProgressPercentage]
+                    SeekTo ${per * nowMusic.value.second}
+            """.trimIndent())
+            exoPlayer.seekTo((per * nowMusic.value.second * 1000).toLong())
+        }
+    }
+
+    private fun recordIncompMusic(music: MusicEntity) {
+        viewModelScope.launch(Dispatchers.IO) {
+            playedPercentage.value?.let {
+                if (incompteDao.hasIncompRec(music.music_id)) {
+                    incompteDao.updateIncompRec(
+                        MusicIncompleteEntity(
+                            music.music_id, it / 100f
+                        )
+                    )
+                } else {
+                    incompteDao.insertIncompRec(
+                        MusicIncompleteEntity(
+                            music.music_id, it / 100f
+                        )
+                    )
+                }
+            }
+        }
+    }
+
+    private fun registerListener() {
 
         exoPlayer.addListener(
             object : Player.Listener {
@@ -220,18 +282,32 @@ class PlayerViewModel(application: Application): AndroidViewModel(application) {
 
                         }
                         STATE_BUFFERING -> {
-
+                            isMusicEnded = false
                         }
                         STATE_READY-> {
                             isMusicEnded = false
+                            if (startPer > 0f) {
+                                setProgressPercentage(startPer)
+                                startPer = -1f
+                            }
                         }
 
                         STATE_ENDED -> {
                             if (!isMusicEnded) {
+                                var delete_music = nowMusic.value;
                                 viewModelScope.launch(Dispatchers.IO) {
+
+                                    Log.i("Player", """
+                                        Delete music
+                                            name:   ${delete_music.music_name}
+                                            id:     ${delete_music.music_id}
+                                            
+                                    """.trimIndent())
+                                    incompteDao.deleteIncompRec(delete_music.music_id)
+
                                     musicDao.updateMusicPlayCnt(MusicCntUpdate(
-                                        nowMusic.value.music_id,
-                                        nowMusic.value.times5day+1
+                                        delete_music.music_id,
+                                        delete_music.times5day+1
                                     ))
                                 }
                                 next()
@@ -239,6 +315,19 @@ class PlayerViewModel(application: Application): AndroidViewModel(application) {
                             }
                         }
                     }
+                }
+
+                override fun onPositionDiscontinuity(
+                    oldPosition: Player.PositionInfo,
+                    newPosition: Player.PositionInfo,
+                    reason: Int
+                ) {
+                    super.onPositionDiscontinuity(oldPosition, newPosition, reason)
+                    Log.i("Player", """
+                        SeekTo Result:
+                            oldPosition:    ${oldPosition.positionMs}
+                            newPosition:    ${newPosition.positionMs}
+                    """.trimIndent())
                 }
             }
         )
@@ -248,6 +337,7 @@ class PlayerViewModel(application: Application): AndroidViewModel(application) {
     init {
         val appDb = AppDatabase.getInstance(application)
         musicDao = appDb.musicDao()
+        incompteDao = appDb.musicIncomleteDao()
         service = BiliCreator.getServiceInstance()
         biliRepo = BiliCreator.getInstance()
         exoPlayer = ExoPlayer.Builder(application)
@@ -282,20 +372,35 @@ class PlayerViewModel(application: Application): AndroidViewModel(application) {
 //                    Log.i("DATA", "${playedSeconds.value}  |  ${totalSeconds.value}")
 
                     withContext(Dispatchers.Main) {
-                        playedSize = exoPlayer.currentPosition / 1000
+                        playedSize = if (isNewPlay) playedSeconds.value else
+                            exoPlayer.currentPosition / 1000
+                        isNewPlay = false
                     }
                     if (playedSize < nowMusic.value.second!!) {
                         withContext(Dispatchers.Main) {
                             playedSeconds.value = playedSize
                             playedPercentage.value =
                                 (playedSize.toFloat() / nowMusic.value.second!!) * 100f
+//                            Log.i("Player", """
+//                                [BarWatch] Still in
+//                                    name:   ${nowMusic.value.music_name}
+//                                    sec:        ${nowMusic.value.second}
+//                                    playedPer:  ${playedPercentage.value}
+//                                    playedSec:  ${playedSeconds.value}
+//                                """.trimIndent())
                         }
                     } else {
                         withContext(Dispatchers.Main) {
+//                            Log.i("Player", """
+//                                [BarWatch] Edge
+//                                    name:   ${nowMusic.value.music_name}
+//                                    sec:        ${nowMusic.value.second}
+//                                    playedPer:  ${playedPercentage.value}
+//                                    playedSec:  ${playedSeconds.value}
+//                            """.trimIndent())
                             playedSeconds.value = nowMusic.value.second
                             playedPercentage.value = 100f
                         }
-                        break
                     }
 
                     delay(1000)
@@ -313,13 +418,7 @@ class PlayerViewModel(application: Application): AndroidViewModel(application) {
     fun setPlayState(value: Boolean) {
         isPlaying.value = value
     }
-    fun resetProgressBar(second: Long) {
-        updatePlayedSeconds(0)
-        updateTotalSeconds(second)
-        playedSeconds.value = 0
-        playedPercentage.value = 0.0f
 
-    }
 }
 
 class PlayerViewModelFactory(

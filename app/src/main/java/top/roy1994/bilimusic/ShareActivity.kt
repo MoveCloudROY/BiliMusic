@@ -58,8 +58,8 @@ class ShareActivity : ComponentActivity() {
         lifecycleScope.launch {
             val longUrl = extractedUrl?.let { parseShortUrl(it) }
             Log.println(Log.INFO, "Activity", "Long URL: $longUrl")
-            val matchResult = longUrl?.let { longRegex.find(it) }
-            val BVid = matchResult?.groups?.get(1)?.value
+            val matchResults = longUrl?.let { longRegex.find(it) }
+            val BVid = matchResults?.groups?.get(1)?.value
             videoId.value = BVid.orEmpty();
             Log.println(Log.INFO, "Activity", "BVid: $BVid")
 

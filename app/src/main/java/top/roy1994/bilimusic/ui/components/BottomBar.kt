@@ -45,7 +45,9 @@ fun BottomBar(
                 status = if (playerVM.isPlaying.value) top.roy1994.bilimusic.playbar.Status.Playing
                 else top.roy1994.bilimusic.playbar.Status.Stop,
                 onPlayBarTapped = {
-                    scope.launch{ playerState.animateTo(ModalBottomSheetValue.Expanded) }
+                    scope.launch{
+
+                        playerState.animateTo(ModalBottomSheetValue.Expanded) }
                 },
                 onPlayButtonTapped = {
                     if (playerVM.nowMusic.value.music_name.isNotEmpty()) {

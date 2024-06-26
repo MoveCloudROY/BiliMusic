@@ -52,23 +52,31 @@ fun MainFrame(
                             topSelectBarVM = topSelectBarVM
                         )
                     }
-                    1 -> {
+                    1 -> {// 歌曲
                         SongsPage(
                             navController = navController,
                             playerVM = playerVM,
                         )
                     }
-                    2 -> {
+                    2 -> {// 歌单
                         SongsSheetPage(
                             navController = navController,
                             playerVM = playerVM,
                         )
                     }
-                    3 -> {}
-                    4 -> {
+                    3 -> {// 流派
+
+                    }
+                    4 -> {// 艺术家
                         ArtistSheetPage(
                             navController = navController,
                             playerVM = playerVM
+                        )
+                    }
+                    5 -> {
+                        IncompletePage(
+                            navController = navController,
+                            playerVM = playerVM,
                         )
                     }
                 }

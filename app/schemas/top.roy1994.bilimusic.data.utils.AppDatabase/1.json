@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "650d2bfe0507c7855a0ee8b38883faf4",
+    "identityHash": "3580c3f8d9dbdce503e37044325045af",
     "entities": [
       {
         "tableName": "ArtistEntity",
@@ -22,10 +22,10 @@
           }
         ],
         "primaryKey": {
+          "autoGenerate": true,
           "columnNames": [
             "artist_id"
-          ],
-          "autoGenerate": true
+          ]
         },
         "indices": [],
         "foreignKeys": []
@@ -108,10 +108,10 @@
           }
         ],
         "primaryKey": {
+          "autoGenerate": true,
           "columnNames": [
             "music_id"
-          ],
-          "autoGenerate": true
+          ]
         },
         "indices": [],
         "foreignKeys": []
@@ -140,10 +140,36 @@
           }
         ],
         "primaryKey": {
+          "autoGenerate": true,
           "columnNames": [
             "sheet_id"
-          ],
-          "autoGenerate": true
+          ]
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "MusicIncompleteEntity",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`incomp_music_id` INTEGER NOT NULL, `progress` REAL NOT NULL, PRIMARY KEY(`incomp_music_id`))",
+        "fields": [
+          {
+            "fieldPath": "incomp_music_id",
+            "columnName": "incomp_music_id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "progress",
+            "columnName": "progress",
+            "affinity": "REAL",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "incomp_music_id"
+          ]
         },
         "indices": [],
         "foreignKeys": []
@@ -152,7 +178,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '650d2bfe0507c7855a0ee8b38883faf4')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '3580c3f8d9dbdce503e37044325045af')"
     ]
   }
 }

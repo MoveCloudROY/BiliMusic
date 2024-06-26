@@ -1,0 +1,6 @@
+{
+    "target": "TopSelectBarElem",
+    "package": "top.roy1994.bilimusic.topselectbarelem",
+    "generateImplementation": true,
+    "generatePreviews": true
+}

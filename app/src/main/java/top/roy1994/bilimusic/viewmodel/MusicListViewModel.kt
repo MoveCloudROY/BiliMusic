@@ -30,7 +30,7 @@ class MusicListViewModel(application: Application): AndroidViewModel(application
 
     val musicList: LiveData<List<MusicEntity>> = musicDao.loadAllMusics()
     val coverMap: LiveData<List<String?>> =
-        Transformations.switchMap(musicList) { l ->
+        musicList.switchMap { l ->
             val p = transformMap(l)
             Log.i("MusicList-DATA-coverMap", "${p}")
             p

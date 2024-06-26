@@ -14,9 +14,9 @@ class ArtistRepo(
     private val coroutineScope = CoroutineScope(Dispatchers.Main)
 
 
-    suspend fun insertArtist(newMusic: ArtistEntity) =
-        withContext(Dispatchers.IO) {
-            artistDao.insertArtists(newMusic)
+    fun insertArtist(newArtist: ArtistEntity) =
+        coroutineScope.launch(Dispatchers.IO) {
+            artistDao.insertArtists(newArtist)
         }
 
 

@@ -63,10 +63,8 @@ class AddMusicViewModel(application: Application): AndroidViewModel(application)
             val sheets = sheetDao.findSheetByName(sheet.value)
             val artistsTest = artistDao.findArtistByName(artist.value)
             if (artistsTest.isEmpty()) {
-                artistRepo.insertArtist(
-                    ArtistEntity(
-                        artist_name = artist.value
-                    )
+                artistDao.insertArtists(
+                    ArtistEntity(artist_name = artist.value)
                 )
             }
             Log.i("AddMusicVM", "addMusic: cover_url: ${cover_url}")

@@ -127,7 +127,8 @@ fun SheetDetail(
                                 minute = (item.second / 60).toString(),
                                 second = (item.second % 60).toString().padStart(2,'0'),
                                 onSongTapped = {
-                                    playerVM.setPlayList(sheetDetailVM.sheetElems.value)
+                                    playerVM.setPlayList(sheetDetailVM.sheetElems.value, index)
+
 
                                 }
                             )

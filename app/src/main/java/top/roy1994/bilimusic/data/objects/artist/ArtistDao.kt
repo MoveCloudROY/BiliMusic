@@ -7,13 +7,13 @@ import top.roy1994.bilimusic.data.objects.sheet.SheetEntity
 @Dao
 interface ArtistDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    fun insertArtists(vararg artists: ArtistEntity)
+    suspend fun insertArtists(vararg artists: ArtistEntity)
 
     @Update
-    fun updateArtists(vararg artists: ArtistEntity)
+    suspend fun updateArtists(vararg artists: ArtistEntity)
 
     @Delete
-    fun deleteArtists(vararg artists: ArtistEntity)
+    suspend fun deleteArtists(vararg artists: ArtistEntity)
 
     @Query("SELECT * FROM ArtistEntity WHERE artist_id = :id")
     fun findArtistById(id: Int): List<ArtistEntity>

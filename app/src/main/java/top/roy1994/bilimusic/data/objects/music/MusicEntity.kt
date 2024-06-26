@@ -47,3 +47,9 @@ data class MusicCntUpdate(
     var times5day: Int = 0,
 ) {}
 
+@Entity
+data class MusicLastPlayTimeUpdate(
+    val music_id: Int = 0,
+    var last_play_time: Long = 0,
+) {}
+

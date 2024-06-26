@@ -1,11 +1,11 @@
 {
   "name": "music_list_detail_elem",
-  "version": 32,
+  "version": 33,
   "source-key": {
     "type": "figma",
     "file": "fmyi8bk5JepuCfQVb7LIDl",
     "node": "33:655",
-    "version": "2877439794",
+    "version": "6056758318",
     "component-id": "86df5cae483a30755146acbf3faa343e2623cf5d"
   },
   "default": "switch=off",
@@ -66,14 +66,14 @@
         "rules": [
           {
             "id": "top_level",
-            "padding": "5.0",
-            "border-radius": "9.0",
+            "padding": 5.0,
+            "border-radius": 9.0,
             "tap-handler": "$on switch tapped",
             "longpress-handler": "$on long pressed",
             "size-constraints": {
               "width-constraints": {
                 "sizing-mode": "proportional",
-                "value": "1.0"
+                "value": 1.0
               },
               "height-constraints": {
                 "sizing-mode": "shrink"
@@ -86,26 +86,26 @@
               "MusicInfoTextBlock",
               "comment"
             ],
-            "item-spacing": "10.0",
+            "item-spacing": 10.0,
             "background-color": {
-              "alpha": "1.0",
-              "hue": "0.0",
-              "saturation": "0.0",
-              "value": "1.0"
+              "alpha": 1.0,
+              "hue": 0.0,
+              "saturation": 0.0,
+              "value": 1.0
             },
-            "clip-content": "false"
+            "clip-content": false
           },
           {
             "id": "cover",
-            "border-radius": "10.0",
+            "border-radius": 10.0,
             "size-constraints": {
               "width-constraints": {
                 "sizing-mode": "fixed",
-                "value": "56.0"
+                "value": 56.0
               },
               "height-constraints": {
                 "sizing-mode": "fixed",
-                "value": "56.0"
+                "value": 56.0
               }
             },
             "image-content": "$cover",
@@ -113,30 +113,16 @@
           },
           {
             "id": "MusicInfoTextBlock",
-            "padding": {
-              "bottom": "11.0"
-            },
-            "size-constraints": {
-              "width-constraints": {
-                "sizing-mode": "proportional",
-                "value": "1.0"
-              },
-              "height-constraints": {
-                "sizing-mode": "fixed",
-                "value": "40.0"
-              }
-            },
-            "main-axis-align": "start",
             "children": [
               "name",
               "artist"
             ],
-            "clip-content": "false"
+            "clip-content": false
           },
           {
             "id": "comment",
             "padding": {
-              "bottom": "2.0"
+              "bottom": 2.0
             },
             "size-constraints": {
               "width-constraints": {
@@ -153,33 +139,33 @@
               "_split",
               "second"
             ],
-            "item-spacing": "1.0",
-            "clip-content": "false"
+            "item-spacing": 1.0,
+            "clip-content": false
           },
           {
             "id": "name",
             "size-constraints": {
               "width-constraints": {
                 "sizing-mode": "proportional",
-                "value": "1.0"
+                "value": 1.0
               },
               "height-constraints": {
                 "sizing-mode": "shrink"
               }
             },
-            "font-weight": "700.0",
+            "font-weight": 700.0,
             "color": {
-              "alpha": "1.0",
-              "hue": "227.75510204081633",
-              "saturation": "0.49",
-              "value": "0.39215686274509803"
+              "alpha": 1.0,
+              "hue": 227.75510204081633,
+              "saturation": 0.49,
+              "value": 0.39215686274509803
             },
             "text-content": "$name",
             "overflow": "visible",
-            "max-lines": "-1",
+            "max-lines": -1,
             "text-align": "left",
-            "text-size": "16.0",
-            "line-height": "1.218999981880188",
+            "text-size": 16.0,
+            "line-height": 1.218999981880188,
             "typeface": "Montserrat"
           },
           {
@@ -187,66 +173,66 @@
             "size-constraints": {
               "width-constraints": {
                 "sizing-mode": "proportional",
-                "value": "1.0"
+                "value": 1.0
               },
               "height-constraints": {
                 "sizing-mode": "shrink"
               }
             },
-            "font-weight": "700.0",
+            "font-weight": 700.0,
             "color": {
-              "alpha": "1.0",
-              "hue": "230.52631578947367",
-              "saturation": "0.17674418604651165",
-              "value": "0.8431372549019608"
+              "alpha": 1.0,
+              "hue": 230.52631578947367,
+              "saturation": 0.17674418604651165,
+              "value": 0.8431372549019608
             },
             "text-content": "$artist",
             "overflow": "visible",
-            "max-lines": "-1",
+            "max-lines": -1,
             "text-align": "left",
-            "line-height": "1.2189999989100866",
+            "line-height": 1.2189999989100866,
             "typeface": "Montserrat"
           },
           {
             "id": "minute",
             "color": {
-              "alpha": "1.0",
-              "hue": "230.52631578947367",
-              "saturation": "0.17674418604651165",
-              "value": "0.8431372549019608"
+              "alpha": 1.0,
+              "hue": 230.52631578947367,
+              "saturation": 0.17674418604651165,
+              "value": 0.8431372549019608
             },
             "text-content": "$minute_off",
             "overflow": "visible",
-            "text-size": "16.0",
-            "line-height": "0.77880859375",
+            "text-size": 16.0,
+            "line-height": 0.77880859375,
             "typeface": "Concert One"
           },
           {
             "id": "_split",
             "color": {
-              "alpha": "1.0",
-              "hue": "230.52631578947367",
-              "saturation": "0.17674418604651165",
-              "value": "0.8431372549019608"
+              "alpha": 1.0,
+              "hue": 230.52631578947367,
+              "saturation": 0.17674418604651165,
+              "value": 0.8431372549019608
             },
             "text-content": ":",
             "overflow": "visible",
-            "text-size": "16.0",
-            "line-height": "0.77880859375",
+            "text-size": 16.0,
+            "line-height": 0.77880859375,
             "typeface": "Concert One"
           },
           {
             "id": "second",
             "color": {
-              "alpha": "1.0",
-              "hue": "230.52631578947367",
-              "saturation": "0.17674418604651165",
-              "value": "0.8431372549019608"
+              "alpha": 1.0,
+              "hue": 230.52631578947367,
+              "saturation": 0.17674418604651165,
+              "value": 0.8431372549019608
             },
             "text-content": "$second_off",
             "overflow": "visible",
-            "text-size": "16.0",
-            "line-height": "0.77880859375",
+            "text-size": 16.0,
+            "line-height": 0.77880859375,
             "typeface": "Concert One"
           }
         ]
@@ -255,19 +241,19 @@
         "rules": [
           {
             "id": "top_level",
-            "padding": "5.0",
-            "border-radius": "9.0",
+            "padding": 5.0,
+            "border-radius": 9.0,
             "drop-shadow": {
               "color": {
-                "alpha": "1.0",
-                "hue": "232.64150943396226",
-                "saturation": "0.424",
-                "value": "0.9803921568627451"
+                "alpha": 1.0,
+                "hue": 232.64150943396226,
+                "saturation": 0.424,
+                "value": 0.9803921568627451
               },
-              "blur": "4.0",
-              "offset-x": "1.0",
-              "offset-y": "2.0",
-              "spread": "0.0",
+              "blur": 4.0,
+              "offset-x": 1.0,
+              "offset-y": 2.0,
+              "spread": 0.0,
               "blend-mode": "normal"
             },
             "tap-handler": "$on switch tapped",
@@ -275,7 +261,7 @@
             "size-constraints": {
               "width-constraints": {
                 "sizing-mode": "proportional",
-                "value": "1.0"
+                "value": 1.0
               },
               "height-constraints": {
                 "sizing-mode": "shrink"
@@ -288,62 +274,62 @@
               "MusicInfoTextBlock",
               "More horiz"
             ],
-            "item-spacing": "10.0",
+            "item-spacing": 10.0,
             "fills": [
               {
                 "color": {},
-                "opacity": "1.0",
+                "opacity": 1.0,
                 "fill-type": "lineargradient",
                 "blend-mode": "normal",
                 "color-stops": [
                   {
                     "color": {
-                      "alpha": "1.0",
-                      "hue": "232.5",
-                      "saturation": "0.7529411764705882",
-                      "value": "1.0"
+                      "alpha": 1.0,
+                      "hue": 232.5,
+                      "saturation": 0.7529411764705882,
+                      "value": 1.0
                     },
-                    "color-stop-position": "0.0"
+                    "color-stop-position": 0.0
                   },
                   {
                     "color": {
-                      "alpha": "1.0",
-                      "hue": "266.43356643356645",
-                      "saturation": "0.5607843137254902",
-                      "value": "1.0"
+                      "alpha": 1.0,
+                      "hue": 266.43356643356645,
+                      "saturation": 0.5607843137254902,
+                      "value": 1.0
                     },
-                    "color-stop-position": "1.0"
+                    "color-stop-position": 1.0
                   }
                 ],
                 "gradient-handle-positions": [
                   {
-                    "x": "0.2",
-                    "y": "1.0"
+                    "x": 0.2,
+                    "y": 1.0
                   },
                   {
-                    "x": "0.8",
-                    "y": "-0.34"
+                    "x": 0.8,
+                    "y": -0.34
                   },
                   {
-                    "x": "0.86",
-                    "y": "1.68"
+                    "x": 0.86,
+                    "y": 1.68
                   }
                 ]
               }
             ],
-            "clip-content": "false"
+            "clip-content": false
           },
           {
             "id": "cover",
-            "border-radius": "10.0",
+            "border-radius": 10.0,
             "size-constraints": {
               "width-constraints": {
                 "sizing-mode": "fixed",
-                "value": "56.0"
+                "value": 56.0
               },
               "height-constraints": {
                 "sizing-mode": "fixed",
-                "value": "56.0"
+                "value": 56.0
               }
             },
             "image-content": "$cover",
@@ -351,39 +337,25 @@
           },
           {
             "id": "MusicInfoTextBlock",
-            "padding": {
-              "bottom": "11.0"
-            },
-            "size-constraints": {
-              "width-constraints": {
-                "sizing-mode": "proportional",
-                "value": "1.0"
-              },
-              "height-constraints": {
-                "sizing-mode": "fixed",
-                "value": "40.0"
-              }
-            },
-            "main-axis-align": "start",
             "children": [
               "name",
               "artist"
             ],
-            "clip-content": "false"
+            "clip-content": false
           },
           {
             "id": "More horiz",
             "size-constraints": {
               "width-constraints": {
                 "sizing-mode": "fixed",
-                "value": "30.0"
+                "value": 30.0
               },
               "height-constraints": {
                 "sizing-mode": "fixed",
-                "value": "30.0"
+                "value": 30.0
               }
             },
-            "is-structured": "false",
+            "is-structured": false,
             "children": [
               "_occupy",
               "more"
@@ -394,25 +366,25 @@
             "size-constraints": {
               "width-constraints": {
                 "sizing-mode": "proportional",
-                "value": "1.0"
+                "value": 1.0
               },
               "height-constraints": {
                 "sizing-mode": "shrink"
               }
             },
-            "font-weight": "700.0",
+            "font-weight": 700.0,
             "color": {
-              "alpha": "1.0",
-              "hue": "0.0",
-              "saturation": "0.0",
-              "value": "1.0"
+              "alpha": 1.0,
+              "hue": 0.0,
+              "saturation": 0.0,
+              "value": 1.0
             },
             "text-content": "$name",
             "overflow": "visible",
-            "max-lines": "-1",
+            "max-lines": -1,
             "text-align": "left",
-            "text-size": "16.0",
-            "line-height": "1.218999981880188",
+            "text-size": 16.0,
+            "line-height": 1.218999981880188,
             "typeface": "Montserrat"
           },
           {
@@ -420,24 +392,24 @@
             "size-constraints": {
               "width-constraints": {
                 "sizing-mode": "proportional",
-                "value": "1.0"
+                "value": 1.0
               },
               "height-constraints": {
                 "sizing-mode": "shrink"
               }
             },
-            "font-weight": "700.0",
+            "font-weight": 700.0,
             "color": {
-              "alpha": "1.0",
-              "hue": "0.0",
-              "saturation": "0.0",
-              "value": "1.0"
+              "alpha": 1.0,
+              "hue": 0.0,
+              "saturation": 0.0,
+              "value": 1.0
             },
             "text-content": "$artist",
             "overflow": "visible",
-            "max-lines": "-1",
+            "max-lines": -1,
             "text-align": "left",
-            "line-height": "1.2189999989100866",
+            "line-height": 1.2189999989100866,
             "typeface": "Montserrat"
           },
           {
@@ -446,30 +418,30 @@
             "size-constraints": {
               "width-constraints": {
                 "sizing-mode": "proportional",
-                "value": "1.0"
+                "value": 1.0
               },
               "height-constraints": {
                 "sizing-mode": "proportional",
-                "value": "1.0"
+                "value": 1.0
               }
             }
           },
           {
             "id": "more",
             "margin": {
-              "left": "5.0",
-              "top": "12.5",
-              "right": "5.0",
-              "bottom": "12.5"
+              "left": 5.0,
+              "top": 12.5,
+              "right": 5.0,
+              "bottom": 12.5
             },
             "size-constraints": {
               "width-constraints": {
                 "sizing-mode": "proportional",
-                "value": "1.0"
+                "value": 1.0
               },
               "height-constraints": {
                 "sizing-mode": "proportional",
-                "value": "1.0"
+                "value": 1.0
               }
             },
             "vector-content": "more.svg"

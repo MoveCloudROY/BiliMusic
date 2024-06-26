@@ -71,6 +71,7 @@ fun Number(
     modifier: Modifier = Modifier
 ) {
     RelayText(
+        modifier = modifier.fillMaxWidth(1.0f),
         content = number,
         fontSize = 28.0.sp,
         fontFamily = concertOne,
@@ -83,22 +84,20 @@ fun Number(
         height = 0.77880859375.em,
         letterSpacing = (-0.2800000011920929).sp,
         maxLines = -1,
-        style = TextStyle(
-            shadow = Shadow(
-                color = Color(
-                    alpha = 63,
-                    red = 0,
-                    green = 0,
-                    blue = 0
-                ),
-                offset = Offset(
-                    x = 2.0f,
-                    y = 3.0f
-                ),
-                blurRadius = 4.0f
-            )
-        ),
-        modifier = modifier.fillMaxWidth(1.0f)
+
+        shadow = Shadow(
+            color = Color(
+                alpha = 63,
+                red = 0,
+                green = 0,
+                blue = 0
+            ),
+            offset = Offset(
+                x = 2.0f,
+                y = 3.0f
+            ),
+            blurRadius = 4.0f,
+        )
     )
 }
 
@@ -108,6 +107,7 @@ fun Type(
     modifier: Modifier = Modifier
 ) {
     RelayText(
+        modifier = modifier.fillMaxWidth(1.0f),
         content = type,
         fontFamily = lxgwWenkaiBold,
         color = Color(
@@ -119,22 +119,20 @@ fun Type(
         height = 1.17138671875.em,
         letterSpacing = (-0.2800000011920929).sp,
         maxLines = -1,
-        style = TextStyle(
-            shadow = Shadow(
-                color = Color(
-                    alpha = 63,
-                    red = 0,
-                    green = 0,
-                    blue = 0
-                ),
-                offset = Offset(
-                    x = 2.0f,
-                    y = 3.0f
-                ),
-                blurRadius = 4.0f
-            )
+        shadow = Shadow(
+            color = Color(
+                alpha = 63,
+                red = 0,
+                green = 0,
+                blue = 0
+            ),
+            offset = Offset(
+                x = 2.0f,
+                y = 3.0f
+            ),
+            blurRadius = 4.0f,
         ),
-        modifier = modifier.fillMaxWidth(1.0f)
+
     )
 }
 

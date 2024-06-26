@@ -113,7 +113,7 @@ fun PlayerProgressBar(
                     onDragEnd = {
                         // 滑动结束时， 回调setProgressPercentage函数
                         // 恢复锚点大小
-                        PlayerVM.setProgressPercentage(dragedPercentage/100f)
+                        PlayerVM.setProgressPercentage(dragedPercentage / 100f)
                         isBarPressed = false
                     },
                     onDrag = { change, dragAmount ->
@@ -126,10 +126,10 @@ fun PlayerProgressBar(
                         } else {
                             (change.position.x / this.size.width)
                         } * 100f
-                        Log.i("Player", """
-                            dragedPercentage:   ${dragedPercentage},
-                            animateNumber:      ${animateNumber.value}
-                        """.trimIndent())
+//                        Log.i("Player", """
+//                            dragedPercentage:   ${dragedPercentage},
+//                            animateNumber:      ${animateNumber.value}
+//                        """.trimIndent())
                     })
             }
             .pointerInput(Unit) {
@@ -139,6 +139,14 @@ fun PlayerProgressBar(
                         PlayerVM.setProgressPercentage(it.x / size.width)
                         isBarPressed = false
                     }
+                    Log.i("Player", """
+                        Tap PlayProgress:
+                            name:           ${PlayerVM.nowMusic.value.music_name}
+                            playedSec:      ${PlayerVM.playedSeconds.value}
+                            playedPer:      ${PlayerVM.playedPercentage.value}
+                            playedTotal:    ${PlayerVM.nowMusic.value.second}
+                            
+                    """.trimIndent())
                 })
             },
     ) {
@@ -176,7 +184,7 @@ fun PlayerProgressBar(
 //            style = Stroke(9f)
         )
         drawCircle(
-            color =  Color(0x8F8F8F8F),
+            color =  Color(0xFF8F8F8F),
             radius = radius,
             center = Offset(x = progress, y = 0f),
             style = Stroke(12f)

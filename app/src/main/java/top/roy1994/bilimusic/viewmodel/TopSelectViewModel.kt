@@ -13,6 +13,7 @@ class TopSelectViewModel: ViewModel() {
             TopSelectBarCategory("歌单"),
             TopSelectBarCategory("标签"),
             TopSelectBarCategory("艺术家"),
+            TopSelectBarCategory("播放记录"),
         )
     )
 

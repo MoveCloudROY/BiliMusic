@@ -66,7 +66,7 @@ class MusicConfigViewModel(application: Application): AndroidViewModel(applicati
             val sheets = sheetDao.findSheetByName(sheet.value)
             val artistsTest = artistDao.findArtistByName(artist.value)
             if (artistsTest.isEmpty()) {
-                artistRepo.insertArtist(
+                artistDao.insertArtists(
                     ArtistEntity(
                         artist_name = artist.value
                     )

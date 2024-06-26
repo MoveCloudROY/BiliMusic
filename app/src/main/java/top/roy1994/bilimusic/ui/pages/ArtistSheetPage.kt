@@ -4,8 +4,9 @@ import android.app.Application
 import android.content.Context
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.lazy.GridCells
-import androidx.compose.foundation.lazy.LazyVerticalGrid
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.*
 import androidx.compose.runtime.livedata.observeAsState
@@ -42,7 +43,8 @@ fun ArtistSheetPage(
     LazyVerticalGrid(
         modifier = Modifier
             .padding(start = 12.dp, end = 12.dp, top = 6.dp, bottom = 85.dp),
-        cells = GridCells.Adaptive(minSize = 160.dp)
+
+        columns = GridCells.Adaptive(minSize = 160.dp)
     ) {
         items(sheets.orEmpty()) { artistEntity ->
             AlbumBlockElem(

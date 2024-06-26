@@ -137,7 +137,9 @@ fun MainPage(
         ReDirTextBar(
             modifier = Modifier.height(50.dp),
             text = "历史",
-            onReDirTextBarTapped = {},
+            onReDirTextBarTapped = {
+                topSelectBarVM.updateCategoryIndex(5)
+            },
         )
         if (musicHistory.isNullOrEmpty()){
             NotFind(

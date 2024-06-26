@@ -11,17 +11,20 @@ import top.roy1994.bilimusic.data.objects.mixed.MusicArtistDao
 import top.roy1994.bilimusic.data.objects.mixed.MusicSheetDao
 import top.roy1994.bilimusic.data.objects.music.MusicDao
 import top.roy1994.bilimusic.data.objects.music.MusicEntity
+import top.roy1994.bilimusic.data.objects.music.MusicIncompleteDao
+import top.roy1994.bilimusic.data.objects.music.MusicIncompleteEntity
 import top.roy1994.bilimusic.data.objects.sheet.SheetDao
 import top.roy1994.bilimusic.data.objects.sheet.SheetEntity
 
 
-@Database(entities = [ArtistEntity::class, MusicEntity::class, SheetEntity::class], version = 1)
+@Database(entities = [ArtistEntity::class, MusicEntity::class, SheetEntity::class, MusicIncompleteEntity::class], version = 1)
 abstract class AppDatabase : RoomDatabase()  {
     abstract fun artistDao(): ArtistDao
     abstract fun musicDao(): MusicDao
     abstract fun sheetDao(): SheetDao
     abstract fun musicArtistDao(): MusicArtistDao
     abstract fun musicSheetDao(): MusicSheetDao
+    abstract fun musicIncomleteDao(): MusicIncompleteDao
 
     companion object {
 
@@ -44,6 +47,8 @@ abstract class AppDatabase : RoomDatabase()  {
 //                    val sheetRepo = SheetRepo(sheetDao)
 //                    val artistDao = instance.artistDao()
 //                    val artistRepo = ArtistRepo(artistDao)
+//                    val musicIncomleteDao = instance.musicIncomleteDao()
+//
 //                    if (null == sheetDao.count().value) {
 //                        sheetRepo.insertSheet(
 //                            SheetEntity(
