@@ -10,6 +10,7 @@ import android.view.WindowInsetsController
 import android.view.WindowManager
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.activity.viewModels
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
@@ -19,6 +20,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.core.view.*
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.Navigator
 import androidx.navigation.compose.rememberNavController
@@ -30,18 +32,20 @@ import top.roy1994.bilimusic.viewmodel.PlayerViewModelFactory
 
 class MainActivity : ComponentActivity() {
 
-
+    private lateinit var playerVM: PlayerViewModel  // Declare playerVM as a property
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        playerVM = ViewModelProvider(this, PlayerViewModelFactory(applicationContext as Application)).get(PlayerViewModel::class.java)
 
         setContent {
             BiliMusicTheme {
                 val navController = rememberNavController()
-                val playerVM: PlayerViewModel = viewModel(
-                    factory = PlayerViewModelFactory(
-                        LocalContext.current.applicationContext as Application
-                    )
-                )
+//                val playerVM: PlayerViewModel = viewModel(
+//                    factory = PlayerViewModelFactory(
+//                        LocalContext.current.applicationContext as Application
+//                    )
+//                )
 
                 NavGraph(
                     navController = navController,
@@ -66,6 +70,14 @@ class MainActivity : ComponentActivity() {
         controller?.hide(WindowInsets.Type.statusBars())
         controller?.hide(WindowInsets.Type.systemBars())
 
+    }
+
+    override fun onStop() {
+        super.onStop()
+        Log.i("Activity", """
+            Stop Main
+        """.trimIndent())
+        playerVM.recordIncompMusic();
     }
 }
 
