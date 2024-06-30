@@ -86,6 +86,7 @@ fun IncompletePage(
                         }
                     },
                     content = {
+                        val seconds = (item.music.second * item.musicIncomplete.progress).toLong()
                         Column(
                         ){
                             MusicListDetailElem(
@@ -100,8 +101,8 @@ fun IncompletePage(
                                 ),
                                 name = item.music.music_name,
                                 artist = item.music.music_artist,
-                                minuteOff = (item.music.second / 60).toString(),
-                                secondOff = (item.music.second % 60).toString().padStart(2, '0'),
+                                minuteOff = "At "+(seconds / 60).toString(),
+                                secondOff = (seconds % 60).toString().padStart(2, '0'),
                                 switch = if (incompVM.listIndex.value == index) Switch.On
                                 else Switch.Off,
                                 onSwitchTapped = {

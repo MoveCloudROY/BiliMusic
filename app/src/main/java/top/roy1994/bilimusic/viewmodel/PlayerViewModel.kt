@@ -252,11 +252,16 @@ class PlayerViewModel(application: Application): AndroidViewModel(application) {
     }
 
     fun recordIncompMusic(music: MusicEntity = nowMusic.value) {
+        val per = playedPercentage.value
         viewModelScope.launch(Dispatchers.IO) {
             if (!musicDao.hasMusic(music.music_id)) {
                 return@launch
             }
-            playedPercentage.value?.let {
+            Log.i("Player", """
+                [recordIncompMusic]
+                    playedPercentage: ${per}
+            """.trimIndent())
+            per?.let {
                 if (incompteDao.hasIncompRec(music.music_id)) {
                     incompteDao.updateIncompRec(
                         MusicIncompleteEntity(
